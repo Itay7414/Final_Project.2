@@ -13,16 +13,23 @@ exports.createItems = async (req, res) => {
 };
 
 
-// exports.updateItems = async (req, res) => {
-//     try {  // HTTP-body example: {"filters": {...}, "update": {...}, "options": {...}}
-//         await db_api.update_Item(db_api.Items_model, req.body)
-//             .then(update_status => res.send(update_status));
-//     } catch (err) { res.status(400).send(err); }
-// }
+// exports.getItemsByType = async (req, res) => {
+//     try {
+//         const itemType = req.body.type;
+
+//         const items = await Item.find({ type: itemType }).exec();
+//         console.log(items);
+//         res.send(items);
+//     } catch (err) {
+//         console.error(err);
+//         res.status(500).json({ message: "Failed to retrieve items by type" });
+//     }
+// };
+
 
 exports.getItems = async (req, res) => {
     try {
-        console.log("123");
+
         // HTTP-body example: {"filters": {...}, "search_method": ...}
         const Items_arr = await Item.find();
         console.log(Items_arr);

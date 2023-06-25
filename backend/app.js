@@ -6,6 +6,7 @@ const express = require('express');
 const load_routes = function (app) {
   app.use(require("../backend/routes/users"));
   app.use(require("../backend/routes/items"));
+  app.use(require("../backend/routes/carts"));
 }
 
 const createApp = async function () {
