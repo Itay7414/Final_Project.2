@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const artworkController = require('../controllers/itemsController');
+const itemController = require('../controllers/itemsController');
 
 
 router.post('/item/createItem', itemController.createItem);

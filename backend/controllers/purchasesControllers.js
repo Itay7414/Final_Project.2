@@ -6,8 +6,8 @@ exports.createPurchases = async (req, res) => {
         const created_purchases = await db_api.create_Item(db_api.purchases_model, req.body)
         for (const purchase of created_purchases) {
             await db_api.get_Item(db_api.artworks_model,
-                {filters: {_id: purchase.artwork_id}, search_method: 'findOne'})
-                .then(artwork => {artwork.sold++; artwork.save();});
+                { filters: { _id: purchase.artwork_id }, search_method: 'findOne' })
+                .then(artwork => { artwork.sold++; artwork.save(); });
         }
         res.send(created_purchases);
     } catch (err) { res.status(400).send(err); }
