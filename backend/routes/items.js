@@ -2,13 +2,13 @@ const router = require('express').Router();
 const itemController = require('../controllers/itemsController');
 
 
-router.post('/item/createItem', itemController.createItem);
-router.post('/item/updateItem', itemController.updateItems);
-router.post('/item/getItems', itemkController.getArtItems);
-router.get('/item/AllSales', itemController.AllSales);
-router.get('/item/AvgSales', itemController.AvgSales);
-router.get('/item/AllProfits', itemController.AllProfits);
-router.get('/item/AvgProfits', itemController.AvgProfits);
+router.post('/item/createItem', itemsController.createItem);
+router.post('/item/updateItem', itemsController.updateItems);
+router.post('/item/getItems', itemskController.getArtItems);
+router.get('/item/AllSales', itemsController.AllSales);
+router.get('/item/AvgSales', itemsController.AvgSales);
+router.get('/item/AllProfits', itemsController.AllProfits);
+router.get('/item/AvgProfits', itemsController.AvgProfits);
 
 
 module.exports = router;
