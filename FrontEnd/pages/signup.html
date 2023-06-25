@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Sign Up</title>
+    <link rel="stylesheet" type="text/css" href="signup.css">
+</head>
+
+<body>
+    <header>
+        <a href="index.html" class="back-to-home-btn">
+            <img src="back-to-home.jpeg" alt="Back to Home" width="50" height="50">
+        </a>
+    </header>
+    <div class="logo2-container">
+        <img src="Yarkania logo 1.png" alt="Shuki's Yarkania Logo" class="logo-img">
+    </div>
+    <main>
+        <div class="form-container">
+            <form id="signup-form" class="form" action="Bigdatabase.js" method="post">
+                <p class="form-title">Sign up for an account</p>
+                <div class="input-container">
+                    <input type="email" placeholder="Enter email" id="email">
+                    <span></span>
+                </div>
+                <div class="input-container">
+                    <input type="password" placeholder="Enter password" id="password">
+                </div>
+                <button type="submit" class="signup-submit">Sign Up</button>
+                <p class="signup-link">
+                    Already have an account? <a href="userprofile.html">Sign in</a>
+                </p>
+            </form>
+        </div>
+    </main>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="signup.js"></script>
+</body>
+
+</html>

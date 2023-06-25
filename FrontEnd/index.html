@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Shuki's Yarkania - Home</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="index.css">
+</head>
+
+<body>
+  <header>
+    <div class="container d-flex justify-content-between align-items-center">
+      <div class="cart-container">
+        <a href="#" class="cart-btn">
+          <img src="cart.png" alt="Cart" class="cart-img">
+        </a>
+        <span class="cart-text">Cart</span>
+      </div>
+      <div class="logo-container">
+        <img src="Yarkania logo 1.png" alt="Shuki's Yarkania Logo" class="logo-img">
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="text-center">
+      <h2>Welcome to Shuki's Yarkania</h2>
+      <p>Choose from our wide selection of fresh fruits and vegetables!</p>
+    </section>
+
+
+    <div class="container card-container">
+      <a href="fruits.html" class="card">
+        <img src="fruits.jpeg" alt="Fruits">
+        <h2>Fruits</h2>
+      </a>
+      <a href="vegetables.html" class="card">
+        <img src="vegetables.jpeg" alt="Vegetables">
+        <h2>Vegetables</h2>
+      </a>
+      <a href="others.html" class="card">
+        <img src="others.jpeg" alt="Others">
+        <h2>Others</h2>
+      </a>
+    </div>
+  </main>
+
+  <div class="navigation left-navbar">
+    <nav>
+      <ul>
+        <li><button id="user-profile-btn">User Profile</button></li>
+        <li><button id="transactions-history-btn">Transactions History</button></li>
+       <li><button onclick="openStoreMapPage()">Find Store Locations</button></li>
+      </ul>
+    </nav>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+  <script src="index.js"></script>
+</body>
+
+</html>

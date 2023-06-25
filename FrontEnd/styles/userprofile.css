@@ -1,0 +1,154 @@
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background-color: #ffffff;
+  }
+  
+  .back-to-home-btn img {
+    width: 110px;
+    height: 70px;
+  }
+  
+  main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+  }
+  
+  .form-container {
+    width: 350px;
+    background-color: #fff;
+    padding: 32px 24px;
+    font-size: 14px;
+    font-family: Arial, sans-serif;
+    color: #212121;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    box-sizing: border-box;
+    border-radius: 10px;
+    box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.084), 0px 2px 3px rgba(0, 0, 0, 0.168);
+    margin-top: -15%;
+  }
+  
+  .form-container button:active {
+    transform: scale(0.95);
+  }
+  
+  .form-container .logo-container {
+    margin-bottom: 12px;
+    margin-top: 12px;
+    text-align: center;
+    font-weight: 700;
+    font-size: 20px;
+  }
+  
+  .form-container .social-buttons {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    flex-direction: column;
+    gap: 12px;
+    align-items: center;
+  }
+  
+  .form-container .social-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    font-family: Arial, sans-serif;
+    color: #fff;
+    border: none;
+    padding: 12px 16px;
+    gap: 8px;
+    cursor: pointer;
+    border-radius: 6px;
+    box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.084), 0px 2px 3px rgba(0, 0, 0, 0.168);
+  }
+  
+  .form-container .social-button svg {
+    width: 22px;
+    height: 22px;
+    fill: white;
+  }
+  
+  .form-container .social-button.facebook {
+    background-color: #1778f2;
+  }
+  
+  .form-container .social-button.apple {
+    background-color: #000;
+  }
+  
+  .form-container .line {
+    height: 1px;
+    background-color: #e0e0e0;
+  }
+  
+  .form-container .form-group {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .form-container .form-group label {
+    margin-bottom: 7px;
+    margin-top: 7px;
+  }
+  
+  .form-container .form-group input {
+    padding: 10px;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    font-family: Arial, sans-serif;
+  }
+  
+  .form-container .form-submit-btn {
+    margin-top: 10px; 
+    background-color: #1778f2;
+    color: #fff;
+    border: none;
+    padding: 12px 16px;
+    border-radius: 6px;
+    font-family: Arial, sans-serif;
+    cursor: pointer;
+  }
+  
+  .form-container .form-submit-btn:hover {
+    background-color: #1366d1;
+  }
+  
+  .form-container .forgot-password-link,
+  .form-container .signup-link {
+    text-align: center;
+    font-size: 12px;
+    color: #757575;
+  }
+  
+  .form-container .link {
+    color: #1778f2;
+    text-decoration: none;
+  }
+  
+  .form-container .link:hover {
+    text-decoration: underline;
+  }
+  
+  .logo2-container {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    margin-top: -5%;
+  }
+  
+  .logo2-container img {
+    width: 350px;
+    height: auto;
+  }
