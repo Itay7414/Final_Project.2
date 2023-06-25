@@ -16,10 +16,26 @@ const userSchema = new mongoose.Schema({
     password: { type: String, required: true },
 });
 
+// Define the cart schema
+const cartSchema = new mongoose.Schema({
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+        required: true
+    },
+    items: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Item'
+        }
+    ]
+});
+
 // Create the models
 const Item = mongoose.model('Item', itemSchema);
 const User = mongoose.model('User', userSchema);
+const Cart = mongoose.model('Cart', cartSchema);
 
 
 // Export the models
-module.exports = { Item, User };
+module.exports = { Item, User, Cart };
