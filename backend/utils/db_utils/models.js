@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const db = require('../../app'); // Assuming you have a separate App.js file
-const { image } = require('d3');
+//const { image } = require('d3');
 
 // Define the item schema
 const itemSchema = new mongoose.Schema({
