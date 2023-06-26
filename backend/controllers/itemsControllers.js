@@ -13,18 +13,19 @@ exports.createItems = async (req, res) => {
 };
 
 
-// exports.getItemsByType = async (req, res) => {
-//     try {
-//         const itemType = req.body.type;
+exports.getItemsByType = async (req, res) => {
+    console.log("123");
+    try {
+        const itemType = req.type;
+        const Items_arr = await Item.find({ type: itemType }).exec();
+        console.log(Items_arr);
+        res.send(Items_arr);
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ message: "Failed to retrieve items by type" });
+    }
+};
 
-//         const items = await Item.find({ type: itemType }).exec();
-//         console.log(items);
-//         res.send(items);
-//     } catch (err) {
-//         console.error(err);
-//         res.status(500).json({ message: "Failed to retrieve items by type" });
-//     }
-// };
 
 
 exports.getItems = async (req, res) => {
