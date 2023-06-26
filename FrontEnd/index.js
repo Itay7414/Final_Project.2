@@ -18,11 +18,12 @@ $(document).ready(function () {
 
   // Handle "User Profile" button click
   $(document).on('click', '#user-profile-btn', function () {
-    window.location.href = 'userprofile.html';
+    window.location.href = 'userprofile.ejs';
   });
 
   // Handle "Stores Addresses" button click
   $(document).on('click', '#stores-addresses-btn', function () {
+    window.location.href = 'store_map.ejs';
     window.open('https://goo.gl/maps/b5cY9fv4N6wpfBug8');
     window.open('https://goo.gl/maps/ALPT1hZNVEtnNrqu9');
   });
@@ -76,5 +77,5 @@ $(document).ready(function () {
 });
 function openStoreMapPage() {
   // Open a new page or redirect the user to the store map page
-  window.open("store_map.html", "_blank");
+  window.open("store_map.ejs", "_blank");
 }

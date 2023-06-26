@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>Vegetables</title>
+  <link rel="stylesheet" type="text/css" href="/frontend/styles/vegetables.css">
+</head>
+
+<body>
+  <header>
+    <a href="/frontend/views/index.ejs" class="back-to-home-btn">
+      <img src="/frontend/assets/back-to-home.jpeg" alt="Back to Home" width="60" height="60">
+    </a>
+  </header>
+  <div class="logo2-container">
+    <img src="/frontend/assets/Yarkania logo 1.png" alt="Shuki's Yarkania Logo" class="logo-img">
+  </div>
+
+  <main>
+    <section id="vegetables-container" class="card-container">
+      <div class="card">
+        <div class="scale-background"></div>
+        <div class="card-img">
+          <img src="/frontend/assets/mashrooms.jpg" alt="mashroom">
+        </div>
+        <div class="card-info">
+          <p class="text-title">Mashroom</p>
+          <p class="text-body">$1.99 per pound</p>
+          <div class="card-footer">
+            <span class="text-body">In Stock: 10 pounds</span>
+            <div class="card-input">
+              <label for="mashroom-weight">Weight (in pounds):</label>
+              <input type="number" id="mashroom-weight" name="mashroom-weight" min="0" max="10">
+            </div>
+            <div class="card-button">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-shopping-cart">
+                <circle cx="9" cy="21" r="1"></circle>
+                <circle cx="20" cy="21" r="1"></circle>
+                <path d="M1 1h4l2.5 7h13m2 0v12h-16v-12m-2 0h20"></path>
+              </svg>
+              <span>Add to Cart</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="scale-background"></div>
+        <div class="card-img">
+          <img src="/frontend/assets/parsley.jpg" alt="parsley">
+        </div>
+        <div class="card-info">
+          <p class="text-title">Parsley</p>
+          <p class="text-body">$2.49 per pound</p>
+          <div class="card-footer">
+            <span class="text-body">In Stock: 15 pounds</span>
+            <div class="card-input">
+              <label for="parsley-weight">Weight (in pounds):</label>
+              <input type="number" id="parsley-weight" name="parsley-weight" min="0" max="15">
+            </div>
+            <div class="card-button">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-shopping-cart">
+                <circle cx="9" cy="21" r="1"></circle>
+                <circle cx="20" cy="21" r="1"></circle>
+                <path d="M1 1h4l2.5 7h13m2 0v12h-16v-12m-2 0h20"></path>
+              </svg>
+              <span>Add to Cart</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="scale-background"></div>
+        <div class="card-img">
+          <img src="/frontend/assets/Mint.jpg" alt="mint">
+        </div>
+        <div class="card-info">
+          <p class="text-title">Mint</p>
+          <p class="text-body">$3.99 per pound</p>
+          <div class="card-footer">
+            <span class="text-body">In Stock: 8 pounds</span>
+            <div class="card-input">
+              <label for="mint-weight">Weight (in pounds):</label>
+              <input type="number" id="mint-weight" name="mint-weight" min="0" max="8">
+            </div>
+            <div class="card-button">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-shopping-cart">
+                <circle cx="9" cy="21" r="1"></circle>
+                <circle cx="20" cy="21" r="1"></circle>
+                <path d="M1 1h4l2.5 7h13m2 0v12h-16v-12m-2 0h20"></path>
+              </svg>
+              <span>Add to Cart</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="scale-background"></div>
+        <div class="card-img">
+          <img src="/frontend/assets/spinach.png" alt="Spinach">
+        </div>
+        <div class="card-info">
+          <p class="text-title">Spinach</p>
+          <p class="text-body">$1.79 per pound</p>
+          <div class="card-footer">
+            <span class="text-body">In Stock: 12 pounds</span>
+            <div class="card-input">
+              <label for="spinach-weight">Weight (in pounds):</label>
+              <input type="number" id="spinach-weight" name="spinach-weight" min="0" max="12">
+            </div>
+            <div class="card-button">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-shopping-cart">
+                <circle cx="9" cy="21" r="1"></circle>
+                <circle cx="20" cy="21" r="1"></circle>
+                <path d="M1 1h4l2.5 7h13m2 0v12h-16v-12m-2 0h20"></path>
+              </svg>
+              <span>Add to Cart</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2023 Shuki's Yarkania. All rights reserved.</p>
+  </footer>
+  <script src="/backend/controllers/itemsControllers.js"></script>
+</body>
+
+</html>
