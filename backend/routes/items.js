@@ -3,7 +3,7 @@ const itemsController = require('../controllers/itemsControllers');
 
 
 router.post('/item/createItem', itemsController.createItems);
-//router.post('/item/updateItem', itemsController.updateItems);
+router.get('/item/getItemsByName', itemsController.getItemByName);
 router.get('/item/getItems', itemsController.getItems);
 router.get('/item/getItemsByType', itemsController.getItemsByType);
 /*router.get('/item/AvgSales', itemsController.AvgSales);
