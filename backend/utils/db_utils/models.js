@@ -12,8 +12,9 @@ const itemSchema = new mongoose.Schema({
 
 // Define the user schema
 const userSchema = new mongoose.Schema({
-    email: { type: String, required: true },
+    userName: { type: String, require: true },
     password: { type: String, required: true },
+    email: { type: String, required: true },
 });
 
 

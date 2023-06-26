@@ -20,22 +20,24 @@ exports.updateUser = async (req, res) => {
 exports.signUp_user = async (req, res) => {
     console.log("Inside of Sign_UP");
     try {
-        const email_to_create = req.body.email;
-        const password_to_create = req.body.password;
-        console.log(email_to_create);
-        console.log(password_to_create);
+        const { name, email, password } = req.body;
+        console.log(name);
+        console.log(email);
+        console.log(password);
+
         await users_model.create({
-            email: email_to_create,
-            password: password_to_create
+            name: name,
+            email: email,
+            password: password
         });
+
         console.log("User created");
         res.status(200).json({ message: "User created successfully" });
     } catch (err) {
         console.error(err);
         res.status(500).json({ message: "Failed to create user" });
     }
-
-}
+};
 /*
 exports.allUsers = async (req, res) => {
     await db_api.get_item(db_api.users_model, { filters: {} })
