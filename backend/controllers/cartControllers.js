@@ -1,14 +1,12 @@
 const models = require('../utils/db_utils/models');
-cart_model = models.Cart;
-
-
+cart_model = models.Cart
 
 exports.createCart = async (req, res) => {
     try {
         const { userId, items } = req.body;
 
         // Create a new cart
-        const cart = new cart_model({
+        const cart = new Cart({
             user: userId,
             items: items
         });

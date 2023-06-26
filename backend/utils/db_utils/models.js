@@ -16,7 +16,7 @@ const userSchema = new mongoose.Schema({
     password: { type: String, required: true },
 });
 
-// Define the cart schema
+
 const cartSchema = new mongoose.Schema({
     user: {
         type: mongoose.Schema.Types.ObjectId,
@@ -25,8 +25,10 @@ const cartSchema = new mongoose.Schema({
     },
     items: [
         {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'Item'
+            type: { type: String, required: true },
+            name: { type: String, required: true },
+            price: { type: Number, required: true },
+            quantity: { type: Number, required: true }
         }
     ]
 });
