@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const db = require('../../app'); // Assuming you have a separate App.js file
+const { image } = require('d3');
 
 // Define the item schema
 const itemSchema = new mongoose.Schema({
@@ -12,11 +13,12 @@ const itemSchema = new mongoose.Schema({
 
 // Define the user schema
 const userSchema = new mongoose.Schema({
-    email: { type: String, required: true },
+    userName: { type: String, require: true },
     password: { type: String, required: true },
+    email: { type: String, required: true },
 });
 
-// Define the cart schema
+
 const cartSchema = new mongoose.Schema({
     user: {
         type: mongoose.Schema.Types.ObjectId,
@@ -25,8 +27,10 @@ const cartSchema = new mongoose.Schema({
     },
     items: [
         {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'Item'
+            type: { type: String, required: true },
+            name: { type: String, required: true },
+            price: { type: Number, required: true },
+            quantity: { type: Number, required: true }
         }
     ]
 });
