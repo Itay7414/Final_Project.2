@@ -14,15 +14,33 @@ exports.createItems = async (req, res) => {
 
 
 exports.getItemsByType = async (req, res) => {
-    console.log("123");
+
     try {
-        const itemType = req.type;
+        const itemType = req.query.type;
         const Items_arr = await Item.find({ type: itemType }).exec();
         console.log(Items_arr);
         res.send(Items_arr);
     } catch (err) {
         console.error(err);
         res.status(500).json({ message: "Failed to retrieve items by type" });
+    }
+};
+
+
+
+exports.getItemByName = async (req, res) => {
+    try {
+        const itemName = req.query.name;
+        const item = await Item.findOne({ name: itemName }).exec();
+
+        if (!item) {
+            return res.status(404).json({ message: "Item not found" });
+        }
+
+        res.json(item);
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ message: "Failed to retrieve item by name" });
     }
 };
 
