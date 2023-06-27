@@ -56,7 +56,9 @@ const createApp = async function () {
   app.get('/store_map', (req, res) => {
     res.render('store_map');
   });
-
+  app.get('/transaction_history', (req, res) => {
+    res.render('transaction_history');
+  });
   return app;
 }
 
