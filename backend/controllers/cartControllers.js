@@ -3,9 +3,11 @@ const Cart = models.Cart;
 const User = models.User;
 
 
+
 exports.createCart = async (req, res) => {
     try {
         const userId = req.body.userId;
+
 
         // Find the user by ID
         const user = await User.findById(userId);
@@ -27,10 +29,10 @@ exports.createCart = async (req, res) => {
 
         // Save the cart
         const createdCart = await cart.save();
-
         res.status(200).json(createdCart);
     } catch (err) {
         res.status(500).json({ message: 'Failed to create cart' });
+
     }
 };
 
