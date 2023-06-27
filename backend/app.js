@@ -32,6 +32,21 @@ const createApp = async function () {
     res.render('index');
   });
 
+  app.get('/fruits', (req, res) => {
+    res.render('fruits');
+  });
+
+  app.get('/vegetables', (req, res) => {
+    res.render('vegetables');
+  });
+
+  app.get('/others', (req, res) => {
+    res.render('others');
+  });
+  app.get('/cart', (req, res) => {
+    res.render('cart');
+  });
+
   return app;
 }
 
