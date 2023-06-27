@@ -33,15 +33,15 @@ const createApp = async function () {
     res.render('index');
   });
 
-  app.get('/fruits.ejs', (req, res) => {
+  app.get('/fruits', (req, res) => {
     res.render('fruits');
   });
 
-  app.get('/vegetables.ejs', (req, res) => {
+  app.get('/vegetables', (req, res) => {
     res.render('vegetables');
   });
 
-  app.get('/others.ejs', (req, res) => {
+  app.get('/others', (req, res) => {
     res.render('others');
   });
   app.get('/cart', (req, res) => {
@@ -50,7 +50,7 @@ const createApp = async function () {
   app.get('/userprofile', (req, res) => {
     res.render('userprofile');
   });
-  app.get('signup.ejs', (req, res) => {
+  app.get('/signup', (req, res) => {
     res.render('signup');
   });
   app.get('/store_map', (req, res) => {
