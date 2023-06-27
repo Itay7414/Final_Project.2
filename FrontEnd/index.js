@@ -13,7 +13,7 @@ $(document).ready(function () {
 
   // Handle "Back to Home" button click
   $(document).on('click', '.back-to-home-btn', function () {
-    window.location.href = 'index.ejs';
+    window.location.href = '/';
   });
 
   // Handle "User Profile" button click
@@ -72,7 +72,7 @@ $(document).ready(function () {
 // index.js
 $(document).ready(function () {
   $('.cart-btn').click(function () {
-    window.location.href = 'cart.html'; // Change 'cart.html' to the desired page URL
+    window.location.href = 'cart.ejs'; // Change 'cart.html' to the desired page URL
   });
 });
 function openStoreMapPage() {
