@@ -32,7 +32,7 @@ const createApp = async function () {
   app.get('/', (req, res) => {
     res.render('index');
   });
-
+  
   app.get('/fruits', (req, res) => {
     res.render('fruits');
   });
@@ -47,6 +47,7 @@ const createApp = async function () {
   app.get('/cart', (req, res) => {
     res.render('cart');
   });
+
 
   return app;
 }
