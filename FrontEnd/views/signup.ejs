@@ -25,25 +25,21 @@
                     <span></span>
                 </div>
                 <div class="input-container">
-                    <input type="name" placeholder="Enter full name" id="name">
-                    <span></span>
-                </div>
-                <div class="input-container">
                     <input type="email" placeholder="Enter email" id="email">
                     <span></span>
                 </div>
                 <div class="input-container">
                     <input type="password" placeholder="Enter password" id="password">
                 </div>
-                <button type="submit" class="signup-submit">Sign Up</button>
-                <p class="signup-link">
-                    Already have an account? <a href="/userprofile">Sign in</a>
+                <button type="submit" class="signup-submit" onclick="submitForm()">Sign Up</button>
+                Already have an account? <a href="/userprofile">Sign in</a>
                 </p>
             </form>
         </div>
     </main>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="/backend/controllers/usersControllers.js"></script>
+    <script src="/backend/routes/users.js"></script>
+    <script src="../signup.js"></script>
 </body>
 
 </html>
