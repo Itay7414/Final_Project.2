@@ -5,3 +5,4 @@ require('./app').createApp().then(app => {
 }).catch(error => {
   console.error('Error creating the app:', error);
 });
+

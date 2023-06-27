@@ -20,17 +20,34 @@ const createApp = async function () {
   const app = await express();
   app.use(express.json());
   app.use(cookieParser());
+  app.use(express.static(path.join(process.cwd(), '../FrontEnd')));
   console.log('App Created !');
   await db.connect('mongodb+srv://mosacho1408:Mosacho1408@cluster0.7ygedx4.mongodb.net', { useNewUrlParser: true, useUnifiedTopology: true });
   console.log('Database Connected!');
   // Set up the app configuration
   app.set('port', process.env.PORT || 3000);
   app.set('view engine', 'ejs');
-  app.set('views', path.join(process.cwd(), '..', 'frontend', 'views'));
+  app.set('views', path.join(process.cwd(), '..', 'FrontEnd', 'views'));
   await load_routes(app);
   app.get('/', (req, res) => {
     res.render('index');
   });
+  
+  app.get('/fruits', (req, res) => {
+    res.render('fruits');
+  });
+
+  app.get('/vegetables', (req, res) => {
+    res.render('vegetables');
+  });
+
+  app.get('/others', (req, res) => {
+    res.render('others');
+  });
+  app.get('/cart', (req, res) => {
+    res.render('cart');
+  });
+
 
   return app;
 }
