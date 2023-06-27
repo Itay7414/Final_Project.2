@@ -17,10 +17,12 @@ $(document).ready(function () {
   });
 
   // Handle "User Profile" button click
+  $(document).on('click', '#transactions-history-btn', function () {
+    window.location.href = '/transaction_history';
+  });
   $(document).on('click', '#user-profile-btn', function () {
     window.location.href = '/userprofile';
   });
-
   // Handle "Stores Addresses" button click
   $(document).on('click', '#stores-addresses-btn', function () {
     window.location.href = '/store_map';
