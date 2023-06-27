@@ -13,14 +13,16 @@ $(document).ready(function () {
 
   // Handle "Back to Home" button click
   $(document).on('click', '.back-to-home-btn', function () {
-    window.location.href = 'index.ejs';
+    window.location.href = '/';
   });
 
   // Handle "User Profile" button click
+  $(document).on('click', '#transactions-history-btn', function () {
+    window.location.href = '/transaction_history';
+  });
   $(document).on('click', '#user-profile-btn', function () {
     window.location.href = '/userprofile';
   });
-
   // Handle "Stores Addresses" button click
   $(document).on('click', '#stores-addresses-btn', function () {
     window.location.href = '/store_map';
@@ -72,7 +74,7 @@ $(document).ready(function () {
 // index.js
 $(document).ready(function () {
   $('.cart-btn').click(function () {
-    window.location.href = 'cart.html'; // Change 'cart.html' to the desired page URL
+    window.location.href = 'cart.ejs'; // Change 'cart.html' to the desired page URL
   });
 });
 function openStoreMapPage() {

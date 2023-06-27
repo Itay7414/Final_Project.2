@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="UTF-8">
     <title>Sign Up</title>
     <link rel="stylesheet" type="text/css" href="/styles/signup.css">
 </head>
+
 <body>
     <header>
         <a href="/" class="back-to-home-btn">
@@ -19,6 +21,14 @@
             <form id="signup-form" class="form">
                 <p class="form-title">Sign up for an account</p>
                 <div class="input-container">
+                    <input type="userName" placeholder="Enter user name" id="userName">
+                    <span></span>
+                </div>
+                <div class="input-container">
+                    <input type="name" placeholder="Enter full name" id="name">
+                    <span></span>
+                </div>
+                <div class="input-container">
                     <input type="email" placeholder="Enter email" id="email">
                     <span></span>
                 </div>
@@ -27,7 +37,7 @@
                 </div>
                 <button type="submit" class="signup-submit">Sign Up</button>
                 <p class="signup-link">
-                    Already have an account? <a href="/views/userprofile.ejs">Sign in</a>
+                    Already have an account? <a href="/userprofile">Sign in</a>
                 </p>
             </form>
         </div>
@@ -35,4 +45,5 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="/backend/controllers/usersControllers.js"></script>
 </body>
+
 </html>
