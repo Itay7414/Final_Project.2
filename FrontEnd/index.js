@@ -18,7 +18,7 @@ $(document).ready(function () {
 
   // Handle "User Profile" button click
   $(document).on('click', '#user-profile-btn', function () {
-    window.location.href = '/userprofile';
+    window.location.href = '../userprofile';
   });
 
   // Handle "Stores Addresses" button click
