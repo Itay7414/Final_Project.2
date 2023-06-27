@@ -58,10 +58,6 @@ main {
     margin-bottom: 10px;
 }
 
-#cart-items {
-    /* Add your custom styles for cart items container here */
-}
-
 #cart-items-body th,
 #cart-items-body td {
     padding: 8px;
