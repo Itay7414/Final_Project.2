@@ -2,6 +2,7 @@ const models = require('../utils/db_utils/models');
 const Cart = models.Cart;
 const User = models.User;
 
+
 exports.createCart = async (req, res) => {
     try {
         const userId = req.body.userId;
@@ -46,7 +47,7 @@ exports.addToCart = async (req, res) => {
         }
 
         // Add the item to the cart
-        cart.items.push({
+        cart.itam.push({
             type: item.type,
             name: item.name,
             price: item.price,
