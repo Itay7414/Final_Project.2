@@ -13,17 +13,17 @@ $(document).ready(function () {
 
   // Handle "Back to Home" button click
   $(document).on('click', '.back-to-home-btn', function () {
-    window.location.href = 'index.html';
+    window.location.href = 'index.ejs';
   });
 
   // Handle "User Profile" button click
   $(document).on('click', '#user-profile-btn', function () {
-    window.location.href = 'userprofile.ejs';
+    window.location.href = '/userprofile';
   });
 
   // Handle "Stores Addresses" button click
   $(document).on('click', '#stores-addresses-btn', function () {
-    window.location.href = 'store_map.ejs';
+    window.location.href = '/store_map';
     window.open('https://goo.gl/maps/b5cY9fv4N6wpfBug8');
     window.open('https://goo.gl/maps/ALPT1hZNVEtnNrqu9');
   });
