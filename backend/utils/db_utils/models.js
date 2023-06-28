@@ -13,7 +13,7 @@ const itemSchema = new mongoose.Schema({
 
 // Define the user schema
 const userSchema = new mongoose.Schema({
-    userName: { type: String, require: true },
+    username: { type: String, require: true, unique: true },
     password: { type: String, required: true },
     email: { type: String, required: true },
 });
