@@ -59,7 +59,7 @@
                     <p class="message">Thank you for your purchase. Your order will be delivered within 2 days of your purchase.</p>
                 </div>
                 <div class="actions">
-                    <button class="history" type="button">History</button>
+                    <button class="history" type="button" onclick="redirectToHistory()">History</button>
                     <button class="track" type="button">Track my order</button>
                 </div>
             </div>
@@ -78,6 +78,9 @@
         dismissButton.addEventListener('click', () => {
             cardContainer.classList.add('hidden');
         });
+        function redirectToHistory() {
+    window.location.href = "/transaction_history"; // Replace "/history" with the actual URL of your transaction history page
+}
     </script>
         <script src="/backend/routes/carts.js"></script>
 
