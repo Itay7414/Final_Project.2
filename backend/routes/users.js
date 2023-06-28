@@ -6,7 +6,7 @@ router.post('/users/signIn', usersController.signIn_user);
 router.put('/users/updateUser', usersController.updateUser);
 router.get('/users/allUsers', usersController.allUsers);
 */
-router.post('/users/signUp', usersController.signUp_user);
+router.post('/users/signUp', usersController.signUp);
 
 
 
