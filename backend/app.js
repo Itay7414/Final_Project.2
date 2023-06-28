@@ -21,6 +21,9 @@ const createApp = async function () {
   app.use(express.json());
   app.use(cookieParser());
   app.use(express.static(path.join(process.cwd(), '../frontend')));
+  app.use(require("./routes/users"));
+  app.use(require("./routes/items"));
+  app.use(require("./routes/carts"));
   console.log('App Created !');
   await db.connect('mongodb+srv://mosacho1408:Mosacho1408@cluster0.7ygedx4.mongodb.net', { useNewUrlParser: true, useUnifiedTopology: true });
   console.log('Database Connected!');
