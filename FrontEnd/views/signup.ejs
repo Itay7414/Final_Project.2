@@ -25,7 +25,7 @@
                     <span id="username-error" class=" error-message"></span>
                 </div>
                 <div class="input-container">
-                    <input type="email" placeholder="Enter email" id="email">
+                    <input required="" type="email" placeholder="Enter email" id="email" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}">
                     <span></span>
                 </div>
                 <div class="input-container">
@@ -34,8 +34,9 @@
                 <button type="submit" class="signup-submit" onclick="submitForm()">Sign Up</button>
                 Already have an account? <a href="/userprofile">Sign in</a>
                 </p>
+
             </form>
-        </div>
+          </div>          
     </main>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="/backend/routes/users.js"></script>
