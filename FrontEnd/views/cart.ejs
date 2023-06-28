@@ -1,11 +1,22 @@
 <!DOCTYPE html>
 <html>
-
 <head>
     <title>Shopping Cart</title>
     <link rel="stylesheet" type="text/css" href="/styles/cart.css">
-</head>
+    <style>
+        .card-container {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 9999;
+        }
 
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
 <body>
     <a href="/" class="back-to-home-btn">
         <img src="/assets/back-to-home.jpeg" alt="Back to Home" width="60" height="60">
@@ -28,9 +39,51 @@
 
 
     </main>
+    <button class="checkout-button">CHECKOUT</button>
+
+    <div id="card-container" class="card-container hidden">
+        <div class="card">
+            <button class="dismiss" type="button">×</button>
+            <div class="header">
+                <div class="image">
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                        <g id="SVGRepo_iconCarrier">
+                            <path d="M20 7L9.00004 18L3.99994 13" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                        </g>
+                    </svg>
+                </div>
+                <div class="content">
+                    <span class="title">Order validated!</span>
+                    <p class="message">Thank you for your purchase. Your order will be delivered within 2 days of your purchase.</p>
+                </div>
+                <div class="actions">
+                    <button class="history" type="button" onclick="redirectToHistory()">History</button>
+                    <button class="track" type="button">Track my order</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const checkoutButton = document.querySelector('.checkout-button');
+        const cardContainer = document.getElementById('card-container');
+        const dismissButton = document.querySelector('.dismiss');
+
+        checkoutButton.addEventListener('click', () => {
+            cardContainer.classList.remove('hidden');
+        });
+
+        dismissButton.addEventListener('click', () => {
+            cardContainer.classList.add('hidden');
+        });
+        function redirectToHistory() {
+    window.location.href = "/transaction_history"; // Replace "/history" with the actual URL of your transaction history page
+}
+    </script>
+        <script src="/backend/routes/carts.js"></script>
 
 
-    <script src="/backend/routes/carts.js"></script>
 </body>
-
 </html>

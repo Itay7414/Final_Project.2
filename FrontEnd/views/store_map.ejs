@@ -11,7 +11,7 @@
       }
     </style>
     <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap" async defer></script>
-    <script>
+    <!-- <script>
       function initMap() {
         // Initialize the map and set the initial position
         var map = new google.maps.Map(document.getElementById('map'), {
@@ -27,7 +27,7 @@
         });
 
       }
-    </script>
+    </script> -->
   </head>
   <body>
     <header>
@@ -43,6 +43,10 @@
       <img src="/assets/Yarkania logo 1.png" alt="Shuki's Yarkania Logo" class="logo-img">
     </div>
     <div id="map"></div>
-
+    <div class="map-container">
+      <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3384.6721511519495!2d34.773588361155866!3d31.969789824911057!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1502b30236ef5d51%3A0x6c10ba446a77cd0c!2z15TXnteb15zXnNeUINec157XoNeU15wg16jXkNep15XXnyDXnNem15nXldef!5e0!3m2!1siw!2sil!4v1687871086094!5m2!1siw!2sil"
+          width="150%" height="250" style="border:0;" allowfullscreen="" loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"></iframe>
   </body>
 </html>

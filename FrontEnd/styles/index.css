@@ -155,3 +155,6 @@ nav ul li a {
   width: 350px;
   height: auto;
 }
+.navButtons {
+  cursor: pointer;
+}

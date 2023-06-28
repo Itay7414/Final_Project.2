@@ -19,31 +19,27 @@
     <main>
         <div class="form-container">
             <form id="signup-form" class="form">
-                <p class="form-title">Sign up for an account</p>
-                <div class="input-container">
-                    <input type="userName" placeholder="Enter user name" id="userName">
-                    <span></span>
-                </div>
-                <div class="input-container">
-                    <input type="name" placeholder="Enter full name" id="name">
-                    <span></span>
-                </div>
-                <div class="input-container">
-                    <input type="email" placeholder="Enter email" id="email">
-                    <span></span>
-                </div>
-                <div class="input-container">
-                    <input type="password" placeholder="Enter password" id="password">
-                </div>
-                <button type="submit" class="signup-submit">Sign Up</button>
-                <p class="signup-link">
-                    Already have an account? <a href="/userprofile">Sign in</a>
-                </p>
+              <p class="form-title">Sign up for an account</p>
+              <div class="input-container">
+                <input required="" type="userName" placeholder="Enter user name" id="userName">
+                <span></span>
+              </div>
+              <div class="input-container">
+                <input required="" type="email" placeholder="Enter email" id="email" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}">
+                <span></span>
+              </div>
+              <div class="input-container">
+                <input required="" type="password" placeholder="Enter password" id="password">
+              </div>
+              <button type="submit" class="signup-submit" onclick="submitForm()">Sign Up</button>
+              Already have an account? <a href="/userprofile">Sign in</a>
+              </p>
             </form>
-        </div>
+          </div>          
     </main>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="/backend/controllers/usersControllers.js"></script>
+    <script src="/backend/routes/users.js"></script>
+    <script src="../signup.js"></script>
 </body>
 
 </html>

@@ -1,5 +1,6 @@
 const models = require('../utils/db_utils/models');
 users_model = models.User;
+//const User = models.User;
 
 /*
 exports.signIn_user = async (req, res) => {
@@ -20,16 +21,23 @@ exports.updateUser = async (req, res) => {
 exports.signUp_user = async (req, res) => {
     console.log("Inside of Sign_UP");
     try {
-        const { name, email, password } = req.body;
-        console.log(name);
-        console.log(email);
-        console.log(password);
+        const { username, email, password } = req.body;
 
-        await users_model.create({
-            name: name,
+        // Check if username already exists in the database
+        const existingUser = await User.findOne({ username });
+        if (existingUser) {
+            return res.status(400).render('signup', { error: "Username already exists. Please choose another one." });
+        }
+
+        // Create a new user
+        const newUser = new User({
+            username: username,
             email: email,
             password: password
         });
+
+        // Save the new user to the database
+        await newUser.save();
 
         console.log("User created");
         res.status(200).json({ message: "User created successfully" });
