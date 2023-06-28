@@ -141,6 +141,7 @@ nav ul li a {
   padding: 10px;
   border-radius: 5px;
 }
+
 .logo2-container {
   position: absolute;
   top: 10px;
@@ -155,6 +156,7 @@ nav ul li a {
   width: 350px;
   height: auto;
 }
+
 .navButtons {
   cursor: pointer;
 }

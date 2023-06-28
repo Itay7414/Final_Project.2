@@ -2,10 +2,7 @@ require('dotenv').config();
 const db = require('mongoose');
 const express = require('express');
 const cookieParser = require('cookie-parser');
-
-
-
-
+const session = require('express-session');
 const path = require('path');
 
 const load_routes = function (app) {
@@ -24,6 +21,11 @@ const createApp = async function () {
   app.use(require("./routes/users"));
   app.use(require("./routes/items"));
   app.use(require("./routes/carts"));
+  app.use(session({
+    secret: 'your-secret-key', // Replace with your own secret key
+    resave: false,
+    saveUninitialized: false,
+  }));
   console.log('App Created !');
   await db.connect('mongodb+srv://mosacho1408:Mosacho1408@cluster0.7ygedx4.mongodb.net', { useNewUrlParser: true, useUnifiedTopology: true });
   console.log('Database Connected!');

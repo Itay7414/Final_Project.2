@@ -1,21 +1,39 @@
 const models = require('../utils/db_utils/models');
 users_model = models.User;
-//const User = models.User;
 
+
+exports.signIn = async (req, res) => {
+    try {
+        const { userName, password } = req.body;
+
+        // Check if the user exists in the database
+        const user = await users_model.findOne({ username: userName });
+        if (!user) {
+            return res.status(400).json({ exists: false, error: "User does not exist. Please sign up." });
+        }
+
+        // Compare the password using the comparePassword method
+        const isPasswordCorrect = await user.comparePassword(password);
+        if (!isPasswordCorrect) {
+            return res.status(400).json({ exists: true, correctPassword: false, error: "Incorrect password." });
+        }
+
+        // User is authenticated, store the user ID in the session
+        req.session.userId = user._id;
+
+        // Return success response
+        return res.status(200).json({ exists: true, correctPassword: true, message: "User signed in successfully" });
+    } catch (err) {
+        console.error(err);
+        return res.status(500).json({ error: "Failed to sign in" });
+    }
+};
 /*
-exports.signIn_user = async (req, res) => {
-    try {  // HTTP-body example: {"email": ..., "password": ..., "type": ...}
-        await db_api.get_Item(db_api.users_model,
-            { filters: { 'email': req.body.email, 'password': req.body.password, 'type': req.body.type } })
-            .then(users_arr => res.send(users_arr));  // users_arr is an array with 1 user object inside
-    } catch (err) { res.status(400).send(err); }
-}
-
 exports.updateUser = async (req, res) => {
-    try {  // HTTP-body example: {"filters": {...}, "update": {...}, "options": {...}}
-        await db_api.update_Item(db_api.users_model, req.body)
-            .then(update_status => res.send(update_status));
-    } catch (err) { res.status(400).send(err); }
+  try {  // HTTP-body example: {"filters": {...}, "update": {...}, "options": {...}}
+      await db_api.update_Item(db_api.users_model, req.body)
+          .then(update_status => res.send(update_status));
+  } catch (err) { res.status(400).send(err); }
 }
 */
 exports.signUp = async (req, res) => {

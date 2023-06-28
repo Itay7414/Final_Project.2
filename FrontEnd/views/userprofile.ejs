@@ -41,7 +41,7 @@
                 </button>
             </div>
             <div class="line"></div>
-            <form class="form">
+            <form class="form" id="signInForm" action="/users/signIn" method="POST">
                 <div class="form-group">
                     <label for="userName">User Name</label>
                     <input required="" placeholder="Enter your user name" name="userName" id="userName" type="text">
@@ -51,7 +51,7 @@
                     <input required="" name="password" placeholder="Enter your password" id="password" type="password">
                 </div>
 
-                <button type="submit" class="form-submit-btn">Sign In</button>
+                <button type="submit" class="form-submit-btn" id="signInBtn">Sign In</button>
             </form>
 
             <!-- <a class="forgot-password-link link" href="#">Forgot Password</a> -->
@@ -65,7 +65,9 @@
     </main>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="/backend/routs/users.js"></script>
+    <script src="/backend/routes/users.js"></script>
+    <script src="../signup.js"></script>
+
 </body>
 
 </html>
