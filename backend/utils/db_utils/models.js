@@ -9,7 +9,7 @@ const itemSchema = new mongoose.Schema({
     name: { type: String, required: true },
     image: { type: String, required: true },
     price: { type: Number, required: true },
-    quantity: { type: Number, required: true },
+
 });
 
 // Define the user schema
@@ -23,7 +23,7 @@ userSchema.methods.comparePassword = async function (password) {
     return bcrypt.compare(password, this.password);
 };
 
-const cartSchema = new mongoose.Schema({
+const orderSchema = new mongoose.Schema({
     user: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
@@ -34,7 +34,7 @@ const cartSchema = new mongoose.Schema({
             type: { type: String, required: true },
             name: { type: String, required: true },
             price: { type: Number, required: true },
-            quantity: { type: Number, required: true }
+
         }
     ]
 });
@@ -42,8 +42,8 @@ const cartSchema = new mongoose.Schema({
 // Create the models
 const Item = mongoose.model('Item', itemSchema);
 const User = mongoose.model('User', userSchema);
-const Cart = mongoose.model('Cart', cartSchema);
+const Order = mongoose.model('Order', orderSchema);
 
 
 // Export the models
-module.exports = { Item, User, Cart };
+module.exports = { Item, User, Order };

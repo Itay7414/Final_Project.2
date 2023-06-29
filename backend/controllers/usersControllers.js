@@ -18,6 +18,9 @@ exports.signIn = async (req, res) => {
             return res.status(400).json({ exists: true, correctPassword: false, error: "Incorrect password." });
         }
 
+        // Set the 'username' cookie
+        res.cookie('username', userName);
+
         // User is authenticated, store the user ID in the session
         req.session.userId = user._id;
 
@@ -28,6 +31,7 @@ exports.signIn = async (req, res) => {
         return res.status(500).json({ error: "Failed to sign in" });
     }
 };
+
 /*
 exports.updateUser = async (req, res) => {
   try {  // HTTP-body example: {"filters": {...}, "update": {...}, "options": {...}}

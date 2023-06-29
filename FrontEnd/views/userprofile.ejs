@@ -19,9 +19,10 @@
     <main>
         <div class="form-container">
             <div class="logo-container">
-                Welcome Back!
+                <% if (userName) { %>
+                    Welcome Back, <%= userName %>!
+                        <% } %>
             </div>
-
             <div class="social-buttons">
                 <button class="social-button facebook">
                     <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -61,11 +62,12 @@
                 <a class="signup-link link" id="signup-link" href="/signup" alt="signup"> Sign up now</a>
             </p>
         </div>
-
     </main>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="/backend/routes/users.js"></script>
+    <script src="/FrontEnd/userprofile.js"></script>
+
     <script src="../signup.js"></script>
 
 </body>

@@ -1,10 +1,10 @@
 const models = require('../utils/db_utils/models');
-const Cart = models.Cart;
+const Order = models.Order;
 const User = models.User;
 
 
 
-exports.createCart = async (req, res) => {
+exports.createOrder = async (req, res) => {
     try {
         const userId = req.body.userId;
 
@@ -16,39 +16,39 @@ exports.createCart = async (req, res) => {
         }
 
         // Check if the user already has a cart
-        const existingCart = await Cart.findOne({ user: userId });
-        if (existingCart) {
+        const existingOrder = await Order.findOne({ user: userId });
+        if (existingOrder) {
             return res.status(400).json({ message: 'User already has a cart' });
         }
 
         // Create a new cart
-        const cart = new Cart({
+        const order = new Order({
             user: userId,
             items: []
         });
 
         // Save the cart
-        const createdCart = await cart.save();
-        res.status(200).json(createdCart);
+        const createOrder = await order.save();
+        res.status(200).json(createOrder);
     } catch (err) {
         res.status(500).json({ message: 'Failed to create cart' });
 
     }
 };
 
-exports.addToCart = async (req, res) => {
+exports.addToOrder = async (req, res) => {
     try {
         const userId = req.body.userId;
         const item = req.body.item;
         const quantity = req.body.quantity;
 
-        // Find the user's cart
-        const cart = await Cart.findOne({ user: userId });
-        if (!cart) {
-            return res.status(404).json({ message: 'Cart not found' });
+        // Find the user's order
+        const Order = await Order.findOne({ user: userId });
+        if (!Order) {
+            return res.status(404).json({ message: 'Order not found' });
         }
 
-        // Add the item to the cart
+        // Add the item to the order
         cart.itam.push({
             type: item.type,
             name: item.name,
@@ -56,10 +56,10 @@ exports.addToCart = async (req, res) => {
             quantity: quantity
         });
 
-        // Save the updated cart
-        const updatedCart = await cart.save();
+        // Save the updated order
+        const updatedOrder = await Order.save();
 
-        res.status(200).json(updatedCart);
+        res.status(200).json(updatedOrder);
     } catch (err) {
         res.status(500).json({ message: 'Failed to add item to cart' });
     }

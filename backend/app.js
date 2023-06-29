@@ -8,7 +8,7 @@ const path = require('path');
 const load_routes = function (app) {
   app.use(require("../backend/routes/users"));
   app.use(require("../backend/routes/items"));
-  app.use(require("../backend/routes/carts"));
+  app.use(require("../backend/routes/orders"));
 }
 
 
@@ -20,7 +20,7 @@ const createApp = async function () {
   app.use(express.static(path.join(process.cwd(), '../frontend')));
   app.use(require("./routes/users"));
   app.use(require("./routes/items"));
-  app.use(require("./routes/carts"));
+  app.use(require("./routes/orders"));
   app.use(session({
     secret: 'your-secret-key', // Replace with your own secret key
     resave: false,
@@ -34,6 +34,8 @@ const createApp = async function () {
   app.set('view engine', 'ejs');
   app.set('views', path.join(process.cwd(), '..', 'frontend', 'views'));
   await load_routes(app);
+
+
   app.get('/', (req, res) => {
     res.render('index');
   });
@@ -49,12 +51,16 @@ const createApp = async function () {
   app.get('/others', (req, res) => {
     res.render('others');
   });
-  app.get('/cart', (req, res) => {
-    res.render('cart');
+  app.get('/orders', (req, res) => {
+    res.render('orders');
   });
+
   app.get('/userprofile', (req, res) => {
-    res.render('userprofile');
+    const username = req.cookies.username; // Retrieve the 'username' cookie value
+    res.render('userprofile', { username }); // Pass the 'username' variable to the template
   });
+
+
   app.get('/signup', (req, res) => {
     res.render('signup');
   });
