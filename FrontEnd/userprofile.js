@@ -79,6 +79,13 @@ $(document).ready(function () {
                 displayErrorMessage('An error occurred. Please try again later.');
             },
         });
+        event.preventDefault(); // Prevent the default form submission
+
+        // Get the form data
+        var formData = $(this).serialize();
+
+        // Perform a form submission
+        this.submit();
     });
     function displayErrorMessage(message) {
         $('.error-message').text(message);

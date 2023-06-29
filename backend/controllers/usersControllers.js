@@ -4,18 +4,18 @@ users_model = models.User;
 
 exports.signIn = async (req, res) => {
     try {
-        const { userName, password } = req.body;
+        const { username, password } = req.body;
 
-        // Check if the user exists in the database
-        const user = await users_model.findOne({ username: userName });
+        const user = await users_model.findOne({ username: username });
         if (!user) {
-            return res.status(400).json({ exists: false, error: "User does not exist. Please sign up." });
+            const errorMessage = "User does not exist. Please sign up.";
+            return res.render("userprofile", { error: errorMessage });
         }
 
-        // Compare the password using the comparePassword method
         const isPasswordCorrect = await user.comparePassword(password);
         if (!isPasswordCorrect) {
-            return res.status(400).json({ exists: true, correctPassword: false, error: "Incorrect password." });
+            const errorMessage = "Incorrect password.";
+            return res.render("userprofile", { error: errorMessage });
         }
 
         // Set the 'username' cookie
@@ -24,11 +24,11 @@ exports.signIn = async (req, res) => {
         // User is authenticated, store the user ID in the session
         req.session.userId = user._id;
 
-        // Return success response
-        return res.status(200).json({ exists: true, correctPassword: true, message: "User signed in successfully" });
+        return res.redirect("/"); // Redirect to the desired page after successful sign-in
     } catch (err) {
         console.error(err);
-        return res.status(500).json({ error: "Failed to sign in" });
+        const errorMessage = "Failed to sign in.";
+        return res.render("userprofile", { error: errorMessage });
     }
 };
 
