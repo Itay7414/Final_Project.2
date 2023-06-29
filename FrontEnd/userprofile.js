@@ -55,17 +55,14 @@ $(document).ready(function () {
             url: '/users/signIn', // Update the URL if necessary
             data: { username: username, password: password }, // Send the data as an object
             success: function (response) {
-                // Handle the successful sign-in response
-                console.log(response);
                 if (response.exists && response.correctPassword) {
                     // User exists and password is correct
                     // Store the user session or token in a cookie
                     document.cookie = 'session=' + response.sessionToken + '; path=/'; // Example code, modify as per your session management
                     document.cookie = 'username=' + username + '; path=/'; // Store the username in a cookie
-                    // Redirect to a new page or perform other actions
-                    window.location.href = '/dashboard'; // Example redirect, modify as per your application's routes
+                    // Redirect to the index page with welcome message
+                    window.location.href = '/?welcome=true&username=' + encodeURIComponent(username);
                 } else if (!response.exists) {
-                    console.log(username);
                     // User does not exist
                     displayErrorMessage('User does not exist.');
                 } else {
@@ -79,17 +76,9 @@ $(document).ready(function () {
                 displayErrorMessage('An error occurred. Please try again later.');
             },
         });
-        event.preventDefault(); // Prevent the default form submission
-
-        // Get the form data
-        var formData = $(this).serialize();
-
-        // Perform a form submission
-        this.submit();
     });
+
     function displayErrorMessage(message) {
         $('.error-message').text(message);
     }
 });
-
-
