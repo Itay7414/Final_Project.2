@@ -15,6 +15,9 @@
         .hidden {
             display: none;
         }
+        .checkout-button {
+            position: absolute;
+        }
     </style>
 </head>
 <body>
@@ -31,10 +34,41 @@
     <section class="text-center">
         <h2>Shuki's Yarkania</h2>
         <p>Your Shopping Cart!</p>
-        <div id="cart-items" class="cart-container">
-            <!-- Cart items will be inserted here dynamically -->
-        </div>
     </section>
+    <div class="table-container">
+        <ul class="responsive-table">
+          <li class="table-header">
+            <div class="col col-2">Product Name</div>
+            <div class="col col-3">Price</div>
+            <div class="col col-4">Amount</div>
+            <div class="col col-5" data-label="Total Price">Total</div>
+          </li>
+          <li class="table-row">
+            <div class="col col-2" data-label="Customer Name">John Doe</div>
+            <div class="col col-3" data-label="Amount">$350</div>
+            <div class="col col-4" data-label="Payment Status">Pending</div>
+            <div class="col col-5" data-label="Total Price">Pending</div>
+          </li>
+          <li class="table-row">
+            <div class="col col-2" data-label="Customer Name">Jennifer Smith</div>
+            <div class="col col-3" data-label="Amount">$220</div>
+            <div class="col col-4" data-label="Payment Status">Pending</div>
+            <div class="col col-5" data-label="Total Price">Pending</div>
+          </li>
+          <li class="table-row">
+            <div class="col col-2" data-label="Customer Name">John Smith</div>
+            <div class="col col-3" data-label="Amount">$341</div>
+            <div class="col col-4" data-label="Payment Status">Pending</div>
+            <div class="col col-5" data-label="Total Price">Pending</div>
+          </li>
+          <li class="table-row">
+            <div class="col col-2" data-label="Customer Name">John Carpenter</div>
+            <div class="col col-3" data-label="Amount">$115</div>
+            <div class="col col-4" data-label="Payment Status">Pending</div>
+            <div class="col col-5" data-label="Total Price">Pending</div>
+          </li>
+        </ul>
+      </div>
     <main>
 
 
