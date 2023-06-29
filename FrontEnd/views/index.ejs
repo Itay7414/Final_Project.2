@@ -44,19 +44,19 @@
     </div>
   </main>
 
-  <div class="navigation left-navbar">
-    <nav>
-      <ul>
-        <li>
-          <a href="/userprofile" class="navButtons">User Profile</a>
-        </li>
-        <li>
-          <a href="/transaction_history" class="navButtons">Transactions History</a>
-        </li>
-        <li>
-          <a href="/store_map" class="navButtons">Find Store Locations</a>
-        </li>
-      </ul>
+  <div class="navigation">
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="/userprofile">User Profile</a>
+        <a class="navbar-brand" href="/transaction_history" class="navButtons">Transactions History</a>
+        <a class="navbar-brand" href="/store_map" class="navButtons">Find Store Locations</a>
+          </ul>
+          <form class="d-flex" role="search">
+            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success" type="submit">Search</button>
+          </form>
+        </div>
+      </div>
     </nav>
   </div>
 
@@ -67,3 +67,22 @@
 </body>
 
 </html>
+
+<!-- <div class="navigation left-navbar">
+  <nav>
+    <ul>
+      <li>
+        <a href="/userprofile" class="navButtons">User Profile</a>
+      </li>
+      <li>
+        <a href="/transaction_history" class="navButtons">Transactions History</a>
+      </li>
+      <li>
+        <a href="/store_map" class="navButtons">Find Store Locations</a>
+      </li>
+      <li>
+        <a href="/logout" class="navButtons">Logout</a>
+      </li>
+    </ul>
+  </nav>
+</div> -->

@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const db = require('../../app'); // Assuming you have a separate App.js file
-//const { image } = require('d3');
+const bcrypt = require('bcrypt');
+
 
 // Define the item schema
 const itemSchema = new mongoose.Schema({
@@ -18,6 +19,9 @@ const userSchema = new mongoose.Schema({
     email: { type: String, required: true },
 });
 
+userSchema.methods.comparePassword = async function (password) {
+    return bcrypt.compare(password, this.password);
+};
 
 const cartSchema = new mongoose.Schema({
     user: {
