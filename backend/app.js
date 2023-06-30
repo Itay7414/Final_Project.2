@@ -37,6 +37,15 @@ const createApp = async function () {
   await load_routes(app);
 
 
+
+
+  app.get('/', (req, res) => {
+    const welcome = req.query.welcome === 'true'; // Check if welcome query parameter is true
+    const username = req.query.username; // Retrieve the username from the query parameter
+    res.render('index', { welcome, username });
+  });
+
+
   app.get('/', (req, res) => {
     res.render('index');
   });
