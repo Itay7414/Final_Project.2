@@ -3,8 +3,8 @@ const Item = models.Item;
 
 exports.createItems = async (req, res) => {
     try {
-        const { type, name, image, price, quantity } = req.body;
-        const newItem = new Item({ type, name, image, price, quantity });
+        const { type, name, image, price } = req.body;
+        const newItem = new Item({ type, name, image, price });
         const createdItem = await newItem.save();
         res.status(200).json(createdItem);
     } catch (err) {

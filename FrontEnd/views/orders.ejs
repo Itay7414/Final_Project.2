@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Shopping Cart</title>
-    <link rel="stylesheet" type="text/css" href="/styles/cart.css">
+    <link rel="stylesheet" type="text/css" href="/styles/order.css">
     <style>
         .card-container {
             position: fixed;
@@ -15,11 +16,13 @@
         .hidden {
             display: none;
         }
+
         .checkout-button {
             position: absolute;
         }
     </style>
 </head>
+
 <body>
     <a href="/" class="back-to-home-btn">
         <img src="/assets/back-to-home.jpeg" alt="Back to Home" width="60" height="60">
@@ -37,32 +40,32 @@
     </section>
     <div class="table-container">
         <ul class="responsive-table">
-          <li class="table-header">
-            <div class="col col-2">Product Name</div>
-            <div class="col col-3">Price</div>
-            <div class="col col-4">Amount</div>
-            <div class="col col-5" data-label="Total Price">Total</div>
-          </li>
-          <li class="table-row">
-            <div class="col col-2" data-label="Item Name">Apple</div>
-            <div class="col col-3" data-label="Price">3.99$</div>
-            <div class="col col-4" data-label="Amount">4</div>
-            <div class="col col-5" data-label="Total Price">15.96$</div>
-          </li>
-          <li class="table-row">
-            <div class="col col-2" data-label="Item Name">Parsley</div>
-            <div class="col col-3" data-label="Price">2.49$</div>
-            <div class="col col-4" data-label="Amount">2</div>
-            <div class="col col-5" data-label="Total Price">4.98$</div>
-          </li>
-          <li class="table-row-total">
-            <div class="col col-2" data-label="Item Name"></div>
-            <div class="col col-3" data-label="Price"></div>
-            <div class="col col-4" data-label="Amount"></div>
-            <div class="col col-total" data-label="Total Price">Total: 20.94$</div>
-          </li>
+            <li class="table-header">
+                <div class="col col-2">Product Name</div>
+                <div class="col col-3">Price</div>
+                <div class="col col-4">Amount</div>
+                <div class="col col-5" data-label="Total Price">Total</div>
+            </li>
+            <li class="table-row">
+                <div class="col col-2" data-label="Item Name">Apple</div>
+                <div class="col col-3" data-label="Price">3.99$</div>
+                <div class="col col-4" data-label="Amount">4</div>
+                <div class="col col-5" data-label="Total Price">15.96$</div>
+            </li>
+            <li class="table-row">
+                <div class="col col-2" data-label="Item Name">Parsley</div>
+                <div class="col col-3" data-label="Price">2.49$</div>
+                <div class="col col-4" data-label="Amount">2</div>
+                <div class="col col-5" data-label="Total Price">4.98$</div>
+            </li>
+            <li class="table-row-total">
+                <div class="col col-2" data-label="Item Name"></div>
+                <div class="col col-3" data-label="Price"></div>
+                <div class="col col-4" data-label="Amount"></div>
+                <div class="col col-total" data-label="Total Price">Total: 20.94$</div>
+            </li>
         </ul>
-      </div>
+    </div>
     <main>
 
 
@@ -78,13 +81,15 @@
                         <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
                         <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
                         <g id="SVGRepo_iconCarrier">
-                            <path d="M20 7L9.00004 18L3.99994 13" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                            <path d="M20 7L9.00004 18L3.99994 13" stroke="#000000" stroke-width="1.5"
+                                stroke-linecap="round" stroke-linejoin="round"></path>
                         </g>
                     </svg>
                 </div>
                 <div class="content">
                     <span class="title">Order validated!</span>
-                    <p class="message">Thank you for your purchase. Your order will be delivered within 2 days of your purchase.</p>
+                    <p class="message">Thank you for your purchase. Your order will be delivered within 2 days of your
+                        purchase.</p>
                 </div>
                 <div class="actions">
                     <button class="history" type="button" onclick="redirectToHistory()">History</button>
@@ -107,11 +112,12 @@
             cardContainer.classList.add('hidden');
         });
         function redirectToHistory() {
-    window.location.href = "/transaction_history"; // Replace "/history" with the actual URL of your transaction history page
-}
+            window.location.href = "/transaction_history"; // Replace "/history" with the actual URL of your transaction history page
+        }
     </script>
-        <script src="/backend/routes/carts.js"></script>
+    <script src="/backend/routes/orders.js"></script>
 
 
 </body>
+
 </html>
