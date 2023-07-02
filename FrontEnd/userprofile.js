@@ -1,84 +1,39 @@
-// $(document).ready(function () {
-//     $('#signInForm').submit(function (event) {
-//         event.preventDefault(); // Prevent the form from submitting normally
+function submitForm(event) {
+    event.preventDefault(); // Prevent the default form submission
 
-//         const username = $('#userName').val();
-//         const password = $('#password').val();
+    const form = document.getElementById('signInForm');
+    const usernameInput = document.getElementById('username');
+    const passwordInput = document.getElementById('password');
+    const errorContainer = document.querySelector('.error-message');
 
-//         // Send a POST request to the server
-//         $.ajax({
-//             type: 'POST',
-//             url: '/users/signIn', // Update the URL if necessary
-//             data: { username: username, password: password }, // Send the data as an object
-//             success: function (response) {
-//                 // Handle the successful sign-in response
-//                 console.log(response);
+    const username = usernameInput.value;
+    const password = passwordInput.value;
 
-//                 if (response.exists && response.correctPassword) {
-//                     // User exists and password is correct
-//                     // Store the user session or token in a cookie
-//                     document.cookie = 'session=' + response.sessionToken + '; path=/'; // Example code, modify as per your session management
+    fetch('/users/signIn', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            username,
+            password
+        }),
+        credentials: 'same-origin' // Include cookies in the request
+    })
+        .then(response => response.json())
+        .then(data => {
+            console.log(data); // Handle the response
 
-//                     // Redirect to a new page or perform other actions
-//                     window.location.href = '/dashboard'; // Example redirect, modify as per your application's routes
-//                 } else if (!response.exists) {
-//                     // User does not exist
-//                     displayErrorMessage('User does not exist.');
-//                 } else {
-//                     // Password is incorrect
-//                     displayErrorMessage('Incorrect password.');
-//                 }
-//             },
-//             error: function (error) {
-//                 // Handle the error response
-//                 console.error(error.responseJSON.error);
-//                 displayErrorMessage('An error occurred. Please try again later.');
-//             },
-//         });
-//     });
-
-//     function displayErrorMessage(message) {
-//         $('.error-message').text(message);
-//     }
-// });
-
-
-
-$(document).ready(function () {
-    $('#signInForm').submit(function (event) {
-        event.preventDefault(); // Prevent the form from submitting normally
-        const username = $('#username').val();
-        const password = $('#password').val();
-        // Send a POST request to the server
-        $.ajax({
-            type: 'POST',
-            url: '/users/signIn', // Update the URL if necessary
-            data: { username: username, password: password }, // Send the data as an object
-            success: function (response) {
-                if (response.exists && response.correctPassword) {
-                    // User exists and password is correct
-                    // Store the user session or token in a cookie
-                    document.cookie = 'session=' + response.sessionToken + '; path=/'; // Example code, modify as per your session management
-                    document.cookie = 'username=' + username + '; path=/'; // Store the username in a cookie
-                    // Redirect to the index page with welcome message
-                    window.location.href = '/?welcome=true&username=' + encodeURIComponent(username);
-                } else if (!response.exists) {
-                    // User does not exist
-                    displayErrorMessage('User does not exist.');
-                } else {
-                    // Password is incorrect
-                    displayErrorMessage('Incorrect password.');
-                }
-            },
-            error: function (error) {
-                // Handle the error response
-                console.error(error.responseJSON.error);
-                displayErrorMessage('An error occurred. Please try again later.');
-            },
+            if (data.error) {
+                errorContainer.textContent = data.error; // Display the error message
+            } else {
+                // Redirect to the user profile page
+                window.location.href = '/';
+            }
+        })
+        .catch(error => {
+            console.log(error); // Handle any error that occurred during the request
         });
-    });
+}
 
-    function displayErrorMessage(message) {
-        $('.error-message').text(message);
-    }
-});
+document.getElementById('signInBtn').addEventListener('click', submitForm);

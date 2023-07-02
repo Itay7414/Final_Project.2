@@ -1,36 +1,40 @@
 const models = require('../utils/db_utils/models');
-users_model = models.User;
+const users_model = models.User;
 
 
 exports.signIn = async (req, res) => {
     try {
+        console.log('signIn method called');
         const { username, password } = req.body;
-
-        const user = await users_model.findOne({ username: username });
-        if (!user) {
-            const errorMessage = "User does not exist. Please sign up.";
-            return res.render("userprofile", { error: errorMessage });
+        console.log('Username:', username);
+        console.log('Password:', password);
+        // Check if a user with the same username exists in the database
+        const existingUser = await users_model.findOne({ username: username });
+        if (!existingUser) {
+            // User does not exist, return an error message
+            return res.status(400).json({ error: 'Username does not exist' });
         }
 
-        const isPasswordCorrect = await user.comparePassword(password);
-        if (!isPasswordCorrect) {
-            const errorMessage = "Incorrect password.";
-            return res.render("userprofile", { error: errorMessage });
+        // Check if the provided password matches the user's password in the database
+        if (existingUser.password !== password) {
+            // Password does not match, return an error message
+            return res.status(400).json({ error: 'Incorrect password' });
         }
 
-        // Set the 'username' cookie
-        res.cookie('username', userName);
+        // Set cookie to remember user's login
+        res.cookie('user', existingUser, { maxAge: 86400000 }); // Cookie expires after 24 hours
 
-        // User is authenticated, store the user ID in the session
-        req.session.userId = user._id;
+        // Return a success message
+        return res.json({ message: 'User signed in successfully' });
 
-        return res.redirect("/"); // Redirect to the desired page after successful sign-in
-    } catch (err) {
-        console.error(err);
-        const errorMessage = "Failed to sign in.";
-        return res.render("userprofile", { error: errorMessage });
+    } catch (error) {
+        console.error('Error Logging In:', error);
+        return res.status(500).json({ error: 'Internal Server Error' });
     }
 };
+
+
+
 
 /*
 exports.updateUser = async (req, res) => {
