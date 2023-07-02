@@ -1,22 +1,32 @@
+/* Global Styles */
+
 body {
   background-image: url("/assets/background-image.jpg");
   background-repeat: no-repeat;
   background-size: cover;
+  margin: 0;
 }
+
+h2,
+p {
+  margin: 0;
+}
+
+/* Header Styles */
 
 header {
   background-color: #ffffff;
   padding: 10px;
-  position: relative;
   margin-top: -4.5%;
+}
 
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .cart-container {
-  margin-top: 5%;
-  position: absolute;
-  top: 10px;
-  left: 10px;
   display: flex;
   align-items: center;
   padding: 10px;
@@ -37,9 +47,6 @@ header {
 }
 
 .logo-container {
-  position: absolute;
-  top: 5px;
-  right: 10px;
   display: flex;
   align-items: center;
   padding: 10px;
@@ -48,66 +55,18 @@ header {
 .logo-container img {
   width: 250px;
   height: auto;
+  margin-right: -50px;
 }
 
+/* Main Content Styles */
+
 main {
-  margin-top: 130px;
+  margin-top: -150px; /* Adjust margin-top as desired */
 }
 
 section {
   padding: 20px;
   text-align: center;
-}
-
-h2,
-p {
-  margin: 0;
-}
-
-.navigation {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 60px;
-}
-
-.left-navbar {
-  position: fixed;
-  left: 5px;
-  top: 87%;
-  transform: translateY(-50%);
-}
-
-.right-navbar {
-  position: fixed;
-  right: 10px;
-  top: 40%;
-  transform: translateY(-50%);
-}
-
-nav {
-  background-color: #333;
-  padding: 20px;
-  color: #fff;
-  height: 60px;
-  margin-top: -72%;
-  text-align: center;
-}
-
-nav ul {
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
-}
-
-nav ul li {
-  margin-bottom: 10px;
-}
-
-nav ul li a {
-  text-decoration: none;
-  color: #fff;
-  padding: 5px;
 }
 
 .card-container {
@@ -139,6 +98,46 @@ nav ul li a {
   margin-bottom: 20px;
 }
 
+/* Navigation Styles */
+
+.navigation {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  z-index: 9999;
+}
+
+nav {
+  background-color: #333;
+  padding: 20px;
+  color: #fff;
+  height: 60px;
+  text-align: center;
+}
+
+nav ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+nav ul li {
+  margin-bottom: 10px;
+}
+
+nav ul li a {
+  text-decoration: none;
+  color: #fff;
+  padding: 5px;
+}
+
+/* Additional Styles */
+
 .welcome-message {
   position: fixed;
   top: 10px;
@@ -162,13 +161,6 @@ nav ul li a {
 .logo2-container img {
   width: 350px;
   height: auto;
-}
-
-.navigation ul {
-  display: flex;
-  justify-content: space-between;
-  list-style: none;
-  padding: 0;
 }
 
 .navButtons {
