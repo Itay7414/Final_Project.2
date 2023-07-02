@@ -37,16 +37,6 @@ exports.signIn = async (req, res) => {
 };
 
 
-
-
-/*
-exports.updateUser = async (req, res) => {
-  try {  // HTTP-body example: {"filters": {...}, "update": {...}, "options": {...}}
-      await db_api.update_Item(db_api.users_model, req.body)
-          .then(update_status => res.send(update_status));
-  } catch (err) { res.status(400).send(err); }
-}
-*/
 exports.signUp = async (req, res) => {
     try {
         const { username, email, password } = req.body;
@@ -71,9 +61,18 @@ exports.signUp = async (req, res) => {
         return res.status(500).json({ error: "Failed to create user" });
     }
 };
-/*
-exports.allUsers = async (req, res) => {
-    await db_api.get_item(db_api.users_model, { filters: {} })
-        .then(users_arr => res.send(users_arr));
-}
-*/
+exports.logout = async (req, res) => {
+    try {
+        // Clear the user's session
+        req.session.destroy();
+
+        // Remove the user's cookie
+        res.clearCookie('user');
+
+        // Redirect the user to the login page or any other desired page
+        res.redirect('/');
+    } catch (error) {
+        console.error('Error Logging Out:', error);
+        return res.status(500).json({ error: 'Internal Server Error' });
+    }
+};

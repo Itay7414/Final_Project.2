@@ -8,7 +8,7 @@
 </head>
 
 <body>
-  <% if (welcome && username) { %>
+  <% if (loggedIn && username) { %>
     <h1>Welcome <%= username %>!</h1>
     <% } %>
       <header>
@@ -53,6 +53,8 @@
             <a class="navbar-brand" href="/userprofile">User Profile</a>
             <a class="navbar-brand" href="/transaction_history" class="navButtons">Transactions History</a>
             <a class="navbar-brand" href="/store_map" class="navButtons">Find Store Locations</a>
+            <a class="navbar-brand" id="logoutBtn" href="/logout" class="navButtons">Logout</a>
+            <!-- Added logout button -->
             </ul>
             <form class="d-flex" role="search">
               <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
