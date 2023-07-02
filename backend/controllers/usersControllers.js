@@ -12,12 +12,14 @@ exports.signIn = async (req, res) => {
         const existingUser = await users_model.findOne({ username: username });
         if (!existingUser) {
             // User does not exist, return an error message
+            console.log('User does not exist');
             return res.status(400).json({ error: 'Username does not exist' });
         }
 
         // Check if the provided password matches the user's password in the database
         if (existingUser.password !== password) {
             // Password does not match, return an error message
+            console.log('Incorrect password');
             return res.status(400).json({ error: 'Incorrect password' });
         }
 
@@ -25,6 +27,7 @@ exports.signIn = async (req, res) => {
         res.cookie('user', existingUser, { maxAge: 86400000 }); // Cookie expires after 24 hours
 
         // Return a success message
+        console.log('User signed in successfully');
         return res.json({ message: 'User signed in successfully' });
 
     } catch (error) {
