@@ -18,6 +18,11 @@
   </div>
 
   <main>
+    <% if (username) { %>
+      <div class="welcome-message">
+          <span class="welcomeMessageText">Now connected: <%= username %></span>
+      </div>
+    <% } %>
     <section id="fruits-container" class="card-container">
       <div class="card">
         <div class="scale-background"></div>
@@ -25,12 +30,12 @@
           <img src="/assets/orange_new.jpg" alt="orange">
         </div>
         <div class="card-info">
-          <p class="text-title">orange</p>
-          <p class="text-body">$1.99 per pound</p>
+          <p class="text-title item-name">orange</p>
+          <p class="text-body item-price">$1.99 per pound</p>
           <div class="card-footer">
             <div class="card-input">
               <label for="orange-weight">Weight (in pounds):</label>
-              <input type="number" id="orange-weight" name="orange-weight" min="0" max="10">
+              <input type="number" id="orange-weight" name="orange-weight" min="0" max="10" class="item-amount">
             </div>
             <div class="card-button">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -51,12 +56,12 @@
           <img src="/assets/grape.jpg" alt="grape">
         </div>
         <div class="card-info">
-          <p class="text-title">grape</p>
-          <p class="text-body">$2.49 per pound</p>
+          <p class="text-title item-name">grape</p>
+          <p class="text-body item-price">$2.49 per pound</p>
           <div class="card-footer">
             <div class="card-input">
               <label for="grape-weight">Weight (in pounds):</label>
-              <input type="number" id="grape-weight" name="grape-weight" min="0" max="15">
+              <input type="number" id="grape-weight" name="grape-weight" min="0" max="15" class="item-amount">
             </div>
             <div class="card-button">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -77,12 +82,12 @@
           <img src="/assets/apple.jpg" alt="apple">
         </div>
         <div class="card-info">
-          <p class="text-title">apple</p>
-          <p class="text-body">$3.99 per pound</p>
+          <p class="text-title item-name">apple</p>
+          <p class="text-body item-price">$3.99 per pound</p>
           <div class="card-footer">
             <div class="card-input">
               <label for="apple-weight">Weight (in pounds):</label>
-              <input type="number" id="apple-weight" name="apple-weight" min="0" max="8">
+              <input type="number" id="apple-weight" name="apple-weight" min="0" max="8" class="item-amount">
             </div>
             <div class="card-button">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -103,12 +108,12 @@
           <img src="/assets/banana.jpg" alt="banana">
         </div>
         <div class="card-info">
-          <p class="text-title">banana</p>
-          <p class="text-body">$1.79 per pound</p>
+          <p class="text-title item-name">banana</p>
+          <p class="text-body item-price">$1.79 per pound</p>
           <div class="card-footer">
             <div class="card-input">
               <label for="banana-weight">Weight (in pounds):</label>
-              <input type="number" id="banana-weight" name="banana-weight" min="0" max="12">
+              <input type="number" id="banana-weight" name="banana-weight" min="0" max="12" class="item-amount">
             </div>
             <div class="card-button">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"

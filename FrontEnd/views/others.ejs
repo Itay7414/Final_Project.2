@@ -18,6 +18,11 @@
   </div>
 
   <main>
+    <% if (username) { %>
+      <div class="welcome-message">
+          <span class="welcomeMessageText">Now connected: <%= username %></span>
+      </div>
+    <% } %>
     <section id="vegetables-container" class="card-container">
       <div class="card">
         <div class="scale-background"></div>
