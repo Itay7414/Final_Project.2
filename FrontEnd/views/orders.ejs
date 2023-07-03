@@ -34,6 +34,11 @@
             </div>
         </div>
     </header>
+    <% if (username) { %>
+        <div class="welcome-message">
+            <span class="welcomeMessageText">Now connected: <%= username %></span>
+        </div>
+    <% } %>
     <section class="text-center">
         <h2>Shuki's Yarkania</h2>
         <p>Your Shopping Cart!</p>
@@ -46,23 +51,23 @@
                 <div class="col col-4">Amount</div>
                 <div class="col col-5" data-label="Total Price">Total</div>
             </li>
-            <li class="table-row">
-                <div class="col col-2" data-label="Item Name">Apple</div>
-                <div class="col col-3" data-label="Price">3.99$</div>
-                <div class="col col-4" data-label="Amount">4</div>
-                <div class="col col-5" data-label="Total Price">15.96$</div>
-            </li>
-            <li class="table-row">
-                <div class="col col-2" data-label="Item Name">Parsley</div>
-                <div class="col col-3" data-label="Price">2.49$</div>
-                <div class="col col-4" data-label="Amount">2</div>
-                <div class="col col-5" data-label="Total Price">4.98$</div>
-            </li>
+            <% if (Array.isArray(cartItems)) { %>
+                <% cartItems.forEach(item => { %>
+                    <li class="table-row">
+                        <div class="col col-2" data-label="Item Name"><%= item.name %></div>
+                        <div class="col col-3" data-label="Price"><%= item.price %> $</div>
+                        <div class="col col-4" data-label="Amount"><%= item.amount %></div>
+                        <div class="col col-5" data-label="Total Price"><%= (item.price * item.amount).toFixed(2) %> $</div>
+                    </li>
+                <% }) %>
+            <% } else { %>
+                <p>No items in the cart.</p>
+            <% } %>
             <li class="table-row-total">
                 <div class="col col-2" data-label="Item Name"></div>
                 <div class="col col-3" data-label="Price"></div>
                 <div class="col col-4" data-label="Amount"></div>
-                <div class="col col-total" data-label="Total Price">Total: 20.94$</div>
+                <div class="col col-total" data-label="Total Price">Total: <%= 5 %> $</div>
             </li>
         </ul>
     </div>
@@ -116,8 +121,6 @@
         }
     </script>
     <script src="/backend/routes/orders.js"></script>
-
-
 </body>
 
 </html>

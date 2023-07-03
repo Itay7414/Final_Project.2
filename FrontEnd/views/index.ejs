@@ -8,10 +8,12 @@
 </head>
 
 <body>
-  <% if (loggedIn && username) { %>
-    <h1>Welcome <%= username %>!</h1>
-    <% } %>
       <header>
+        <% if (username) { %>
+          <div class="welcome-message">
+              <span class="welcomeMessageText">Now connected: <%= username %></span>
+          </div>
+        <% } %>
         <div class="container d-flex justify-content-between align-items-center">
           <div class="cart-container">
             <a href="/orders" class="cart-btn">

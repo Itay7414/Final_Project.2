@@ -17,6 +17,7 @@
         <img src="/assets/Yarkania logo 1.png" alt="Shuki's Yarkania Logo" class="logo-img">
     </div>
     <main>
+        <% if (!username) { %>
         <div class="form-container">
             <div class="logo-container">
 
@@ -62,12 +63,17 @@
                 <a class="signup-link link" id="signup-link" href="/signup" alt="signup"> Sign up now</a>
             </p>
         </div>
+        <% } else { %>
+            <div class="welcome-message">Now connected: <%= username %> </div>
+            <% } %>
     </main>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="/backend/routes/users.js"></script>
     <script src="../signup.js"></script>
     <script src="userprofile.js"></script>
+    <script src="/backend/app.js"></script>
+
 
 </body>
 
