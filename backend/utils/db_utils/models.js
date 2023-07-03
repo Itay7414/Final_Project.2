@@ -11,7 +11,7 @@ const itemSchema = new mongoose.Schema({
     price: { type: Number, required: true },
 
 });
-const cartItem = mongoose.model('cartItem', itemSchema);
+
 // Define the user schema
 const userSchema = new mongoose.Schema({
     username: { type: String, require: true, unique: true },
