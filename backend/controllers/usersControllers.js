@@ -12,12 +12,14 @@ exports.signIn = async (req, res) => {
         const existingUser = await users_model.findOne({ username: username });
         if (!existingUser) {
             // User does not exist, return an error message
+            console.log('User does not exist');
             return res.status(400).json({ error: 'Username does not exist' });
         }
 
         // Check if the provided password matches the user's password in the database
         if (existingUser.password !== password) {
             // Password does not match, return an error message
+            console.log('Incorrect password');
             return res.status(400).json({ error: 'Incorrect password' });
         }
 
@@ -25,6 +27,7 @@ exports.signIn = async (req, res) => {
         res.cookie('user', existingUser, { maxAge: 86400000 }); // Cookie expires after 24 hours
 
         // Return a success message
+        console.log('User signed in successfully');
         return res.json({ message: 'User signed in successfully' });
 
     } catch (error) {
@@ -34,16 +37,6 @@ exports.signIn = async (req, res) => {
 };
 
 
-
-
-/*
-exports.updateUser = async (req, res) => {
-  try {  // HTTP-body example: {"filters": {...}, "update": {...}, "options": {...}}
-      await db_api.update_Item(db_api.users_model, req.body)
-          .then(update_status => res.send(update_status));
-  } catch (err) { res.status(400).send(err); }
-}
-*/
 exports.signUp = async (req, res) => {
     try {
         const { username, email, password } = req.body;
@@ -68,9 +61,18 @@ exports.signUp = async (req, res) => {
         return res.status(500).json({ error: "Failed to create user" });
     }
 };
-/*
-exports.allUsers = async (req, res) => {
-    await db_api.get_item(db_api.users_model, { filters: {} })
-        .then(users_arr => res.send(users_arr));
-}
-*/
+exports.logout = async (req, res) => {
+    try {
+        // Clear the user's session
+        req.session.destroy();
+
+        // Remove the user's cookie
+        res.clearCookie('user');
+
+        // Redirect the user to the login page or any other desired page
+        res.redirect('/');
+    } catch (error) {
+        console.error('Error Logging Out:', error);
+        return res.status(500).json({ error: 'Internal Server Error' });
+    }
+};
