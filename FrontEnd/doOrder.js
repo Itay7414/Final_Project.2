@@ -1,57 +1,75 @@
-const addToOrder = document.querySelectorAll('.add-to-order-btn');
-addToOrder.forEach(button => {
-    button.addEventListener('click', () => {
-        const fruitName = button.closest('.card').querySelector('.item-name').textContent;
-        const quantityInput = button.closest('.card').querySelector('.item-amount');
-        const quantity = parseFloat(quantityInput.value);
-        const price = parseFloat(button.closest('.card').querySelector('.item-price').textContent.split('$')[1]);
+const models = require('../utils/db_utils/models');
+const Order = models.Order;
 
-        // Make AJAX request to addToOrder route
-        const xhr = new XMLHttpRequest();
-        xhr.open('POST', '/orders/addToOrder', true);
-        xhr.withCredentials = true; // Include cookies in the request
-        xhr.setRequestHeader('Content-type', 'application/json');
-        xhr.setRequestHeader('Authorization', 'Bearer your-authentication-token');
+exports.addToOrder = async (req, res) => {
+    try {
+        console.log('Start addtocart');
+        const username = req.cookies.user.username; // Get the username from cookies
+        const fruitName = req.body.fruitName;
+        const quantity = parseFloat(req.body.quantity);
+        const price = parseFloat(req.body.price);
 
-        xhr.onload = function () {
-            if (xhr.status === 200) {
-                const orderData = JSON.parse(xhr.responseText);
-                updateOrderTable(orderData);
-            }
+        console.log('username: ', username);
+        console.log('fruitName: ', fruitName);
+        console.log('quantity: ', quantity);
+        console.log('price: ', price);
+
+        if (!username) {
+            console.log('not exist addtocart');
+            return res.status(401).json({ message: 'User not authenticated' });
+        }
+
+        // Check if the user already has an order
+        let order = await Order.findOne({ user: username });
+
+        // If the user doesn't have an order, create a new one
+        if (!order) {
+            order = new Order({
+                user: username,
+                items: []
+            });
+        }
+
+        // Add the item to the order
+        order.items.push({
+            name: fruitName,
+            price: price,
+            quantity: quantity
+        });
+
+        // Save the updated order
+        const updatedOrder = await order.save();
+
+        console.log('Item added to order:', updatedOrder);
+
+        res.status(200).json(updatedOrder);
+    } catch (err) {
+        console.error('Failed to add item to order:', err);
+        res.status(500).json({ message: 'Failed to add item to order' });
+    }
+};
+function addToOrder(itemName, itemPrice) {
+    // Get the current order from the cookies
+    const orderCookie = Cookies.get('order');
+    let order = {};
+
+    if (orderCookie) {
+        // Parse the existing order from JSON
+        order = JSON.parse(orderCookie);
+    }
+
+    // Add the new item to the order or update its quantity
+    if (order[itemName]) {
+        order[itemName].quantity++;
+    } else {
+        order[itemName] = {
+            quantity: 1,
+            price: parseFloat(itemPrice),
         };
+    }
 
-        const data = JSON.stringify({ fruitName, quantity, price });
-        xhr.send(data);
-    });
-});
+    // Store the updated order in the cookies
+    Cookies.set('order', JSON.stringify(order));
 
-
-// Function to update the order table in the orders.ejs file
-function updateOrderTable(orderData) {
-    // Get the table body element
-    const tableBody = document.getElementById('order-table-body');
-
-    // Create a new row for the order data
-    const newRow = document.createElement('tr');
-
-    // Create table cells for the order data
-    const nameCell = document.createElement('td');
-    nameCell.textContent = orderData.name;
-
-    const quantityCell = document.createElement('td');
-    quantityCell.textContent = orderData.quantity;
-
-    const priceCell = document.createElement('td');
-    priceCell.textContent = orderData.price;
-
-    // Append the cells to the new row
-    newRow.appendChild(nameCell);
-    newRow.appendChild(quantityCell);
-    newRow.appendChild(priceCell);
-
-    // Append the new row to the table body
-    tableBody.appendChild(newRow);
-
-    // Example: Log the order data to the console
-    console.log(orderData);
+    console.log('Item added to order:', order);
 }
