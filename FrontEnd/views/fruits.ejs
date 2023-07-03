@@ -20,121 +20,129 @@
   <main>
     <% if (username) { %>
       <div class="welcome-message">
-          <span class="welcomeMessageText">Now connected: <%= username %></span>
+        <span class="welcomeMessageText">Now connected: <%= username %></span>
       </div>
-    <% } %>
-    <section id="fruits-container" class="card-container">
-      <div class="card">
-        <div class="scale-background"></div>
-        <div class="card-img">
-          <img src="/assets/orange_new.jpg" alt="orange">
-        </div>
-        <div class="card-info">
-          <p class="text-title item-name">orange</p>
-          <p class="text-body item-price">$1.99 per pound</p>
-          <div class="card-footer">
-            <div class="card-input">
-              <label for="orange-weight">Weight (in pounds):</label>
-              <input type="number" id="orange-weight" name="orange-weight" min="0" max="10" class="item-amount">
+      <% } %>
+        <section id="fruits-container" class="card-container">
+          <div class="card">
+            <div class="scale-background"></div>
+            <div class="card-img">
+              <img src="/assets/orange_new.jpg" alt="orange">
             </div>
-            <div class="card-button">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-shopping-cart">
-                <circle cx="9" cy="21" r="1"></circle>
-                <circle cx="20" cy="21" r="1"></circle>
-                <path d="M1 1h4l2.5 7h13m2 0v12h-16v-12m-2 0h20"></path>
-              </svg>
-              <span>Add to your order</span>
+            <div class="card-info">
+              <p class="text-title item-name">orange</p>
+              <p class="text-body item-price">$1.99 per pound</p>
+              <div class="card-footer">
+                <div class="card-input">
+                  <label for="orange-weight">Weight (in pounds):</label>
+                  <input type="number" id="orange-weight" name="orange-weight" min="0" max="10" class="item-amount">
+                </div>
+                <div class="card-button">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="feather feather-shopping-cart">
+                    <circle cx="9" cy="21" r="1"></circle>
+                    <circle cx="20" cy="21" r="1"></circle>
+                    <path d="M1 1h4l2.5 7h13m2 0v12h-16v-12m-2 0h20"></path>
+                  </svg>
+                  <span class="add-to-order-btn" onclick="addToOrder('orange', '1.99')">Add to your order</span>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-      </div>
 
-      <div class="card">
-        <div class="scale-background"></div>
-        <div class="card-img">
-          <img src="/assets/grape.jpg" alt="grape">
-        </div>
-        <div class="card-info">
-          <p class="text-title item-name">grape</p>
-          <p class="text-body item-price">$2.49 per pound</p>
-          <div class="card-footer">
-            <div class="card-input">
-              <label for="grape-weight">Weight (in pounds):</label>
-              <input type="number" id="grape-weight" name="grape-weight" min="0" max="15" class="item-amount">
+          <div class="card">
+            <div class="scale-background"></div>
+            <div class="card-img">
+              <img src="/assets/grape.jpg" alt="grape">
             </div>
-            <div class="card-button">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-shopping-cart">
-                <circle cx="9" cy="21" r="1"></circle>
-                <circle cx="20" cy="21" r="1"></circle>
-                <path d="M1 1h4l2.5 7h13m2 0v12h-16v-12m-2 0h20"></path>
-              </svg>
-              <span>Add to your order</span>
+            <div class="card-info">
+              <p class="text-title item-name">grape</p>
+              <p class="text-body item-price">$2.49 per pound</p>
+              <div class="card-footer">
+                <div class="card-input">
+                  <label for="grape-weight">Weight (in pounds):</label>
+                  <input type="number" id="grape-weight" name="grape-weight" min="0" max="15" class="item-amount">
+                </div>
+                <div class="card-button">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="feather feather-shopping-cart">
+                    <circle cx="9" cy="21" r="1"></circle>
+                    <circle cx="20" cy="21" r="1"></circle>
+                    <path d="M1 1h4l2.5 7h13m2 0v12h-16v-12m-2 0h20"></path>
+                  </svg>
+                  <span class="add-to-order-btn" onclick="addToOrder('grape', '2.49')">Add to your order</span>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-      </div>
 
-      <div class="card">
-        <div class="scale-background"></div>
-        <div class="card-img">
-          <img src="/assets/apple.jpg" alt="apple">
-        </div>
-        <div class="card-info">
-          <p class="text-title item-name">apple</p>
-          <p class="text-body item-price">$3.99 per pound</p>
-          <div class="card-footer">
-            <div class="card-input">
-              <label for="apple-weight">Weight (in pounds):</label>
-              <input type="number" id="apple-weight" name="apple-weight" min="0" max="8" class="item-amount">
+          <div class="card">
+            <div class="scale-background"></div>
+            <div class="card-img">
+              <img src="/assets/apple.jpg" alt="apple">
             </div>
-            <div class="card-button">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-shopping-cart">
-                <circle cx="9" cy="21" r="1"></circle>
-                <circle cx="20" cy="21" r="1"></circle>
-                <path d="M1 1h4l2.5 7h13m2 0v12h-16v-12m-2 0h20"></path>
-              </svg>
-              <span>Add to your order</span>
+            <div class="card-info">
+              <p class="text-title item-name">apple</p>
+              <p class="text-body item-price">$3.99 per pound</p>
+              <div class="card-footer">
+                <div class="card-input">
+                  <label for="apple-weight">Weight (in pounds):</label>
+                  <input type="number" id="apple-weight" name="apple-weight" min="0" max="8" class="item-amount">
+                </div>
+                <div class="card-button">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="feather feather-shopping-cart">
+                    <circle cx="9" cy="21" r="1"></circle>
+                    <circle cx="20" cy="21" r="1"></circle>
+                    <path d="M1 1h4l2.5 7h13m2 0v12h-16v-12m-2 0h20"></path>
+                  </svg>
+                  <span class="add-to-order-btn" onclick="addToOrder('apple', '3.99')">Add to your order</span>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-      </div>
 
-      <div class="card">
-        <div class="scale-background"></div>
-        <div class="card-img">
-          <img src="/assets/banana.jpg" alt="banana">
-        </div>
-        <div class="card-info">
-          <p class="text-title item-name">banana</p>
-          <p class="text-body item-price">$1.79 per pound</p>
-          <div class="card-footer">
-            <div class="card-input">
-              <label for="banana-weight">Weight (in pounds):</label>
-              <input type="number" id="banana-weight" name="banana-weight" min="0" max="12" class="item-amount">
+          <div class="card">
+            <div class="scale-background"></div>
+            <div class="card-img">
+              <img src="/assets/banana.jpg" alt="banana">
             </div>
-            <div class="card-button">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-shopping-cart">
-                <circle cx="9" cy="21" r="1"></circle>
-                <circle cx="20" cy="21" r="1"></circle>
-                <path d="M1 1h4l2.5 7h13m2 0v12h-16v-12m-2 0h20"></path>
-              </svg>
-              <span>Add to your order</span>
+            <div class="card-info">
+              <p class="text-title item-name">banana</p>
+              <p class="text-body item-price">$1.79 per pound</p>
+              <div class="card-footer">
+                <div class="card-input">
+                  <label for="banana-weight">Weight (in pounds):</label>
+                  <input type="number" id="banana-weight" name="banana-weight" min="0" max="12" class="item-amount">
+                </div>
+                <div class="card-button">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="feather feather-shopping-cart">
+                    <circle cx="9" cy="21" r="1"></circle>
+                    <circle cx="20" cy="21" r="1"></circle>
+                    <path d="M1 1h4l2.5 7h13m2 0v12h-16v-12m-2 0h20"></path>
+                  </svg>
+                  <span class="add-to-order-btn" onclick="addToOrder('banana', '1.79')">Add to your order</span>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-      </div>
-    </section>
+        </section>
   </main>
 
   <footer>
     <p>&copy; 2023 Shuki's Yarkania. All rights reserved.</p>
   </footer>
-  <script src="/backend/controllers/itemsControllers.js"></script>
-  <script src="/backend/controllers/ordersControllers.js"></script>
+  <script src="/backend/routes/orders.js"></script>
+  <script src="/backend/routes/users.js"></script>
+  <script src="../doOrder.js"></script>
+  <script src="/backend/app.js"></script>
+
+
 </body>
 
 </html>

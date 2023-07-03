@@ -38,89 +38,98 @@
         <div class="welcome-message">
             <span class="welcomeMessageText">Now connected: <%= username %></span>
         </div>
-    <% } %>
-    <section class="text-center">
-        <h2>Shuki's Yarkania</h2>
-        <p>Your Shopping Cart!</p>
-    </section>
-    <div class="table-container">
-        <ul class="responsive-table">
-            <li class="table-header">
-                <div class="col col-2">Product Name</div>
-                <div class="col col-3">Price</div>
-                <div class="col col-4">Amount</div>
-                <div class="col col-5" data-label="Total Price">Total</div>
-            </li>
-            <% if (Array.isArray(cartItems)) { %>
-                <% cartItems.forEach(item => { %>
-                    <li class="table-row">
-                        <div class="col col-2" data-label="Item Name"><%= item.name %></div>
-                        <div class="col col-3" data-label="Price"><%= item.price %> $</div>
-                        <div class="col col-4" data-label="Amount"><%= item.amount %></div>
-                        <div class="col col-5" data-label="Total Price"><%= (item.price * item.amount).toFixed(2) %> $</div>
+        <% } %>
+            <section class="text-center">
+                <h2>Shuki's Yarkania</h2>
+                <p>Your Shopping Cart!</p>
+            </section>
+            <div class="table-container">
+                <ul class="responsive-table">
+                    <li class="table-header">
+                        <div class="col col-2">Product Name</div>
+                        <div class="col col-3">Price</div>
+                        <div class="col col-4">Amount</div>
+                        <div class="col col-5" data-label="Total Price">Total</div>
                     </li>
-                <% }) %>
-            <% } else { %>
-                <p>No items in the cart.</p>
-            <% } %>
-            <li class="table-row-total">
-                <div class="col col-2" data-label="Item Name"></div>
-                <div class="col col-3" data-label="Price"></div>
-                <div class="col col-4" data-label="Amount"></div>
-                <div class="col col-total" data-label="Total Price">Total: <%= 5 %> $</div>
-            </li>
-        </ul>
-    </div>
-    <main>
+                    <% if (Array.isArray(cartItems)) { %>
+                        <% cartItems.forEach(item=> { %>
+                            <li class="table-row">
+                                <div class="col col-2" data-label="Item Name">
+                                    <%= item.name %>
+                                </div>
+                                <div class="col col-3" data-label="Price">
+                                    <%= item.price %> $
+                                </div>
+                                <div class="col col-4" data-label="Amount">
+                                    <%= item.amount %>
+                                </div>
+                                <div class="col col-5" data-label="Total Price">
+                                    <%= (item.price * item.amount).toFixed(2) %> $
+                                </div>
+                            </li>
+                            <% }) %>
+                                <% } else { %>
+                                    <p>No items in the cart.</p>
+                                    <% } %>
+                                        <li class="table-row-total">
+                                            <div class="col col-2" data-label="Item Name"></div>
+                                            <div class="col col-3" data-label="Price"></div>
+                                            <div class="col col-4" data-label="Amount"></div>
+                                            <div class="col col-total" data-label="Total Price">Total: <%= 5 %> $</div>
+                                        </li>
+                </ul>
+            </div>
+            <main>
 
 
-    </main>
-    <button class="checkout-button">CHECKOUT</button>
+            </main>
+            <button class="checkout-button">CHECKOUT</button>
 
-    <div id="card-container" class="card-container hidden">
-        <div class="card">
-            <button class="dismiss" type="button">×</button>
-            <div class="header">
-                <div class="image">
-                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
-                        <g id="SVGRepo_iconCarrier">
-                            <path d="M20 7L9.00004 18L3.99994 13" stroke="#000000" stroke-width="1.5"
-                                stroke-linecap="round" stroke-linejoin="round"></path>
-                        </g>
-                    </svg>
-                </div>
-                <div class="content">
-                    <span class="title">Order validated!</span>
-                    <p class="message">Thank you for your purchase. Your order will be delivered within 2 days of your
-                        purchase.</p>
-                </div>
-                <div class="actions">
-                    <button class="history" type="button" onclick="redirectToHistory()">History</button>
-                    <button class="track" type="button">Track my order</button>
+            <div id="card-container" class="card-container hidden">
+                <div class="card">
+                    <button class="dismiss" type="button">×</button>
+                    <div class="header">
+                        <div class="image">
+                            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                                <g id="SVGRepo_iconCarrier">
+                                    <path d="M20 7L9.00004 18L3.99994 13" stroke="#000000" stroke-width="1.5"
+                                        stroke-linecap="round" stroke-linejoin="round"></path>
+                                </g>
+                            </svg>
+                        </div>
+                        <div class="content">
+                            <span class="title">Order validated!</span>
+                            <p class="message">Thank you for your purchase. Your order will be delivered within 2 days
+                                of your
+                                purchase.</p>
+                        </div>
+                        <div class="actions">
+                            <button class="history" type="button" onclick="redirectToHistory()">History</button>
+                            <button class="track" type="button">Track my order</button>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
 
-    <script>
-        const checkoutButton = document.querySelector('.checkout-button');
-        const cardContainer = document.getElementById('card-container');
-        const dismissButton = document.querySelector('.dismiss');
+            <script>
+                const checkoutButton = document.querySelector('.checkout-button');
+                const cardContainer = document.getElementById('card-container');
+                const dismissButton = document.querySelector('.dismiss');
 
-        checkoutButton.addEventListener('click', () => {
-            cardContainer.classList.remove('hidden');
-        });
+                checkoutButton.addEventListener('click', () => {
+                    cardContainer.classList.remove('hidden');
+                });
 
-        dismissButton.addEventListener('click', () => {
-            cardContainer.classList.add('hidden');
-        });
-        function redirectToHistory() {
-            window.location.href = "/transaction_history"; // Replace "/history" with the actual URL of your transaction history page
-        }
-    </script>
-    <script src="/backend/routes/orders.js"></script>
+                dismissButton.addEventListener('click', () => {
+                    cardContainer.classList.add('hidden');
+                });
+                function redirectToHistory() {
+                    window.location.href = "/transaction_history"; // Replace "/history" with the actual URL of your transaction history page
+                }
+            </script>
+            <script src="/routes/orders.js"></script>
 </body>
 
 </html>
