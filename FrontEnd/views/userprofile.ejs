@@ -19,9 +19,8 @@
     <main>
         <div class="form-container">
             <div class="logo-container">
-                Welcome Back!
-            </div>
 
+            </div>
             <div class="social-buttons">
                 <button class="social-button facebook">
                     <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -41,32 +40,34 @@
                 </button>
             </div>
             <div class="line"></div>
-            <form class="form" id="signInForm" action="/users/signIn" method="POST">
+            <form class="form" id="signInForm" action="/backend/routes/users.js" method="POST">
                 <div class="form-group">
-                    <label for="userName">User Name</label>
-                    <input required="" placeholder="Enter your user name" name="userName" id="userName" type="text">
+                    <label for="username">Username</label>
+                    <input required placeholder="Enter your username" name="username" id="username" type="text"
+                        value="<%= username %>">
                 </div>
                 <div class="form-group">
                     <label for="password">Password</label>
-                    <input required="" name="password" placeholder="Enter your password" id="password" type="password">
+                    <input required name="password" placeholder="Enter your password" id="password" type="password">
                 </div>
+                <button type="submit" class="form-submit-btn" id="signInBtn" onclick="submitForm()">Sign
+                    In</button>
 
-                <button type="submit" class="form-submit-btn" id="signInBtn">Sign In</button>
             </form>
 
-            <!-- <a class="forgot-password-link link" href="#">Forgot Password</a> -->
+
 
             <p class="signup-link">
                 Don't have an account?
                 <a class="signup-link link" id="signup-link" href="/signup" alt="signup"> Sign up now</a>
             </p>
         </div>
-
     </main>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="/backend/routes/users.js"></script>
     <script src="../signup.js"></script>
+    <script src="userprofile.js"></script>
 
 </body>
 
