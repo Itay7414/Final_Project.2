@@ -126,8 +126,8 @@ const createApp = async function () {
     res.redirect('/fruits');
   });
   app.post('/orders/addToOrder', (req, res) => {
-    // Extract fruitName, quantity, and price from the request body
-    const { fruitName, quantity, price } = req.body;
+    // Extract itemName, quantity, and price from the request body
+    const { itemName, quantity, price } = req.body;
 
     // Retrieve the user ID and username from the cookies
     const username = req.cookies.user ? req.cookies.user.username : null;
@@ -142,17 +142,17 @@ const createApp = async function () {
 
     // Example: Storing the order data in cookies
     res.cookie('order', {
-      fruitName,
-      quantity,
+      itemName,
       price,
+      quantity,
       username
     });
 
     // Return the response
     res.status(200).json({
-      name: fruitName,
-      quantity,
+      name: itemName,
       price,
+      quantity,
       username
     });
   });
@@ -168,11 +168,10 @@ const createApp = async function () {
 
   app.get('/orders', (req, res) => {
     const username = req.cookies.user ? req.cookies.user.username : null; // Retrieve the 'username' cookie value if available
-
-    // Get the cart items from the user's cookie or session
-    const cartItems = req.cookies.cartItems || req.session.cartItems || [];
-
-    res.render('orders', { username, cartItems });
+  
+    const items = req.cookies[`order_${username}`] || req.session[`order_${username}`] || [];
+  
+    res.render('orders', { username, items });
   });
 
   app.get('/userprofile', (req, res) => {
