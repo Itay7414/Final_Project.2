@@ -2,6 +2,8 @@ const models = require('../utils/db_utils/models');
 const Order = models.Order;
 
 exports.addToOrder = (req, res) => {
+
+
     try {
         console.log('Start addtocart');
         const username = req.cookies.user.username; // Get the username from cookies
@@ -13,6 +15,7 @@ exports.addToOrder = (req, res) => {
         console.log('fruitName: ', fruitName);
         console.log('quantity: ', quantity);
         console.log('price: ', price);
+
 
         if (!username) {
             console.log('not exist addtocart');
@@ -31,6 +34,7 @@ exports.addToOrder = (req, res) => {
         // Update the order with the new item
         order.username = username;
         order.items.push({
+            type: 'fruit',  // Add the type field
             name: fruitName,
             price: price,
             quantity: quantity

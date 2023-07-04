@@ -26,4 +26,5 @@ async function addToOrder(fruitName, price, quantity) {
         // Handle any error that occurred during the request
         console.error('Error adding item to order:', error);
     }
+
 }
