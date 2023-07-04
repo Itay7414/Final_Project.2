@@ -23,113 +23,137 @@
     </style>
 </head>
 
+<a href="/" class="back-to-home-btn">
+    <img src="/assets/back-to-home.jpeg" alt="Back to Home" width="60" height="60">
+</a>
+
+<header>
+    <div class="container">
+        <div class="logo-container">
+            <img src="/assets/Yarkania logo 1.png" alt="Shuki's Yarkania Logo" class="logo-img">
+        </div>
+    </div>
+</header>
+
 <body>
-    <a href="/" class="back-to-home-btn">
-        <img src="/assets/back-to-home.jpeg" alt="Back to Home" width="60" height="60">
-    </a>
-    <header>
-        <div class="container">
-            <div class="logo-container">
-                <img src="/assets/Yarkania logo 1.png" alt="Shuki's Yarkania Logo" class="logo-img">
-            </div>
-        </div>
-    </header>
     <% if (username) { %>
-        <div class="welcome-message">
-            <span class="welcomeMessageText">Now connected: <%= username %></span>
-        </div>
-        <% } %>
-            <section class="text-center">
-                <h2>Shuki's Yarkania</h2>
-                <p>Your Shopping Cart!</p>
-            </section>
-            <div class="table-container">
-                <ul class="responsive-table">
-                    <li class="table-header">
-                        <div class="col col-2">Product Name</div>
-                        <div class="col col-3">Price</div>
-                        <div class="col col-4">Amount</div>
-                        <div class="col col-5" data-label="Total Price">Total</div>
+    <div class="welcome-message">
+        <span class="welcomeMessageText">Now connected: <%= username %></span>
+    </div>
+
+    <section class="text-center">
+        <h2>Shuki's Yarkania</h2>
+        <p>Your Shopping Cart!</p>
+    </section>
+
+    <div class="table-container">
+        <ul class="responsive-table">
+            <li class="table-header">
+                <div class="col col-2">Product Name</div>
+                <div class="col col-3">Price</div>
+                <div class="col col-4">Amount</div>
+                <div class="col col-5" data-label="Total Price">Total</div>
+            </li>
+
+            <% if (Array.isArray(items)) { %>
+                <% let total = 0; %>
+                <% items.forEach(item => { %>
+                    <% total += item.price * item.quantity; %>
+                    <li class="table-row">
+                        <div class="col col-2" data-label="Product Name">
+                            <%= item.itemName %>
+                        </div>
+                        <div class="col col-3" data-label="Price">
+                            <%= item.price %> $
+                        </div>
+                        <div class="col col-4" data-label="Amount">
+                            <%= item.quantity %>
+                        </div>
+                        <div class="col col-5" data-label="Total Price">
+                            <%= (item.price * item.quantity).toFixed(2) %> $
+                        </div>
                     </li>
-                    <% if (Array.isArray(cartItems)) { %>
-                        <% cartItems.forEach(item=> { %>
-                            <li class="table-row">
-                                <div class="col col-2" data-label="Item Name">
-                                    <%= item.name %>
-                                </div>
-                                <div class="col col-3" data-label="Price">
-                                    <%= item.price %> $
-                                </div>
-                                <div class="col col-4" data-label="Amount">
-                                    <%= item.amount %>
-                                </div>
-                                <div class="col col-5" data-label="Total Price">
-                                    <%= (item.price * item.amount).toFixed(2) %> $
-                                </div>
-                            </li>
-                            <% }) %>
-                                <% } else { %>
-                                    <p>No items in the cart.</p>
-                                    <% } %>
-                                        <li class="table-row-total">
-                                            <div class="col col-2" data-label="Item Name"></div>
-                                            <div class="col col-3" data-label="Price"></div>
-                                            <div class="col col-4" data-label="Amount"></div>
-                                            <div class="col col-total" data-label="Total Price">Total: <%= 5 %> $</div>
-                                        </li>
-                </ul>
+                <% }) %>
+                <% if (items.length > 0) { %>
+                    <li class="table-row-total">
+                        <div class="col col-2" data-label="Product Name"></div>
+                        <div class="col col-3" data-label="Price"></div>
+                        <div class="col col-4" data-label="Amount"></div>
+                        <div class="col col-total" data-label="Total Price">Total: <%= total.toFixed(2) %> $</div>
+                    </li>
+                <% } %>
+            <% } else { %>
+            <p>No items in the cart.</p>
+            <% } %>
+        </ul>
+    </div>
+
+    <main></main>
+
+    <button class="checkout-button">CHECKOUT</button>
+
+    <div id="card-container" class="card-container hidden">
+        <div class="card">
+            <button class="dismiss" type="button">×</button>
+            <div class="header">
+                <div class="image">
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M17 2H5C3.89543 2 3 2.89543 3 4V20C3 21.1046 3.89543 22 5 22H17C18.1046 22 19 21.1046 19 20V4C19 2.89543 18.1046 2 17 2ZM17 20H5V8H17V20ZM17 6H5V4H17V6Z" fill="#333333" />
+                        <path d="M7 10H15V12H7V10Z" fill="#333333" />
+                        <path d="M7 14H15V16H7V14Z" fill="#333333" />
+                    </svg>
+                </div>
+                <div class="title">Payment</div>
             </div>
-            <main>
-
-
-            </main>
-            <button class="checkout-button">CHECKOUT</button>
-
-            <div id="card-container" class="card-container hidden">
-                <div class="card">
-                    <button class="dismiss" type="button">×</button>
-                    <div class="header">
-                        <div class="image">
-                            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
-                                <g id="SVGRepo_iconCarrier">
-                                    <path d="M20 7L9.00004 18L3.99994 13" stroke="#000000" stroke-width="1.5"
-                                        stroke-linecap="round" stroke-linejoin="round"></path>
-                                </g>
-                            </svg>
+            <div class="content">
+                <div class="form-container">
+                    <form>
+                        <div class="form-group">
+                            <label for="card-number">Card Number</label>
+                            <input type="text" id="card-number" placeholder="**** **** **** ****" required>
                         </div>
-                        <div class="content">
-                            <span class="title">Order validated!</span>
-                            <p class="message">Thank you for your purchase. Your order will be delivered within 2 days
-                                of your
-                                purchase.</p>
+                        <div class="form-group">
+                            <label for="card-holder">Card Holder</label>
+                            <input type="text" id="card-holder" placeholder="Card Holder" required>
                         </div>
-                        <div class="actions">
-                            <button class="history" type="button" onclick="redirectToHistory()">History</button>
-                            <button class="track" type="button">Track my order</button>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="expiry-date">Expiry Date</label>
+                                <input type="text" id="expiry-date" placeholder="MM/YY" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="cvv">CVV</label>
+                                <input type="password" id="cvv" placeholder="CVV" required>
+                            </div>
                         </div>
-                    </div>
+                        <button type="submit" class="pay-button">PAY</button>
+                    </form>
                 </div>
             </div>
+        </div>
+    </div>
+    <% } %>
+    <script>
+        const checkoutButton = document.querySelector(".checkout-button");
+        const cardContainer = document.getElementById("card-container");
 
-            <script>
-                const checkoutButton = document.querySelector('.checkout-button');
-                const cardContainer = document.getElementById('card-container');
-                const dismissButton = document.querySelector('.dismiss');
+        checkoutButton.addEventListener("click", () => {
+            cardContainer.classList.remove("hidden");
+        });
 
-                checkoutButton.addEventListener('click', () => {
-                    cardContainer.classList.remove('hidden');
-                });
+        const dismissButton = document.querySelector(".dismiss");
 
-                dismissButton.addEventListener('click', () => {
-                    cardContainer.classList.add('hidden');
-                });
-                function redirectToHistory() {
-                    window.location.href = "/transaction_history"; // Replace "/history" with the actual URL of your transaction history page
-                }
-            </script>
-            <script src="/routes/orders.js"></script>
+        dismissButton.addEventListener("click", () => {
+            cardContainer.classList.add("hidden");
+        });
+    </script>
+    <script src="/routes/orders.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="/backend/routes/users.js"></script>
+    <script src="../signup.js"></script>
+    <script src="userprofile.js"></script>
+    <script src="/backend/app.js"></script>
+
 </body>
 
 </html>

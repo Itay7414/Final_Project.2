@@ -22,7 +22,11 @@ header {
     align-items: center;
     min-height: 100vh;
   }
-  
+  .form-title {
+    margin-top: -5px;
+    display: flex;
+    justify-content: center;
+  }
   .form-container {
     width: 350px;
     background-color: #fff;
@@ -45,7 +49,6 @@ header {
   
   .form-container .logo-container {
     margin-bottom: 12px;
-    margin-top: 12px;
     text-align: center;
     font-weight: 700;
     font-size: 20px;
@@ -55,7 +58,7 @@ header {
     display: flex;
     justify-content: center;
     margin-bottom: 10px;
-    margin-top: 10px;
+    margin-top: -25px;
     flex-direction: column;
     gap: 12px;
     align-items: center;
