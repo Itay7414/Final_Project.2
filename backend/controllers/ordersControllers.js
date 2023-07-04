@@ -14,7 +14,7 @@ exports.addToOrder = (req, res) => {
   
       // Get the current order data from cookies or initialize an empty order object
       const order = req.cookies[`order_${username}`] || { username: null, items: [] };
-  
+
       // Check if the user already has an order in the cookies
       if (order.username && order.username !== username) {
         return res.status(400).json({ message: 'User already has an order' });

@@ -1,6 +1,6 @@
 // doOrder.js
 
-async function addToOrder(fruitName, price, quantity) {
+async function addToOrder(itemName, price, quantity) {
   try {
     if (quantity < 1) {
       alert("Minimum quantity is 1 :)");
@@ -13,7 +13,7 @@ async function addToOrder(fruitName, price, quantity) {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        fruitName,
+        itemName,
         price,
         quantity,
       }),
@@ -40,3 +40,32 @@ async function addToOrder(fruitName, price, quantity) {
     console.error('Error adding item to order:', error);
   }
 }
+
+
+async function getItems() {
+  try {
+    const response = await fetch('/orders', {
+      method: 'GET',
+      credentials: 'same-origin', // Include cookies in the request
+    });
+
+    if (response.ok) {
+      const items = await response.json();
+      // Use the items array to update your UI or perform any necessary operations
+    } else {
+      const errorData = await response.json();
+      // Handle error responses, if needed
+      console.log('Failed to get items:', errorData.message);
+    }
+  } catch (error) {
+    // Handle any error that occurred during the request
+    console.error('Error getting items:', error);
+  }
+}
+
+
+
+
+
+
+

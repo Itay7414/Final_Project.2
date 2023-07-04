@@ -55,13 +55,13 @@
                 <div class="col col-5" data-label="Total Price">Total</div>
             </li>
 
-            <% if (Array.isArray(cartItems)) { %>
+            <% if (Array.isArray(items)) { %>
                 <% let total = 0; %>
-                <% cartItems.forEach(item => { %>
+                <% items.forEach(item => { %>
                     <% total += item.price * item.quantity; %>
                     <li class="table-row">
                         <div class="col col-2" data-label="Product Name">
-                            <%= item.fruitName %>
+                            <%= item.itemName %>
                         </div>
                         <div class="col col-3" data-label="Price">
                             <%= item.price %> $
@@ -74,7 +74,7 @@
                         </div>
                     </li>
                 <% }) %>
-                <% if (cartItems.length > 0) { %>
+                <% if (items.length > 0) { %>
                     <li class="table-row-total">
                         <div class="col col-2" data-label="Product Name"></div>
                         <div class="col col-3" data-label="Price"></div>

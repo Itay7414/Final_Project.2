@@ -143,16 +143,16 @@ const createApp = async function () {
     // Example: Storing the order data in cookies
     res.cookie('order', {
       itemName,
-      quantity,
       price,
+      quantity,
       username
     });
 
     // Return the response
     res.status(200).json({
       name: itemName,
-      quantity,
       price,
+      quantity,
       username
     });
   });
@@ -168,11 +168,10 @@ const createApp = async function () {
 
   app.get('/orders', (req, res) => {
     const username = req.cookies.user ? req.cookies.user.username : null; // Retrieve the 'username' cookie value if available
-
-    // Get the cart items from the user's cookie or session
-    const cartItems = req.cookies.cartItems || req.session.cartItems || [];
-
-    res.render('orders', { username, cartItems });
+  
+    const items = req.cookies[`order_${username}`] || req.session[`order_${username}`] || [];
+  
+    res.render('orders', { username, items });
   });
 
   app.get('/userprofile', (req, res) => {
