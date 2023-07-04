@@ -45,7 +45,10 @@
                     <circle cx="20" cy="21" r="1"></circle>
                     <path d="M1 1h4l2.5 7h13m2 0v12h-16v-12m-2 0h20"></path>
                   </svg>
-                  <span class="add-to-order-btn" onclick="addToOrder('orange', '1.99')">Add to your order</span>
+                  <span class="add-to-order-btn"
+                    onclick="addToOrder('orange', '1.99', document.getElementById('orange-weight').value)">Add to your
+                    Order</span>
+
                 </div>
               </div>
             </div>
@@ -72,11 +75,15 @@
                     <circle cx="20" cy="21" r="1"></circle>
                     <path d="M1 1h4l2.5 7h13m2 0v12h-16v-12m-2 0h20"></path>
                   </svg>
-                  <span class="add-to-order-btn" onclick="addToOrder('grape', '2.49')">Add to your order</span>
+                  <span class="add-to-order-btn"
+                    onclick="addToOrder('grape', '2.49', document.getElementById('grape-weight').value)">Add to your
+                    Order</span>
                 </div>
               </div>
             </div>
           </div>
+          </div>
+
 
           <div class="card">
             <div class="scale-background"></div>
@@ -99,7 +106,9 @@
                     <circle cx="20" cy="21" r="1"></circle>
                     <path d="M1 1h4l2.5 7h13m2 0v12h-16v-12m-2 0h20"></path>
                   </svg>
-                  <span class="add-to-order-btn" onclick="addToOrder('apple', '3.99')">Add to your order</span>
+                  <span class="add-to-order-btn"
+                    onclick="addToOrder('apple', '3.99', document.getElementById('apple-weight').value)">Add to your
+                    Order</span>
                 </div>
               </div>
             </div>
@@ -126,7 +135,9 @@
                     <circle cx="20" cy="21" r="1"></circle>
                     <path d="M1 1h4l2.5 7h13m2 0v12h-16v-12m-2 0h20"></path>
                   </svg>
-                  <span class="add-to-order-btn" onclick="addToOrder('banana', '1.79')">Add to your order</span>
+                  <span class="add-to-order-btn"
+                    onclick="addToOrder('banana', '1.79', document.getElementById('banana-weight').value)">Add to your
+                    Order</span>
                 </div>
               </div>
             </div>
@@ -141,6 +152,7 @@
   <script src="/backend/routes/users.js"></script>
   <script src="../doOrder.js"></script>
   <script src="/backend/app.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.1/dist/js.cookie.min.js"></script>
 
 
 </body>
