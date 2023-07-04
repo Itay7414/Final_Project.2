@@ -1,25 +1,6 @@
-<!DOCTYPE html>
-<html>
-
-<head>
-    <meta charset="UTF-8">
-    <title>User Profile</title>
-    <link rel="stylesheet" type="text/css" href="/styles/userprofile.css">
-</head>
-
-<body>
-    <header>
-        <a href="/" class="back-to-home-btn">
-            <img src="/assets/back-to-home.jpeg" alt="Back to Home" width="50" height="50">
-        </a>
-    </header>
-    <div class="logo2-container">
-        <img src="/assets/Yarkania logo 1.png" alt="Shuki's Yarkania Logo" class="logo-img">
-    </div>
-    <main>
+ <main>
         <% if (!username) { %>
         <div class="form-container">
-            <h1 class="form-title">Welcome back!</h1>
             <div class="logo-container">
 
             </div>
@@ -68,14 +49,3 @@
             <div class="welcome-message">Now connected: <%= username %> </div>
             <% } %>
     </main>
-
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="/backend/routes/users.js"></script>
-    <script src="../signup.js"></script>
-    <script src="userprofile.js"></script>
-    <script src="/backend/app.js"></script>
-
-
-</body>
-
-</html>
