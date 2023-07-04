@@ -1,25 +1,29 @@
-function addToOrder(itemName, itemPrice) {
-    // Get the current order from the cookies
-    const orderCookie = Cookies.get('order');
-    let order = {};
+// doOrder.js
 
-    if (orderCookie) {
-        // Parse the existing order from JSON
-        order = JSON.parse(orderCookie);
+async function addToOrder(fruitName, price, quantity) {
+    try {
+        const response = await fetch('/orders/addToOrder', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                fruitName,
+                price,
+                quantity,
+            }),
+            credentials: 'same-origin', // Include cookies in the request
+        });
+
+        if (response.ok) {
+            // Handle a successful response, if needed
+            console.log('Item added to order successfully');
+        } else {
+            // Handle an error response, if needed
+            console.log('Failed to add item to order');
+        }
+    } catch (error) {
+        // Handle any error that occurred during the request
+        console.error('Error adding item to order:', error);
     }
-
-    // Add the new item to the order or update its quantity
-    if (order[itemName]) {
-        order[itemName].quantity++;
-    } else {
-        order[itemName] = {
-            quantity: 1,
-            price: parseFloat(itemPrice),
-        };
-    }
-
-    // Store the updated order in the cookies
-    Cookies.set('order', JSON.stringify(order));
-
-    console.log('Item added to order:', order);
 }
