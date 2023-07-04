@@ -8,7 +8,7 @@ exports.addToOrder = (req, res) => {
         return res.status(401).json({ message: 'User not authenticated' });
       }
   
-      const fruitName = req.body.fruitName;
+      const itemName = req.body.itemName;
       const quantity = parseFloat(req.body.quantity);
       const price = parseFloat(req.body.price);
   
@@ -21,13 +21,13 @@ exports.addToOrder = (req, res) => {
       }
   
       // Check if the item already exists in the order
-      const existingItem = order.items.find((item) => item.name === fruitName);
+      const existingItem = order.items.find((item) => item.name === itemName);
       if (existingItem) {
         existingItem.quantity += quantity; // Update the quantity
       } else {
         // Add the new item to the order
         order.items.push({
-          name: fruitName,
+          name: itemName,
           price: price,
           quantity: quantity,
         });

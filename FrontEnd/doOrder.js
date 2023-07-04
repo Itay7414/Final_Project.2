@@ -26,7 +26,6 @@ async function addToOrder(fruitName, price, quantity) {
 
       // Update the cart display if needed
       // For example, you can call a function to update the cart UI
-      updateCartDisplay(updatedOrder);
     } else {
       const errorData = await response.json();
       if (response.status === 401) {

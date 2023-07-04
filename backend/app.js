@@ -126,8 +126,8 @@ const createApp = async function () {
     res.redirect('/fruits');
   });
   app.post('/orders/addToOrder', (req, res) => {
-    // Extract fruitName, quantity, and price from the request body
-    const { fruitName, quantity, price } = req.body;
+    // Extract itemName, quantity, and price from the request body
+    const { itemName, quantity, price } = req.body;
 
     // Retrieve the user ID and username from the cookies
     const username = req.cookies.user ? req.cookies.user.username : null;
@@ -142,7 +142,7 @@ const createApp = async function () {
 
     // Example: Storing the order data in cookies
     res.cookie('order', {
-      fruitName,
+      itemName,
       quantity,
       price,
       username
@@ -150,7 +150,7 @@ const createApp = async function () {
 
     // Return the response
     res.status(200).json({
-      name: fruitName,
+      name: itemName,
       quantity,
       price,
       username
