@@ -69,6 +69,7 @@ const createApp = async function () {
 
       // Store the user object in the session
       req.session.user = user;
+      res.cookie('user', user);
 
       // Redirect the user to the dashboard or any other desired page
       res.redirect('/dashboard');
@@ -99,12 +100,67 @@ const createApp = async function () {
     const username = req.cookies.user ? req.cookies.user.username : null; // Retrieve the 'username' cookie value if available
     res.render('fruits', { username });
   });
+  app.post('/fruits', (req, res) => {
+    // Get the fruit details from the request body
+    const fruit = req.body.fruit;
 
+    // Check if the user is logged in
+    if (req.session.user || req.cookies.user) {
+      // Get the current user from the session or cookies
+      const user = req.session.user || req.cookies.user;
+
+      // Add or update the fruit value in the user object
+      user.fruit = fruit;
+
+      // Store the updated user object in the session or cookies
+      req.session.user = user;
+      res.cookie('user', user);
+    } else {
+      // User is not logged in, create a new cartItems array in cookies and add the fruit
+      const cartItems = req.cookies.cartItems || [];
+      cartItems.push(fruit);
+      res.cookie('cartItems', cartItems);
+    }
+
+    // Redirect back to the fruits page
+    res.redirect('/fruits');
+  });
+  app.post('/orders/addToOrder', (req, res) => {
+    // Extract fruitName, quantity, and price from the request body
+    const { fruitName, quantity, price } = req.body;
+
+    // Retrieve the user ID and username from the cookies
+    const username = req.cookies.user ? req.cookies.user.username : null;
+
+    // Check if the user is authenticated
+    if (!userId) {
+      return res.status(401).json({ message: 'User not authenticated' });
+    }
+
+    // Perform necessary operations with the received data
+    // For example, you can save the order to a database, update a shopping cart, or perform any other required logic.
+
+    // Example: Storing the order data in cookies
+    res.cookie('order', {
+      fruitName,
+      quantity,
+      price,
+      username
+    });
+
+    // Return the response
+    res.status(200).json({
+      name: fruitName,
+      quantity,
+      price,
+      username
+    });
+  });
   app.get('/vegetables', (req, res) => {
     const username = req.cookies.user ? req.cookies.user.username : null; // Retrieve the 'username' cookie value if available
     res.render('vegetables', { username });
   });
- 
+
   app.get('/others', (req, res) => {
     const username = req.cookies.user ? req.cookies.user.username : null; // Retrieve the 'username' cookie value if available
     res.render('others', { username });
@@ -117,7 +173,7 @@ const createApp = async function () {
     const cartItems = req.cookies.cartItems || req.session.cartItems || [];
 
     res.render('orders', { username, cartItems });
-});
+  });
 
   app.get('/userprofile', (req, res) => {
     const username = req.cookies.user ? req.cookies.user.username : null; // Retrieve the 'username' cookie value if available

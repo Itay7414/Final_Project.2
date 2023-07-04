@@ -1,66 +1,53 @@
 const models = require('../utils/db_utils/models');
 const Order = models.Order;
-const User = models.User;
+
+exports.addToOrder = (req, res) => {
 
 
-
-exports.createOrder = async (req, res) => {
     try {
-        const userId = req.body.userId;
+        console.log('Start addtocart');
+        const username = req.cookies.user.username; // Get the username from cookies
+        const fruitName = req.body.fruitName;
+        const quantity = parseFloat(req.body.quantity);
+        const price = parseFloat(req.body.price);
+
+        console.log('username: ', username);
+        console.log('fruitName: ', fruitName);
+        console.log('quantity: ', quantity);
+        console.log('price: ', price);
 
 
-        // Find the user by ID
-        const user = await User.findById(userId);
-        if (!user) {
-            return res.status(404).json({ message: 'User not found' });
+        if (!username) {
+            console.log('not exist addtocart');
+            return res.status(401).json({ message: 'User not authenticated' });
         }
 
-        // Check if the user already has a cart
-        const existingOrder = await Order.findOne({ user: userId });
-        if (existingOrder) {
-            return res.status(400).json({ message: 'User already has a cart' });
+        // Get the current order data from cookies or initialize an empty order object
+        const order = req.cookies.order || { username: null, items: [] };
+
+        // Check if the user already has an order in the cookies
+        if (order.username && order.username !== username) {
+            console.log('User already has an order in the cookies');
+            return res.status(400).json({ message: 'User already has an order' });
         }
 
-        // Create a new cart
-        const order = new Order({
-            user: userId,
-            items: []
-        });
-
-        // Save the cart
-        const createOrder = await order.save();
-        res.status(200).json(createOrder);
-    } catch (err) {
-        res.status(500).json({ message: 'Failed to create cart' });
-
-    }
-};
-
-exports.addToOrder = async (req, res) => {
-    try {
-        const userId = req.body.userId;
-        const item = req.body.item;
-        const quantity = req.body.quantity;
-
-        // Find the user's order
-        const Order = await Order.findOne({ user: userId });
-        if (!Order) {
-            return res.status(404).json({ message: 'Order not found' });
-        }
-
-        // Add the item to the order
-        cart.itam.push({
-            type: item.type,
-            name: item.name,
-            price: item.price,
+        // Update the order with the new item
+        order.username = username;
+        order.items.push({
+            type: 'fruit',  // Add the type field
+            name: fruitName,
+            price: price,
             quantity: quantity
         });
 
-        // Save the updated order
-        const updatedOrder = await Order.save();
+        // Store the updated order in cookies
+        res.cookie('order', order);
 
-        res.status(200).json(updatedOrder);
+        console.log('Item added to order:', order);
+
+        res.status(200).json(order);
     } catch (err) {
-        res.status(500).json({ message: 'Failed to add item to cart' });
+        console.error('Failed to add item to order:', err);
+        res.status(500).json({ message: 'Failed to add item to order' });
     }
 };
