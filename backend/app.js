@@ -103,55 +103,6 @@ const createApp = async function () {
 
 
 
-
-  app.post('/orders/addToOrder', async (req, res) => {
-    try {
-      const { itemName, quantity, price } = req.body;
-      const username = req.cookies.user ? req.cookies.user.username : null;
-
-      // Retrieve the user ID from the cookies (if available)
-      const userId = req.cookies.user ? req.cookies.user.userId : null;
-
-      // Check if the user is authenticated
-      if (!userId) {
-        return res.status(401).json({ message: 'User not authenticated' });
-      }
-
-      // Find the user based on the username
-      const user = await User.findOne({ username });
-
-      if (!user) {
-        return res.status(404).json({ message: 'User not found' });
-      }
-
-      // Create a new order item
-      const item = { name: itemName, price };
-
-      // Find the order document based on the user
-      let order = await Order.findOne({ user });
-
-      if (!order) {
-        // If the order doesn't exist, create a new order document
-        order = new Order({ user, items: [item] });
-      } else {
-        // If the order already exists, add the new item to the existing items array
-        order.items.push(item);
-      }
-
-      // Save the updated order document
-      await order.save();
-
-      // Store the order data in the cookies with the username as the key
-      res.cookie(`order_${username}`, order);
-
-      // Return the response
-      res.status(200).json({ success: true, order });
-    } catch (error) {
-      console.error('Error adding item to order:', error);
-      res.status(500).json({ error: 'Internal Server Error' });
-    }
-  });
-
   app.get('/vegetables', (req, res) => {
     const username = req.cookies.user ? req.cookies.user.username : null; // Retrieve the 'username' cookie value if available
     res.render('vegetables', { username });
