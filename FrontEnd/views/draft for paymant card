@@ -1,6 +1,6 @@
 
 
-<div id="card-container" class="card-container hidden">
+<div id="card-container2" class="card-container2 hidden">
     <div class="card">
         <button class="dismiss" type="button">×</button>
         <div class="header">
@@ -14,7 +14,7 @@
             <div class="title">Payment</div>
         </div>
         <div class="content">
-            <div class="form-container">
+            <div class="form-container2">
                 <form>
                     <div class="form-group">
                         <label for="card-number">Card Number</label>
@@ -40,3 +40,27 @@
         </div>
     </div>
 </div>
+
+
+
+
+const checkoutButton = document.querySelector('.checkout-button');
+const payButton = document.querySelector('.checkout-button');
+const cardContainer = document.getElementById('card-container');
+const dismissButton = document.querySelector('.dismiss');
+const cardContainer2 = document.getElementById('card-container2');
+const dismissButton2 = document.querySelector('.dismiss2');
+
+
+payButton.addEventListener('click', () => {
+    cardContainer.classList.remove('hidden');
+});
+checkoutButton.addEventListener('click', () => {
+    cardContainer2.classList.remove('hidden');
+});
+dismissButton.addEventListener('click', () => {
+    cardContainer.classList.add('hidden');
+});
+dismissButton2.addEventListener('click', () => {
+    cardContainer2.classList.add('hidden');
+});
