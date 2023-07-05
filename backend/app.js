@@ -166,13 +166,15 @@ const createApp = async function () {
     res.render('others', { username });
   });
 
+
   app.get('/orders', (req, res) => {
     const username = req.cookies.user ? req.cookies.user.username : null; // Retrieve the 'username' cookie value if available
-  
-    const items = req.cookies[`order_${username}`] || req.session[`order_${username}`] || [];
-  
-    res.render('orders', { username, items });
+
+    const cartItems = req.cookies.order || req.session.order || []; // Corrected the cookie name
+
+    res.render('orders', { username, cartItems });
   });
+
 
   app.get('/userprofile', (req, res) => {
     const username = req.cookies.user ? req.cookies.user.username : null; // Retrieve the 'username' cookie value if available
