@@ -100,31 +100,7 @@ const createApp = async function () {
     const username = req.cookies.user ? req.cookies.user.username : null; // Retrieve the 'username' cookie value if available
     res.render('fruits', { username });
   });
-  app.post('/fruits', (req, res) => {
-    // Get the fruit details from the request body
-    const fruit = req.body.fruit;
-
-    // Check if the user is logged in
-    if (req.session.user || req.cookies.user) {
-      // Get the current user from the session or cookies
-      const user = req.session.user || req.cookies.user;
-
-      // Add or update the fruit value in the user object
-      user.fruit = fruit;
-
-      // Store the updated user object in the session or cookies
-      req.session.user = user;
-      res.cookie('user', user);
-    } else {
-      // User is not logged in, create a new cartItems array in cookies and add the fruit
-      const cartItems = req.cookies.cartItems || [];
-      cartItems.push(fruit);
-      res.cookie('cartItems', cartItems);
-    }
-
-    // Redirect back to the fruits page
-    res.redirect('/fruits');
-  });
+  
   app.post('/orders/addToOrder', (req, res) => {
     // Extract itemName, quantity, and price from the request body
     const { itemName, quantity, price } = req.body;
@@ -170,9 +146,9 @@ const createApp = async function () {
   app.get('/orders', (req, res) => {
     const username = req.cookies.user ? req.cookies.user.username : null; // Retrieve the 'username' cookie value if available
 
-    const cartItems = req.cookies.order || req.session.order || []; // Corrected the cookie name
+    const items = req.cookies.order || req.session.order || []; // Corrected the cookie name
 
-    res.render('orders', { username, cartItems });
+    res.render('orders', { username, items });
   });
 
 
