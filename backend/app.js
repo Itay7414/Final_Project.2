@@ -100,38 +100,9 @@ const createApp = async function () {
     const username = req.cookies.user ? req.cookies.user.username : null; // Retrieve the 'username' cookie value if available
     res.render('fruits', { username });
   });
-  
-  app.post('/orders/addToOrder', (req, res) => {
-    // Extract itemName, quantity, and price from the request body
-    const { itemName, quantity, price } = req.body;
 
-    // Retrieve the user ID and username from the cookies
-    const username = req.cookies.user ? req.cookies.user.username : null;
 
-    // Check if the user is authenticated
-    if (!userId) {
-      return res.status(401).json({ message: 'User not authenticated' });
-    }
 
-    // Perform necessary operations with the received data
-    // For example, you can save the order to a database, update a shopping cart, or perform any other required logic.
-
-    // Example: Storing the order data in cookies
-    res.cookie('order', {
-      itemName,
-      price,
-      quantity,
-      username
-    });
-
-    // Return the response
-    res.status(200).json({
-      name: itemName,
-      price,
-      quantity,
-      username
-    });
-  });
   app.get('/vegetables', (req, res) => {
     const username = req.cookies.user ? req.cookies.user.username : null; // Retrieve the 'username' cookie value if available
     res.render('vegetables', { username });
@@ -146,7 +117,7 @@ const createApp = async function () {
   app.get('/orders', (req, res) => {
     const username = req.cookies.user ? req.cookies.user.username : null; // Retrieve the 'username' cookie value if available
 
-    const items = req.cookies.order || req.session.order || []; // Corrected the cookie name
+    const items = req.cookies[`order`] || req.session.order || []; // Retrieve 'order' array from cookies first, then from session if not found
 
     res.render('orders', { username, items });
   });
