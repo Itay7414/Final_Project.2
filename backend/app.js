@@ -166,7 +166,7 @@ const createApp = async function () {
   app.get('/orders', (req, res) => {
     const username = req.cookies.user ? req.cookies.user.username : null; // Retrieve the 'username' cookie value if available
 
-    const items = req.cookies.order || req.session.order || []; // Retrieve 'order' array from cookies first, then from session if not found
+    const items = req.cookies[`order`] || req.session.order || []; // Retrieve 'order' array from cookies first, then from session if not found
 
     res.render('orders', { username, items });
   });

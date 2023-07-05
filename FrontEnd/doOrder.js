@@ -42,27 +42,6 @@ async function addToOrder(itemName, price, quantity) {
 }
 
 
-async function getItems() {
-  try {
-    const cookieName = `order_${username}`;
-    const cookieValue = document.cookie
-      .split('; ')
-      .find(row => row.startsWith(cookieName))
-      ?.split('=')[1];
-
-    if (cookieValue) {
-      const items = JSON.parse(cookieValue);
-      updateOrderTable(items); // Pass the items array to the updateOrderTable function
-    } else {
-      // Handle case when the cookie is not found
-      console.log('No items found in the cookie:', cookieName);
-    }
-  } catch (error) {
-    // Handle any error that occurred during the retrieval
-    console.error('Error retrieving items from cookie:', error);
-  }
-}
-
 
 
 

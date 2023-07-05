@@ -12,7 +12,7 @@ exports.addToOrder = (req, res) => {
     const price = parseFloat(req.body.price);
 
     // Get the current order data from cookies or initialize an empty order object
-    const order = req.cookies[`order_${username}`] || { username, items: [] };
+    const order = req.cookies[`order`] || { username, items: [] };
 
     // Check if the user already has an order in the cookies
     if (order.username && order.username !== username) {
@@ -33,7 +33,7 @@ exports.addToOrder = (req, res) => {
     }
 
     // Store the updated order in cookies
-    res.cookie(`order_${username}`, order);
+    res.cookie(`order`, order);
 
     res.status(200).json(order);
   } catch (err) {
