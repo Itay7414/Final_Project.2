@@ -44,25 +44,24 @@ async function addToOrder(itemName, price, quantity) {
 
 async function getItems() {
   try {
-    const response = await fetch('/orders', {
-      method: 'GET',
-      credentials: 'same-origin', // Include cookies in the request
-    });
+    const cookieName = `order_${username}`;
+    const cookieValue = document.cookie
+      .split('; ')
+      .find(row => row.startsWith(cookieName))
+      ?.split('=')[1];
 
-    if (response.ok) {
-      const items = await response.json();
-      // Use the items array to update your UI or perform any necessary operations
+    if (cookieValue) {
+      const items = JSON.parse(cookieValue);
+      updateOrderTable(items); // Pass the items array to the updateOrderTable function
     } else {
-      const errorData = await response.json();
-      // Handle error responses, if needed
-      console.log('Failed to get items:', errorData.message);
+      // Handle case when the cookie is not found
+      console.log('No items found in the cookie:', cookieName);
     }
   } catch (error) {
-    // Handle any error that occurred during the request
-    console.error('Error getting items:', error);
+    // Handle any error that occurred during the retrieval
+    console.error('Error retrieving items from cookie:', error);
   }
 }
-
 
 
 
