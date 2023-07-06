@@ -1,4 +1,7 @@
 // ordersControllers.js
+const models = require('../utils/db_utils/models');
+const Order = models.Order;
+
 exports.addToOrder = (req, res) => {
   try {
     const username = req.cookies.user.username; // Get the username from cookies
@@ -39,5 +42,29 @@ exports.addToOrder = (req, res) => {
   } catch (err) {
     console.error('Failed to add item to order:', err);
     res.status(500).json({ message: 'Failed to add item to order' });
+  }
+};
+
+exports.submitOrder = async (req, res) => {
+  try {
+    console.log('hey');
+    const { username } = req.cookies.user; // Retrieve the username from the cookies
+    const order = req.cookies.order || {}; // Retrieve the order from the cookies
+
+    // Create anewOrder document in the database
+    const newOrder = await Order.create({
+      username: username,
+      items: order.items
+    });
+
+    // Clear the order cookie
+    res.clearCookie('order');
+    console.log('Order submitted successfully');
+
+    // Return a success response
+    res.status(200).json({ message: 'Order submitted successfully' });
+  } catch (error) {
+    console.error('Failed to submit order:', error);
+    res.status(500).json({ error: 'Failed to submit order' });
   }
 };

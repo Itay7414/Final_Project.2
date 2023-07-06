@@ -1,9 +1,14 @@
 // doOrder.js
 
-async function addToOrder(itemName, price, quantity) {
+async function addToOrder(itemName, price, quantity, itemId) {
   try {
     if (quantity < 1) {
-      alert("Minimum quantity is 1 :)");
+      // Show pop-up message
+      $('#match-message').text('Minimum quantity is 1 :)');
+      $('#match-message').addClass('show-message');
+      setTimeout(function() {
+        $('#match-message').removeClass('show-message');
+      }, 3000);
       return;
     }
 
@@ -22,14 +27,25 @@ async function addToOrder(itemName, price, quantity) {
 
     if (response.ok) {
       const updatedOrder = await response.json();
-      alert("Added to the cart!");
+
+      // Show pop-up message
+      $('#match-message').text('Added to the cart!');
+      $('#match-message').addClass('show-message');
+      setTimeout(function() {
+        $('#match-message').removeClass('show-message');
+      }, 3000);
 
       // Update the cart display if needed
       // For example, you can call a function to update the cart UI
     } else {
       const errorData = await response.json();
       if (response.status === 401) {
-        alert("You have to log in to your user before adding items to the cart!");
+        // Show pop-up message
+        $('#match-message').text('You have to log in to your user before adding items to the cart!');
+        $('#match-message').addClass('show-message');
+        setTimeout(function() {
+          $('#match-message').removeClass('show-message');
+        }, 5000);
       } else {
         // Handle other error responses, if needed
         console.log('Failed to add item to order:', errorData.message);
@@ -38,6 +54,28 @@ async function addToOrder(itemName, price, quantity) {
   } catch (error) {
     // Handle any error that occurred during the request
     console.error('Error adding item to order:', error);
+  }
+}
+async function removeItem(itemId) {
+  try {
+    const deleteResponse = await fetch('/items/delete', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        itemId,
+      }),
+      credentials: 'same-origin',
+    });
+
+    if (deleteResponse.ok) {
+      location.reload();
+    } else {
+      console.error('Failed to delete item from the database.');
+    }
+  } catch (error) {
+    console.error('Error deleting item:', error);
   }
 }
 

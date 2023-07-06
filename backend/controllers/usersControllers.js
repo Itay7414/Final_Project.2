@@ -68,6 +68,7 @@ exports.logout = async (req, res) => {
 
         // Remove the user's cookie
         res.clearCookie('user');
+        res.clearCookie('order');
 
         // Redirect the user to the login page or any other desired page
         res.redirect('/');

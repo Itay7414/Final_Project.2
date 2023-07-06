@@ -4,6 +4,7 @@ const express = require('express');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const path = require('path');
+const Item = require('./utils/db_utils/models').Item;
 
 // const load_routes = function (app) {
 //   app.use(require("./routes/users"));
@@ -40,7 +41,8 @@ const createApp = async function () {
       // Clear the user's session or remove the user's cookie
       // For example, if you are using Express sessions with cookies:
       res.clearCookie('user'); // Clear the session cookie
-
+      res.clearCookie('order');
+      
       req.session.destroy(); // Destroy the session
 
       // Log a message to the terminal
@@ -96,23 +98,53 @@ const createApp = async function () {
     res.render('index', { loggedIn: loggedIn, username: username });
   });
 
-  app.get('/fruits', (req, res) => {
-    const username = req.cookies.user ? req.cookies.user.username : null; // Retrieve the 'username' cookie value if available
-    res.render('fruits', { username });
+  app.post('/items/delete', async (req, res) => {
+    try {
+      const itemId = req.body.itemId;
+      await Item.findByIdAndDelete(itemId);
+      res.sendStatus(200);
+    } catch (error) {
+      console.error(error);
+      res.sendStatus(500);
+    }
   });
 
-
-
-  app.get('/vegetables', (req, res) => {
-    const username = req.cookies.user ? req.cookies.user.username : null; // Retrieve the 'username' cookie value if available
-    res.render('vegetables', { username });
+  app.get('/fruits', async (req, res) => {
+    try {
+      const username = req.cookies.user ? req.cookies.user.username : null;
+      const fruits = await Item.find({ type: 'Fruits' }).exec();
+      // console.log(fruits); // Log the retrieved fruits data
+      res.render('fruits', { username, fruits });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: 'Failed to retrieve fruits' });
+    }
+  });
+  
+  app.get('/vegetables', async (req, res) => {
+    try {
+      const username = req.cookies.user ? req.cookies.user.username : null;
+      const vegetables = await Item.find({ type: 'Vegetables' }).exec();
+      // console.log(vegetables); // Log the retrieved fruits data
+      res.render('vegetables', { username, vegetables });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: 'Failed to retrieve vegetables' });
+    }
   });
 
-  app.get('/others', (req, res) => {
-    const username = req.cookies.user ? req.cookies.user.username : null; // Retrieve the 'username' cookie value if available
-    res.render('others', { username });
+  app.get('/others', async (req, res) => {
+    try {
+      const username = req.cookies.user ? req.cookies.user.username : null;
+      const others = await Item.find({ type: 'Others' }).exec();
+      // console.log(others); // Log the retrieved fruits data
+      res.render('others', { username, others });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: 'Failed to retrieve others' });
+    }
   });
-
+  
 
   app.get('/orders', (req, res) => {
     const username = req.cookies.user ? req.cookies.user.username : null; // Retrieve the 'username' cookie value if available
