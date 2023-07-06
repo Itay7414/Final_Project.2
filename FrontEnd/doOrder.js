@@ -1,9 +1,14 @@
 // doOrder.js
 
-async function addToOrder(itemName, price, quantity) {
+async function addToOrder(itemName, price, quantity, itemId) {
   try {
     if (quantity < 1) {
-      alert("Minimum quantity is 1 :)");
+      // Show pop-up message
+      $('#match-message').text('Minimum quantity is 1 :)');
+      $('#match-message').addClass('show-message');
+      setTimeout(function() {
+        $('#match-message').removeClass('show-message');
+      }, 3000);
       return;
     }
 
@@ -22,14 +27,25 @@ async function addToOrder(itemName, price, quantity) {
 
     if (response.ok) {
       const updatedOrder = await response.json();
-      alert("Added to the cart!");
+
+      // Show pop-up message
+      $('#match-message').text('Added to the cart!');
+      $('#match-message').addClass('show-message');
+      setTimeout(function() {
+        $('#match-message').removeClass('show-message');
+      }, 3000);
 
       // Update the cart display if needed
       // For example, you can call a function to update the cart UI
     } else {
       const errorData = await response.json();
       if (response.status === 401) {
-        alert("You have to log in to your user before adding items to the cart!");
+        // Show pop-up message
+        $('#match-message').text('You have to log in to your user before adding items to the cart!');
+        $('#match-message').addClass('show-message');
+        setTimeout(function() {
+          $('#match-message').removeClass('show-message');
+        }, 5000);
       } else {
         // Handle other error responses, if needed
         console.log('Failed to add item to order:', errorData.message);
@@ -40,26 +56,26 @@ async function addToOrder(itemName, price, quantity) {
     console.error('Error adding item to order:', error);
   }
 }
-
-
-async function getItems() {
+async function removeItem(itemId) {
   try {
-    const response = await fetch('/orders', {
-      method: 'GET',
-      credentials: 'same-origin', // Include cookies in the request
+    const deleteResponse = await fetch('/items/delete', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        itemId,
+      }),
+      credentials: 'same-origin',
     });
 
-    if (response.ok) {
-      const items = await response.json();
-      // Use the items array to update your UI or perform any necessary operations
+    if (deleteResponse.ok) {
+      location.reload();
     } else {
-      const errorData = await response.json();
-      // Handle error responses, if needed
-      console.log('Failed to get items:', errorData.message);
+      console.error('Failed to delete item from the database.');
     }
   } catch (error) {
-    // Handle any error that occurred during the request
-    console.error('Error getting items:', error);
+    console.error('Error deleting item:', error);
   }
 }
 

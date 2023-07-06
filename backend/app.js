@@ -4,6 +4,7 @@ const express = require('express');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const path = require('path');
+const Item = require('./utils/db_utils/models').Item;
 
 // const load_routes = function (app) {
 //   app.use(require("./routes/users"));
@@ -40,7 +41,8 @@ const createApp = async function () {
       // Clear the user's session or remove the user's cookie
       // For example, if you are using Express sessions with cookies:
       res.clearCookie('user'); // Clear the session cookie
-
+      res.clearCookie('order');
+      
       req.session.destroy(); // Destroy the session
 
       // Log a message to the terminal
@@ -96,83 +98,62 @@ const createApp = async function () {
     res.render('index', { loggedIn: loggedIn, username: username });
   });
 
-  app.get('/fruits', (req, res) => {
-    const username = req.cookies.user ? req.cookies.user.username : null; // Retrieve the 'username' cookie value if available
-    res.render('fruits', { username });
-  });
-  app.post('/fruits', (req, res) => {
-    // Get the fruit details from the request body
-    const fruit = req.body.fruit;
-
-    // Check if the user is logged in
-    if (req.session.user || req.cookies.user) {
-      // Get the current user from the session or cookies
-      const user = req.session.user || req.cookies.user;
-
-      // Add or update the fruit value in the user object
-      user.fruit = fruit;
-
-      // Store the updated user object in the session or cookies
-      req.session.user = user;
-      res.cookie('user', user);
-    } else {
-      // User is not logged in, create a new cartItems array in cookies and add the fruit
-      const cartItems = req.cookies.cartItems || [];
-      cartItems.push(fruit);
-      res.cookie('cartItems', cartItems);
+  app.post('/items/delete', async (req, res) => {
+    try {
+      const itemId = req.body.itemId;
+      await Item.findByIdAndDelete(itemId);
+      res.sendStatus(200);
+    } catch (error) {
+      console.error(error);
+      res.sendStatus(500);
     }
-
-    // Redirect back to the fruits page
-    res.redirect('/fruits');
   });
-  app.post('/orders/addToOrder', (req, res) => {
-    // Extract itemName, quantity, and price from the request body
-    const { itemName, quantity, price } = req.body;
 
-    // Retrieve the user ID and username from the cookies
-    const username = req.cookies.user ? req.cookies.user.username : null;
-
-    // Check if the user is authenticated
-    if (!userId) {
-      return res.status(401).json({ message: 'User not authenticated' });
+  app.get('/fruits', async (req, res) => {
+    try {
+      const username = req.cookies.user ? req.cookies.user.username : null;
+      const fruits = await Item.find({ type: 'Fruits' }).exec();
+      // console.log(fruits); // Log the retrieved fruits data
+      res.render('fruits', { username, fruits });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: 'Failed to retrieve fruits' });
     }
-
-    // Perform necessary operations with the received data
-    // For example, you can save the order to a database, update a shopping cart, or perform any other required logic.
-
-    // Example: Storing the order data in cookies
-    res.cookie('order', {
-      itemName,
-      price,
-      quantity,
-      username
-    });
-
-    // Return the response
-    res.status(200).json({
-      name: itemName,
-      price,
-      quantity,
-      username
-    });
   });
-  app.get('/vegetables', (req, res) => {
-    const username = req.cookies.user ? req.cookies.user.username : null; // Retrieve the 'username' cookie value if available
-    res.render('vegetables', { username });
+  
+  app.get('/vegetables', async (req, res) => {
+    try {
+      const username = req.cookies.user ? req.cookies.user.username : null;
+      const vegetables = await Item.find({ type: 'Vegetables' }).exec();
+      // console.log(vegetables); // Log the retrieved fruits data
+      res.render('vegetables', { username, vegetables });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: 'Failed to retrieve vegetables' });
+    }
   });
 
-  app.get('/others', (req, res) => {
-    const username = req.cookies.user ? req.cookies.user.username : null; // Retrieve the 'username' cookie value if available
-    res.render('others', { username });
+  app.get('/others', async (req, res) => {
+    try {
+      const username = req.cookies.user ? req.cookies.user.username : null;
+      const others = await Item.find({ type: 'Others' }).exec();
+      // console.log(others); // Log the retrieved fruits data
+      res.render('others', { username, others });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: 'Failed to retrieve others' });
+    }
   });
+  
 
   app.get('/orders', (req, res) => {
     const username = req.cookies.user ? req.cookies.user.username : null; // Retrieve the 'username' cookie value if available
-  
-    const items = req.cookies[`order_${username}`] || req.session[`order_${username}`] || [];
-  
+
+    const items = req.cookies[`order`] || req.session.order || []; // Retrieve 'order' array from cookies first, then from session if not found
+
     res.render('orders', { username, items });
   });
+
 
   app.get('/userprofile', (req, res) => {
     const username = req.cookies.user ? req.cookies.user.username : null; // Retrieve the 'username' cookie value if available

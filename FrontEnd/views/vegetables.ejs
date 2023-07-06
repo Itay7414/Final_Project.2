@@ -9,11 +9,6 @@
 </head>
 
 <body>
-  <% if (username) { %>
-    <div class="welcome-message">
-      <span class="welcomeMessageText">Now connected: <%= username %></span>
-    </div>
-    <% } %>
       <header>
         <a href="/" class="back-to-home-btn">
           <img src="/assets/back-to-home.jpeg" alt="Back to Home" width="60" height="60">
@@ -24,19 +19,65 @@
       </div>
 
       <main>
-        <div class="scale-background"></div>
-        <section class="card-container">
+        <% if (username === 'chipopo') { %>
+          <button class="add-item-button" type="button">
+            <span class="button__text">Add Item</span>
+            <span class="button__icon"><svg class="svg" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><line x1="12" x2="12" y1="5" y2="19"></line><line x1="5" x2="19" y1="12" y2="12"></line></svg></span>
+          </button>
+          <form class="form add-item-form">
+            <button class="dismiss" type="button">×</button>
+            <p class="title">Add item</p>
+            <p class="message">Please fill all the details!</p>
+              <label>
+                <input required="" placeholder="" type="addItamType" class="input">
+                <span>Item Type(Fruits / Vegetables / Others)</span>
+              </label>
+          
+            <label>
+              <input required="" placeholder="" type="addItemName" class="input">
+              <span>Item Name</span>
+            </label>
+          
+            <label>
+              <input required="" placeholder="" type="addItemPrice" class="input">
+              <span>Price</span>
+            </label>
+            <label>
+              <input required="" placeholder="" type="addItemImage" class="input">
+              <span>Image(URL Address)</span>
+            </label>
+            <button class="submit">Submit</button>
+          </form>
+          <% } %>
+        <% if (username) { %>
+          <div class="welcome-message">
+            <span class="welcomeMessageText">Now connected: <%= username %></span>
+          </div>
+          <% } %>
+        <section id="vegetables-container" class="card-container">
+        <% vegetables.forEach(item => { %>
           <div class="card">
+            <% if (username === 'chipopo') { %>
+              <button class="button" onclick="removeItem('<%= item._id %>')">
+                <span>Remove item</span>
+                <span>
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-miterlimit="2" stroke-linejoin="round" fill-rule="evenodd" clip-rule="evenodd">
+                    <path fill-rule="nonzero" d="m12.002 2.005c5.518 0 9.998 4.48 9.998 9.997 0 5.518-4.48 9.998-9.998 9.998-5.517 0-9.997-4.48-9.997-9.998 0-5.517 4.48-9.997 9.997-9.997zm0 1.5c-4.69 0-8.497 3.807-8.497 8.497s3.807 8.498 8.497 8.498 8.498-3.808 8.498-8.498-3.808-8.497-8.498-8.497zm0 7.425 2.717-2.718c.146-.146.339-.219.531-.219.404 0 .75.325.75.75 0 .193-.073.384-.219.531l-2.717 2.717 2.727 2.728c.147.147.22.339.22.531 0 .427-.349.75-.75.75-.192 0-.384-.073-.53-.219l-2.729-2.728-2.728 2.728c-.146.146-.338.219-.53.219-.401 0-.751-.323-.751-.75 0-.192.073-.384.22-.531l2.728-2.728-2.722-2.722c-.146-.147-.219-.338-.219-.531 0-.425.346-.749.75-.749.192 0 .385.073.531.219z"></path>
+                  </svg>
+                </span>
+              </button>
+            <% } %>
+            <div class="scale-background"></div>
             <div class="card-img">
-              <img src="/assets/carrot.png" alt="Carrot">
+              <img src="<%= item.image %>" alt="<%= item.name %>">
             </div>
             <div class="card-info">
-              <h2 class="text-title">Carrot</h2>
-              <p class="text-body">Price: $2.99 per pound</p>
+              <p class="text-title item-name"><%= item.name %></p>
+              <p class="text-body item-price">$<%= item.price %> per pound</p>
               <div class="card-footer">
                 <div class="card-input">
-                  <label for="carrot-weight">Weight (in pounds):</label>
-                  <input type="number" id="carrot-weight" name="carrot-weight" min="0" max="8">
+                  <label for="<%= item.name %>-weight">Weight (in pounds):</label>
+                  <input type="number" id="<%= item.name %>-weight" name="<%= item.name %>-weight" min="0" max="10" class="item-amount">
                 </div>
                 <div class="card-button">
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -47,107 +88,40 @@
                     <path d="M1 1h4l2.5 7h13m2 0v12h-16v-12m-2 0h20"></path>
                   </svg>
                   <span class="add-to-order-btn"
-                    onclick="addToOrder('carrot', '2.99', document.getElementById('carrot-weight').value)">Add to your
-                    Order</span>
+                    onclick="addToOrder('<%= item.name %>', '<%= item.price %>', document.getElementById('<%= item.name %>-weight').value)">Add to your Order</span>
                 </div>
               </div>
             </div>
           </div>
-          <div class="card">
-            <div class="card-img">
-              <img src="/assets/Tomato.png" alt="Tomato">
-            </div>
-            <div class="card-info">
-              <h2 class="text-title">Tomato</h2>
-              <p class="text-body">Price: $3.49 per pound</p>
-              <div class="card-footer">
-                <div class="card-input">
-                  <label for="tomato-weight">Weight (in pounds):</label>
-                  <input type="number" id="tomato-weight" name="tomato-weight" min="0" max="8">
-                </div>
-                <div class="card-button">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                    class="feather feather-shopping-cart">
-                    <circle cx="9" cy="21" r="1"></circle>
-                    <circle cx="20" cy="21" r="1"></circle>
-                    <path d="M1 1h4l2.5 7h13m2 0v12h-16v-12m-2 0h20"></path>
-                  </svg>
-                  <span class="add-to-order-btn"
-                    onclick="addToOrder('tomato', '3.49', document.getElementById('tomato-weight').value)">Add to your
-                    Order</span>
-                </div>
-              </div>
-            </div>
-          </div>
+        <% }) %>
+      </section>
+      <div id="match-message" class="pop-up-message"></div>
 
-          <div class="card">
-            <div class="card-img">
-              <img src="/assets/broccoli.png" alt="Broccoli">
-            </div>
-            <div class="card-info">
-              <h2 class="text-title">Broccoli</h2>
-              <p class="text-body">Price: $1.99 per pound</p>
-              <div class="card-footer">
-                <div class="card-input">
-                  <label for="broccoli-weight">Weight (in pounds):</label>
-                  <input type="number" id="broccoli-weight" name="broccoli-weight" min="0" max="8">
-                </div>
-                <div class="card-button">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                    class="feather feather-shopping-cart">
-                    <circle cx="9" cy="21" r="1"></circle>
-                    <circle cx="20" cy="21" r="1"></circle>
-                    <path d="M1 1h4l2.5 7h13m2 0v12h-16v-12m-2 0h20"></path>
-                  </svg>
-                  <span class="add-to-order-btn"
-                    onclick="addToOrder('broccoli', '1.99', document.getElementById('broccoli-weight').value)">Add to
-                    your Order</span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="card">
-            <div class="card-img">
-              <img src="/assets/cucumber.jpg" alt="cucumber">
-            </div>
-            <div class="card-info">
-              <h2 class="text-title">Cucumber</h2>
-              <p class="text-body">Price: $2.49 per pound</p>
-              <div class="card-footer">
-                <div class="card-input">
-                  <label for="cucumber-weight">Weight (in pounds):</label>
-                  <input type="number" id="cucumber-weight" name="cucumber-weight" min="0" max="5">
-                </div>
-                <div class="card-button">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                    class="feather feather-shopping-cart">
-                    <circle cx="9" cy="21" r="1"></circle>
-                    <circle cx="20" cy="21" r="1"></circle>
-                    <path d="M1 1h4l2.5 7h13m2 0v12h-16v-12m-2 0h20"></path>
-                  </svg>
-                  <span class="add-to-order-btn"
-                    onclick="addToOrder('cucumber', '2.49', document.getElementById('cucumber-weight').value)">Add to
-                    your Order</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
       </main>
 
       <footer>
         <p>© 2023 Online Vegetable Store. All rights reserved.</p>
       </footer>
-      cript src="/backend/routes/orders.js"></script>
-      <script src="/backend/routes/users.js"></script>
-      <script src="../doOrder.js"></script>
-      <script src="/backend/app.js"></script>
-      <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.1/dist/js.cookie.min.js"></script>
+      <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="/backend/routes/orders.js"></script>
+  <script src="/backend/routes/users.js"></script>
+  <script src="/backend/app.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.1/dist/js.cookie.min.js"></script>
+  <script src="../doOrder.js"></script>
+  <script>
+    const dismissButton = document.querySelector('.dismiss');
+    const formContainer = document.querySelector('.add-item-form');
 
+    dismissButton.addEventListener('click', () => {
+    formContainer.style.display = 'none';
+    });
+   const addButton = document.querySelector('.add-item-button');
+   const form = document.querySelector('.add-item-form');
+     
+   addButton.addEventListener('click', () => {
+   form.style.display = 'block';
+   });
+   </script>
 </body>
 
 </html>
