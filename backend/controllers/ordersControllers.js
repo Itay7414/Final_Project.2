@@ -44,21 +44,24 @@ exports.addToOrder = (req, res) => {
     res.status(500).json({ message: 'Failed to add item to order' });
   }
 };
-
 exports.submitOrder = async (req, res) => {
   try {
-    console.log('hey');
-    const { username } = req.cookies.user; // Retrieve the username from the cookies
-    const order = req.cookies.order || {}; // Retrieve the order from the cookies
+    const username = req.cookies.order.username; // Retrieve the username from the cookies
+    console.log('user: ', username);
+    const items = req.cookies.order.items || []; // Retrieve the items from the request body
 
-    // Create anewOrder document in the database
+    // Check if username and items are available
+    if (!username || !items) {
+      throw new Error('Invalid order data');
+    }
+
+    // Create a new Order document in the database
     const newOrder = await Order.create({
-      username: username,
-      items: order.items
+      user: username, // Set the user field to the username directly
+      items: items || [],
     });
-
-    // Clear the order cookie
     res.clearCookie('order');
+
     console.log('Order submitted successfully');
 
     // Return a success response
@@ -68,3 +71,5 @@ exports.submitOrder = async (req, res) => {
     res.status(500).json({ error: 'Failed to submit order' });
   }
 };
+
+

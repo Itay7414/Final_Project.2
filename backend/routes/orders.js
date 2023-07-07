@@ -3,7 +3,7 @@ const ordersControllers = require('../controllers/ordersControllers');
 
 
 router.post('/orders/addToOrder', ordersControllers.addToOrder);
-router.post('/orders/sumbitOrder', ordersControllers.submitOrder);
+router.post('/orders/submitOrder', ordersControllers.submitOrder);
 
 module.exports = router;
 
