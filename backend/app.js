@@ -5,6 +5,8 @@ const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const path = require('path');
 const Item = require('./utils/db_utils/models').Item;
+const Order = require('./utils/db_utils/models').Order;
+
 
 // const load_routes = function (app) {
 //   app.use(require("./routes/users"));
@@ -169,12 +171,26 @@ const createApp = async function () {
     res.render('store_map', { username });
   });
 
-  app.get('/transaction_history', (req, res) => {
-    const username = req.cookies.user ? req.cookies.user.username : null; // Retrieve the 'username' cookie value if available
-    res.render('transaction_history', { username });
+  app.get('/transaction_history', async (req, res) => {
+    try {
+      const username = req.cookies.user ? req.cookies.user.username : null;
+  
+      let orders = [];
+      if (username === 'chipopo') {
+        orders = await Order.find({}).sort({ transactionDate: -1 });
+      } else {
+        orders = await Order.find({ user: username }).sort({ transactionDate: -1 });
+      }
+  
+      res.render('transaction_history', { username, orders });
+    } catch (error) {
+      console.error('Failed to fetch transaction history:', error);
+      res.status(500).send('Failed to fetch transaction history');
+    }
   });
-
+  
   return app;
-};
+  };
+  
 
 module.exports = { db, createApp };
