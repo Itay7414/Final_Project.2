@@ -42,7 +42,7 @@ const createApp = async function () {
       // For example, if you are using Express sessions with cookies:
       res.clearCookie('user'); // Clear the session cookie
       res.clearCookie('order');
-      
+
       req.session.destroy(); // Destroy the session
 
       // Log a message to the terminal
@@ -120,7 +120,7 @@ const createApp = async function () {
       res.status(500).json({ message: 'Failed to retrieve fruits' });
     }
   });
-  
+
   app.get('/vegetables', async (req, res) => {
     try {
       const username = req.cookies.user ? req.cookies.user.username : null;
@@ -144,7 +144,7 @@ const createApp = async function () {
       res.status(500).json({ message: 'Failed to retrieve others' });
     }
   });
-  
+
 
   app.get('/orders', (req, res) => {
     const username = req.cookies.user ? req.cookies.user.username : null; // Retrieve the 'username' cookie value if available
