@@ -49,17 +49,33 @@ exports.submitOrder = async (req, res) => {
     const username = req.cookies.order.username; // Retrieve the username from the cookies
     console.log('user: ', username);
     const items = req.cookies.order.items || []; // Retrieve the items from the request body
-
+    const transactionDate = new Date(); // Get the current date and time
+    console.log('items:', items);
     // Check if username and items are available
-    if (!username || !items) {
+
+    if (!username || !items || !transactionDate) {
       throw new Error('Invalid order data');
     }
 
+    const formattedDate = transactionDate.toISOString().substring(0, 10); // Extract the first 10 characters (YYYY-MM-DD)
+    const formattedHour = transactionDate.toISOString().substring(11, 16); // Extract the hour part (HH:MM)
+
+
+
+
+    console.log('transactionDate:', formattedDate);
+    console.log('transactionDate:', formattedHour);
+
     // Create a new Order document in the database
     const newOrder = await Order.create({
-      user: username, // Set the user field to the username directly
-      items: items || [],
+      user: username,
+      items: items,
+      transactionDate: {
+        date: formattedDate,
+        hour: formattedHour
+      }
     });
+
     res.clearCookie('order');
 
     console.log('Order submitted successfully');
