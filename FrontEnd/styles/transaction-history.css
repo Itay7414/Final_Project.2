@@ -49,121 +49,6 @@ main {
     padding: 50px;
 }
 
-.text-center {
-    text-align: center;
-    margin-bottom: 50px;
-    margin-top: -5%;
-}
-
-.text-center h2 {
-    font-size: 28px;
-    font-weight: bold;
-    margin-bottom: 10px;
-}
-
-#cart-items-body th,
-#cart-items-body td {
-    padding: 8px;
-    text-align: left;
-    border-bottom: 1px solid #ddd;
-}
-
-#cart-items-body th {
-    font-weight: bold;
-}
-
-.cart-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-}
-
-.empty-cart-message {
-    text-align: center;
-    font-size: 18px;
-    margin-top: 50px;
-}
-
-.table-container {
-  max-width: 1000px;
-  margin-left: auto;
-  margin-right: auto;
-  padding-left: 10px;
-  padding-right: 10px;
-}
-
-h2 {
-  font-size: 26px;
-  margin: 20px 0;
-  text-align: center;
-}
-
-h2 small {
-  font-size: 0.5em;
-}
-
-.responsive-table {
-  list-style-type: none;
-  padding: 0;
-}
-.responsive-table .table-header {
-  background-color:#515c53c5;
-}
-.responsive-table li {
-  border-radius: 3px;
-  padding: 25px 30px;
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 25px;
-  background-color: #ffffff;
-  box-shadow: 0px 0px 9px 0px rgba(0, 0, 0, 0.1);
-}
-
-.table-header {
-  background-color: #33c069;
-  font-size: 14px;
-  text-transform: uppercase;
-  letter-spacing: 0.03em;
-}
-
-.col-5 {
-  flex-basis: 10%;
-}
-
-.col-2 {
-  flex-basis: 35%;
-}
-
-.col-3 {
-  flex-basis: 25%;
-}
-
-.col-4 {
-  flex-basis: 25%;
-}
-
-@media all and (max-width: 767px) {
-  .table-header {
-    display: none;
-  }
-  
-  .responsive-table li {
-    display: block;
-  }
-  
-  .col {
-    display: flex;
-    padding: 10px 0;
-  }
-  
-  .col:before {
-    color: #6C7A89;
-    padding-right: 10px;
-    content: attr(data-label);
-    flex-basis: 50%;
-    text-align: right;
-  }
-}
 .welcome-message {
   margin-top: -250px;
   margin-left: -350px;
@@ -184,4 +69,55 @@ h2 small {
   background-size: 100% 100%;
   background-position: 0% 100%;
   transition: background-position .7s, background-size .5s ease-in-out;
+}
+/* Styling for Transaction History */
+/* .container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+} */
+
+.accordion {
+  max-width: 800px;
+  width: 100%;
+  margin: 0 auto;
+  background-color: #f1f1f1;
+  border-radius: 5px;
+  padding: 20px;
+}
+
+.accordion-header {
+  background-color: #ddd;
+  padding: 10px;
+  cursor: pointer;
+  text-align: center;
+}
+
+.accordion-content {
+  padding: 10px;
+  display: none;
+  text-align: center;
+}
+
+.accordion-item:not(:last-child) {
+  margin-bottom: 10px;
+}
+
+.accordion-button {
+  width: 100%;
+  text-align: center;
+  padding: 10px;
+  background-color: #f1f1f1;
+  border: none;
+  outline: none;
+}
+
+.accordion-body {
+  padding: 10px;
+  text-align: center;
+}
+
+.accordion-collapse.show .accordion-body {
+  display: block;
 }
