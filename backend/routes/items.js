@@ -2,7 +2,7 @@ const router = require('express').Router();
 const itemsController = require('../controllers/itemsControllers');
 
 
-router.post('/item/createItem', itemsController.createItems);
+router.post('/item/createItems', itemsController.createItems);
 router.get('/item/getItemsByName', itemsController.getItemByName);
 router.get('/item/getItems', itemsController.getItems);
 router.get('/item/getItemsByType', itemsController.getItemsByType);

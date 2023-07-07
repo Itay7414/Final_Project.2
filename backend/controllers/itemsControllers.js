@@ -6,6 +6,8 @@ exports.createItems = async (req, res) => {
         const { type, name, image, price } = req.body;
         const newItem = new Item({ type, name, image, price });
         const createdItem = await newItem.save();
+        console.log('item: ', newItem);
+        console.log('Item Add');
         res.status(200).json(createdItem);
     } catch (err) {
         res.status(400).json({ error: err.message });
@@ -13,28 +15,16 @@ exports.createItems = async (req, res) => {
 };
 
 
-// exports.getItemsByType = async (req, res) => {
-
-//     try {
-//         const itemType = req.query.type;
-//         const Items_arr = await Item.find({ type: itemType }).exec();
-//         console.log(Items_arr);
-//         res.send(Items_arr);
-//     } catch (err) {
-//         console.error(err);
-//         res.status(500).json({ message: "Failed to retrieve items by type" });
-//     }
-// };
 exports.getItemsByType = async (req, res) => {
     try {
-      const itemType = req.query.type;
-      const items = await Item.find({ type: itemType }).exec();
-      res.render('fruits', { items });
+        const itemType = req.query.type;
+        const items = await Item.find({ type: itemType }).exec();
+        res.render('fruits', { items });
     } catch (err) {
-      console.error(err);
-      res.status(500).json({ message: "Failed to retrieve items by type" });
+        console.error(err);
+        res.status(500).json({ message: "Failed to retrieve items by type" });
     }
-  };
+};
 
 
 exports.getItemByName = async (req, res) => {

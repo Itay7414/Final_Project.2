@@ -272,8 +272,6 @@
                             console.log('order: ', orderCookie);
                             // Parse the order data as JSON
                             const sanitizedOrderCookie = orderCookie.startsWith('j:') ? orderCookie.slice(2) : orderCookie;
-
-                            // Parse the order data as JSON
                             let orderData;
                             try {
                                 orderData = JSON.parse(sanitizedOrderCookie);
@@ -281,6 +279,8 @@
                                 console.error('Invalid order data');
                                 return;
                             }
+
+
                             // Send the order data to the server to save in the database
                             fetch('/orders/submitOrder', {
                                 method: 'POST',

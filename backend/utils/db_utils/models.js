@@ -33,8 +33,15 @@ const orderSchema = new mongoose.Schema({
       quantity: { type: Number, required: true },
     },
   ],
-});
+  transactionDate: {
+    date: { type: Date },
+    hour: { type: String },
+  },
+}, { toJSON: { virtuals: true }, toObject: { virtuals: true } });
 
+orderSchema.virtual('transactionDateTimeFormatted').get(function () {
+  return `Date: ${this.transactionDate.date}\nHour: ${this.transactionDate.hour}`;
+});
 // Create the models
 const Item = mongoose.model('Item', itemSchema);
 const User = mongoose.model('User', userSchema);
