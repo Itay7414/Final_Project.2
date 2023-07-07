@@ -6,8 +6,6 @@ exports.createItems = async (req, res) => {
         const { type, name, image, price } = req.body;
         const newItem = new Item({ type, name, image, price });
         const createdItem = await newItem.save();
-        console.log('item: ', newItem);
-        console.log('Item Add');
         res.status(200).json(createdItem);
     } catch (err) {
         res.status(400).json({ error: err.message });
