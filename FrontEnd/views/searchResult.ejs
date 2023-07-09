@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>Fruits</title>
+  <title>Search Results</title>
   <link rel="stylesheet" type="text/css" href="/styles/fruits.css">
 </head>
 
@@ -58,7 +58,7 @@
           </div>
           <% } %>
             <section id="fruits-container" class="card-container">
-              <% fruits.forEach(item=> { %>
+              <% searchResults.forEach(item=> { %>
                 <div class="card">
                   <% if (username==='chipopo' ) { %>
                     <button class="button" onclick="removeItem('<%= item._id %>')">
