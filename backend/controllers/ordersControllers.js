@@ -44,21 +44,40 @@ exports.addToOrder = (req, res) => {
     res.status(500).json({ message: 'Failed to add item to order' });
   }
 };
-
 exports.submitOrder = async (req, res) => {
   try {
-    console.log('hey');
-    const { username } = req.cookies.user; // Retrieve the username from the cookies
-    const order = req.cookies.order || {}; // Retrieve the order from the cookies
+    const username = req.cookies.order.username; // Retrieve the username from the cookies
+    console.log('user: ', username);
+    const items = req.cookies.order.items || []; // Retrieve the items from the request body
+    const transactionDate = new Date(); // Get the current date and time
+    console.log('items:', items);
+    // Check if username and items are available
 
-    // Create anewOrder document in the database
+    if (!username || !items || !transactionDate) {
+      throw new Error('Invalid order data');
+    }
+
+    const formattedDate = transactionDate.toISOString().substring(0, 10); // Extract the first 10 characters (YYYY-MM-DD)
+    const formattedHour = transactionDate.toISOString().substring(11, 16); // Extract the hour part (HH:MM)
+
+
+
+
+    console.log('transactionDate:', formattedDate);
+    console.log('transactionDate:', formattedHour);
+
+    // Create a new Order document in the database
     const newOrder = await Order.create({
-      username: username,
-      items: order.items
+      user: username,
+      items: items,
+      transactionDate: {
+        date: formattedDate,
+        hour: formattedHour
+      }
     });
 
-    // Clear the order cookie
     res.clearCookie('order');
+
     console.log('Order submitted successfully');
 
     // Return a success response
@@ -68,3 +87,5 @@ exports.submitOrder = async (req, res) => {
     res.status(500).json({ error: 'Failed to submit order' });
   }
 };
+
+

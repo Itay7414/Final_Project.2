@@ -48,7 +48,7 @@
 
     <div class="table-container">
         <ul class="responsive-table">
-           
+
             </li>
             <% if (Array.isArray(items.items)) { %>
                 <li class="table-header">
@@ -56,36 +56,35 @@
                     <div class="col col-3">Price</div>
                     <div class="col col-4">Amount</div>
                     <div class="col col-5" data-label="Total Price">Total</div>
-                <% let total=0; %>
-                    <% items.items.forEach(item=> { %>
-                        <% total +=item.price * item.quantity; %>
-                            <li class="table-row">
-                                <div class="col col-2" data-label="Product Name">
-                                    <%= item.name %>
-                                </div>
-                                <div class="col col-3" data-label="Price">
-                                    <%= item.price %> $
-                                </div>
-                                <div class="col col-4" data-label="Amount">
-                                    <%= item.quantity %>
-                                </div>
-                                <div class="col col-5" data-label="Total Price">
-                                    <%= (item.price * item.quantity).toFixed(2) %> $
-                                </div>
-                            </li>
-                            <% }) %>
-                                <% if (items.items.length> 0) { %>
-                                    <li class="table-row-total">
-                                        <div class="col col-2" data-label="Product Name"></div>
-                                        <div class="col col-3" data-label="Price"></div>
-                                        <div class="col col-4" data-label="Amount"></div>
-                                        <div class="col col-total" data-label="Total Price">Total: <%= total.toFixed(2)
-                                                %> $</div>
-                                    </li>
-                                    <% } %>
-                                        <% } else { %>
-                                            <h2 class="seaBody" id="no-items-message" aria-label="No items yet!"></h2>
-                                            <% } %>
+                    <% let total=0; %>
+                        <% items.items.forEach(item=> { %>
+                            <% total +=item.price * item.quantity; %>
+                <li class="table-row">
+                    <div class="col col-2" data-label="Product Name">
+                        <%= item.name %>
+                    </div>
+                    <div class="col col-3" data-label="Price">
+                        <%= item.price %> $
+                    </div>
+                    <div class="col col-4" data-label="Amount">
+                        <%= item.quantity %>
+                    </div>
+                    <div class="col col-5" data-label="Total Price">
+                        <%= (item.price * item.quantity).toFixed(2) %> $
+                    </div>
+                </li>
+                <% }) %>
+                    <% if (items.items.length> 0) { %>
+                        <li class="table-row-total">
+                            <div class="col col-2" data-label="Product Name"></div>
+                            <div class="col col-3" data-label="Price"></div>
+                            <div class="col col-4" data-label="Amount"></div>
+                            <div class="col col-total" data-label="Total Price">Total: <%= total.toFixed(2) %> $</div>
+                        </li>
+                        <% } %>
+                            <% } else { %>
+                                <h2 class="seaBody" id="no-items-message" aria-label="No items yet!"></h2>
+                                <% } %>
         </ul>
     </div>
 
@@ -159,7 +158,8 @@
                                         <input type="password" id="cvv" maxlength="3" placeholder="CVV" required>
                                     </div>
                                 </div>
-                                <button type="submit" class="pay-button" id="pay-button" onclick="proccessOrder()">PAY</button>
+                                <button type="submit" class="pay-button" id="pay-button"
+                                    onclick="saveOrderToDatabase()">PAY</button>
                                 <div id="error-message" class="error-message"></div>
                             </form>
                         </div>
@@ -214,12 +214,12 @@
                     </p>
                 </div>
                 <% } %>
-                <script src="/backend/routes/orders.js"></script>
-                <script src="/backend/routes/users.js"></script>
-                <script src="../doOrder.js"></script>
-                <script src="/backend/app.js"></script>
-                <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.1/dist/js.cookie.min.js"></script>
-                <script src="userprofile.js"></script>
+                    <script src="/backend/routes/orders.js"></script>
+                    <script src="/backend/routes/users.js"></script>
+                    <script src="../doOrder.js"></script>
+                    <script src="/backend/app.js"></script>
+                    <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.1/dist/js.cookie.min.js"></script>
+                    <script src="userprofile.js"></script>
                     <script>
                         window.addEventListener('DOMContentLoaded', function () {
                             document.getElementById('signInBtn').addEventListener('click', submitForm);
@@ -250,10 +250,10 @@
                             cardContainer.classList.remove('hidden');
                         });
                         function redirectToHistory() {
-                            window.location.href = "/transaction_history"; 
+                            window.location.href = "/transaction_history";
                         }
                         function redirectToHome() {
-                            window.location.href = "/"; 
+                            window.location.href = "/";
                         }
                     </script>
                     <script>
@@ -262,61 +262,57 @@
                             cardContainer.classList.remove('hidden');
                         }
                     </script>
-            <script>
-                document.getElementById("pay-button").addEventListener("click", function (event) {
-                    event.preventDefault(); // Prevent the default form submission behavior
-            
-                    // Process the order
-                    processOrder();
-                });
-            
-                // Function to process the order
-                function processOrder() {
-                    // Retrieve the order from the cookies
-                    const order = JSON.parse(getCookie('order'));
-            
-                    // Submit the order asynchronously using JavaScript fetch API
-                    fetch("/backend/routes/orders.js", {  // Update the URL to match the server route
-                        method: "POST",
-                        headers: {
-                            "Content-Type": "application/json"
-                        },
-                        body: JSON.stringify(order)
-                    })
-                        .then(response => response.json())
-                        .then(data => {
-                            // Handle the response from the server
-                            console.log(data); // You can customize this based on your requirements
-            
-                            // Clear the order cookie
-                            document.cookie = "order=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-            
-                            // Optionally, perform any additional actions after the order submission
-                            // For example, redirect to a success page
-                            window.location.href = "/success";
-                        })
-                        .catch(error => {
-                            console.error("Error:", error);
-                        });
-                }
-            
-                // Function to retrieve cookie by name
-                function getCookie(name) {
-                    const cookies = document.cookie.split("; ");
-                    for (let i = 0; i < cookies.length; i++) {
-                        const cookie = cookies[i].split("=");
-                        if (cookie[0] === name) {
-                            return decodeURIComponent(cookie[1]);
+                    <script>
+                        // Function to save the order to the database
+                        function saveOrderToDatabase() {
+                            console.log('saveOrderToDatabase called');
+
+                            // Retrieve the order data from the cookies
+                            const orderCookie = getCookie('order');
+                            console.log('order: ', orderCookie);
+                            // Parse the order data as JSON
+                            const sanitizedOrderCookie = orderCookie.startsWith('j:') ? orderCookie.slice(2) : orderCookie;
+                            let orderData;
+                            try {
+                                orderData = JSON.parse(sanitizedOrderCookie);
+                            } catch (error) {
+                                console.error('Invalid order data');
+                                return;
+                            }
+
+
+                            // Send the order data to the server to save in the database
+                            fetch('/orders/submitOrder', {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json'
+                                },
+                                body: JSON.stringify(orderData) // Include the order data in the request body
+                            })
+                                .then(response => response.json())
+                                .then(data => {
+                                    console.log(data); // Handle the response
+                                })
+                                .catch(error => {
+                                    console.error(error); // Handle the error response
+                                });
                         }
-                    }
-                    return "";
-                }
-            
-                // Start the function when the "PAY" button is clicked
-                document.getElementById("pay-button").addEventListener("click", function (event) {
-                    document.getElementById("payment-form").submit();
-                });
-            </script>
+
+                        function getCookie(name) {
+                            const cookieString = decodeURIComponent(document.cookie);
+                            const cookies = cookieString.split(';');
+
+                            for (let i = 0; i < cookies.length; i++) {
+                                const cookie = cookies[i].trim();
+                                if (cookie.startsWith(name + '=')) {
+                                    return cookie.substring(name.length + 1);
+                                }
+                            }
+
+                            return '';
+                        }
+
+                    </script>
 
                     </body>
 

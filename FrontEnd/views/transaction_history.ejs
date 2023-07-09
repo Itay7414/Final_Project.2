@@ -2,74 +2,56 @@
 <html>
 
 <head>
-    <title>Shopping Cart</title>
-    <link rel="stylesheet" type="text/css" href="/styles/transaction-history.css">
+  <title>Transaction History</title>
+  <link rel="stylesheet" type="text/css" href="/styles/transaction-history.css">
 </head>
 
 <body>
   <% if (username) { %>
     <div class="welcome-message">
-        <span class="welcomeMessageText">Now connected: <%= username %></span>
+      <span class="welcomeMessageText">Now connected: <%= username %></span>
     </div>
   <% } %>
-    <a href="/" class="back-to-home-btn">
-        <img src="/assets/back-to-home.jpeg" alt="Back to Home" width="60" height="60">
-    </a>
-    <header>
-        <div class="container">
-            <div class="logo-container">
-                <img src="/assets/Yarkania logo 1.png" alt="Shuki's Yarkania Logo" class="logo-img">
-            </div>
-        </div>
-    </header>
-    <section class="text-center">
-        <h2>Shuki's Yarkania</h2>
-        <p>Your Transaction History!</p>
-        <div id="cart-items" class="cart-container">
-            <!-- Cart items will be inserted here dynamically -->
-        </div>
-    </section>
-    <div class="table-container">
-        <ul class="responsive-table">
-          <li class="table-header">
-            <div class="col col-2">Order number</div>
-            <div class="col col-3">Date</div>
-            <div class="col col-4">Time</div>
-            <div class="col col-5" data-label="Total Price">Total</div>
-          </li>
-          <li class="table-row">
-            <div class="col col-2" data-label="Order Number">14025</div>
-            <div class="col col-3" data-label="Date">12.2.2023</div>
-            <div class="col col-4" data-label="Time">11:38</div>
-            <div class="col col-5" data-label="Total Price">112.49$</div>
-          </li>
-          <li class="table-row">
-            <div class="col col-2" data-label="Order Number">14305</div>
-            <div class="col col-3" data-label="Date">19.2.2023</div>
-            <div class="col col-4" data-label="Time">12:40</div>
-            <div class="col col-5" data-label="Total Price">98.69$</div>
-          </li>
-          <li class="table-row">
-            <div class="col col-2" data-label="Order Number">14396</div>
-            <div class="col col-3" data-label="Date">3.3.2023</div>
-            <div class="col col-4" data-label="Time">12:12</div>
-            <div class="col col-5" data-label="Total Price">104.81$</div>
-          </li>
-          <li class="table-row">
-            <div class="col col-2" data-label="Order Number">14512</div>
-            <div class="col col-3" data-label="Date">28.3.2023</div>
-            <div class="col col-4" data-label="Time">13:01</div>
-            <div class="col col-5" data-label="Total Price">71.32$</div>
-          </li>
-        </ul>
+  <a href="/" class="back-to-home-btn">
+    <img src="/assets/back-to-home.jpeg" alt="Back to Home" width="60" height="60">
+  </a>
+  <header>
+    <div class="container">
+      <div class="logo-container">
+        <img src="/assets/Yarkania logo 1.png" alt="Shuki's Yarkania Logo" class="logo-img">
       </div>
-    <main>
+    </div>
+  </header>
+  <div class="accordion" id="accordionPanelsStayOpenExample">
+    <% if (orders.length > 0) { %>
+      <% orders.forEach((order, index) => { %>
+        <% let totalPrice = 0; %>
+        <% order.items.forEach(item => { %>
+          <% totalPrice += item.price * item.quantity; %>
+        <% }) %>
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="heading<%= index %>">
+            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse<%= index %>" aria-expanded="true" aria-controls="collapse<%= index %>">
+              Order ID: <%= order.id %><br><br>Ordered by: <%= order.user %><br><br>Total Items: <%= order.items.length %>,   Total Price: <%= totalPrice.toFixed(2) %>$
+            </button>
+          </h2>
+          <div id="collapse<%= index %>" class="accordion-collapse collapse<%= index === 0 ? ' show' : '' %>" aria-labelledby="heading<%= index %>" data-bs-parent="#accordionPanelsStayOpenExample">
+            <div class="accordion-body">
+              <% order.items.forEach(item => { %>
+                <div>Item: <%= item.name %>, Price: <%= item.price %>$, Quantity: <%= item.quantity %></div>
+              <% }) %>
+            </div>
+          </div>
+        </div>
+      <% }) %>
+    <% } else { %>
+      <p>No transaction history found.</p>
+    <% } %>
+  </div>
 
-
-    </main>
-
-
-    <script src="/backend/routes/carts.js"></script>
+  <!-- Add Bootstrap JS scripts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.0/js/bootstrap.bundle.min.js"></script>
+  <script src="/backend/routes/carts.js"></script>
 </body>
 
 </html>

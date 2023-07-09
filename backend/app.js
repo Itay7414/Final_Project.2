@@ -5,12 +5,9 @@ const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const path = require('path');
 const Item = require('./utils/db_utils/models').Item;
+const Order = require('./utils/db_utils/models').Order;
 
-// const load_routes = function (app) {
-//   app.use(require("./routes/users"));
-//   app.use(require("./routes/items"));
-//   app.use(require("./routes/orders"));
-// };
+
 
 const createApp = async function () {
   const app = express();
@@ -42,7 +39,7 @@ const createApp = async function () {
       // For example, if you are using Express sessions with cookies:
       res.clearCookie('user'); // Clear the session cookie
       res.clearCookie('order');
-      
+
       req.session.destroy(); // Destroy the session
 
       // Log a message to the terminal
@@ -120,7 +117,7 @@ const createApp = async function () {
       res.status(500).json({ message: 'Failed to retrieve fruits' });
     }
   });
-  
+
   app.get('/vegetables', async (req, res) => {
     try {
       const username = req.cookies.user ? req.cookies.user.username : null;
@@ -144,8 +141,23 @@ const createApp = async function () {
       res.status(500).json({ message: 'Failed to retrieve others' });
     }
   });
-  
 
+  app.get('/searchResult', async (req, res) => {
+    try {
+      const username = req.cookies.user ? req.cookies.user.username : null;
+
+      const query = req.query.query; // Get the search query from the URL parameter "query"
+  
+      // Perform the search by querying the items with names that include the search query
+      const searchResults = await Item.find({ name: { $regex: query, $options: 'i' } });
+  
+      res.render('searchResult', { username, searchResults });
+    } catch (error) {
+      console.error('Failed to perform search:', error);
+      res.status(500).send('Failed to perform search');
+    }
+  });
+  
   app.get('/orders', (req, res) => {
     const username = req.cookies.user ? req.cookies.user.username : null; // Retrieve the 'username' cookie value if available
 
@@ -169,12 +181,26 @@ const createApp = async function () {
     res.render('store_map', { username });
   });
 
-  app.get('/transaction_history', (req, res) => {
-    const username = req.cookies.user ? req.cookies.user.username : null; // Retrieve the 'username' cookie value if available
-    res.render('transaction_history', { username });
+  app.get('/transaction_history', async (req, res) => {
+    try {
+      const username = req.cookies.user ? req.cookies.user.username : null;
+
+      let orders = [];
+      if (username === 'chipopo') {
+        orders = await Order.find({}).sort({ transactionDate: -1 });
+      } else {
+        orders = await Order.find({ user: username }).sort({ transactionDate: -1 });
+      }
+
+      res.render('transaction_history', { username, orders });
+    } catch (error) {
+      console.error('Failed to fetch transaction history:', error);
+      res.status(500).send('Failed to fetch transaction history');
+    }
   });
 
   return app;
 };
+
 
 module.exports = { db, createApp };

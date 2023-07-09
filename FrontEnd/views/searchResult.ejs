@@ -3,8 +3,8 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>Vegetables</title>
-  <link rel="stylesheet" type="text/css" href="/styles/vegetables.css">
+  <title>Search Results</title>
+  <link rel="stylesheet" type="text/css" href="/styles/fruits.css">
 </head>
 
 <body>
@@ -49,7 +49,7 @@
           <input required="" placeholder="" type="addItemImage" class="input">
           <span>Image(URL Address)</span>
         </label>
-        <button class="submit">Submit</button>
+        <button class="submit" onclick="createItems()">Submit</button>
       </form>
       <% } %>
         <% if (username) { %>
@@ -57,8 +57,8 @@
             <span class="welcomeMessageText">Now connected: <%= username %></span>
           </div>
           <% } %>
-            <section id="others-container" class="card-container">
-              <% others.forEach(item=> { %>
+            <section id="fruits-container" class="card-container">
+              <% searchResults.forEach(item=> { %>
                 <div class="card">
                   <% if (username==='chipopo' ) { %>
                     <button class="button" onclick="removeItem('<%= item._id %>')">
@@ -106,7 +106,6 @@
                 <% }) %>
             </section>
             <div id="match-message" class="pop-up-message"></div>
-
   </main>
 
   <footer>
@@ -132,8 +131,11 @@
     addButton.addEventListener('click', () => {
       form.style.display = 'block';
     });
+
   </script>
   <script>
+
+    // Add event listener to the submit button
     const createItems = () => {
       const typeInput = document.querySelector('.input[type="addItamType"]');
       const nameInput = document.querySelector('.input[type="addItemName"]');
@@ -168,6 +170,7 @@
     // Add event listener to the submit button
     const submitButton = document.querySelector('.submit');
     submitButton.addEventListener('click', createItems);
+
   </script>
 </body>
 
