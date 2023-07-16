@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>Vegetables</title>
+  <title>Others</title>
   <link rel="stylesheet" type="text/css" href="/styles/vegetables.css">
 </head>
 
@@ -57,6 +57,12 @@
             <span class="welcomeMessageText">Now connected: <%= username %></span>
           </div>
           <% } %>
+          <div class="cart-container">
+            <a href="/orders" class="cart-btn">
+              <img src="/assets/cart.png" alt="Cart" class="cart-img">
+            </a>
+            <span class="cart-text">Cart</span>
+          </div>
             <section id="others-container" class="card-container">
               <% others.forEach(item=> { %>
                 <div class="card">
