@@ -57,6 +57,12 @@
             <span class="welcomeMessageText">Now connected: <%= username %></span>
           </div>
           <% } %>
+          <div class="cart-container">
+            <a href="/orders" class="cart-btn">
+              <img src="/assets/cart.png" alt="Cart" class="cart-img">
+            </a>
+            <span class="cart-text">Cart</span>
+          </div>
             <section id="fruits-container" class="card-container">
               <% fruits.forEach(item=> { %>
                 <div class="card">

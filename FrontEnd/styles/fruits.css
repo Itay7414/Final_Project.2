@@ -550,3 +550,26 @@ footer {
   border: 2px solid #ee0d0d;
   color: #fff;
 }
+
+.cart-container {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  margin-bottom: -2%;
+  margin-top: -5%;
+  margin-left: 4%;
+}
+
+.cart-text {
+  display: block;
+  text-align: center;
+  font-size: 30px;
+  color: #333;
+  margin-top: 5px;
+}
+
+.cart-btn img {
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+}
