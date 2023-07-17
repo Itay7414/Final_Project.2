@@ -56,25 +56,27 @@
                     <div class="col col-4">Amount</div>
                     <div class="col col-5" data-label="Total Price">Total</div>
                     <% let total=0; %>
-                    <% items.items.forEach(item => { %>
-                        <% total += item.price * item.quantity; %>
-                        <li class="table-row">
-                            <div class="col col-2" data-label="Product Name">
-                                <%= item.name %>
-                            </div>
-                            <div class="col col-3" data-label="Price">
-                                <%= item.price %> $
-                            </div>
-                            <div class="col col-4" data-label="Amount">
-                                <%= item.quantity %>
-                            </div>
-                            <div class="col col-5" data-label="Total Price">
-                                <%= (item.price * item.quantity).toFixed(2) %> $
-                            </div>
-                            <div class="col col-6" data-label="Delete">
-                                <button class="delete" onclick="deleteItem('<%= item.id %>')">Delete</button>
-                            </div>
-                        </li>
+                        <% items.items.forEach(item=> { %>
+                            <% total +=item.price * item.quantity; %>
+                <li class="table-row">
+                    <div class="col col-2" data-label="Product Name">
+                        <%= item.name %>
+                    </div>
+                    <div class="col col-3" data-label="Price">
+                        <%= item.price %> $
+                    </div>
+                    <div class="col col-4" data-label="Amount">
+                        <%= item.quantity %>
+                    </div>
+                    <div class="col col-5" data-label="Total Price">
+                        <%= (item.price * item.quantity).toFixed(2) %> $
+                    </div>
+                    <div class="col col-6" data-label="Delete">
+                        <button class="delete" onclick="deleteItem('<%= item.name %>')"
+                            data-item-name="<%= item.name %>">Delete</button>
+
+                    </div>
+                </li>
                 <% }) %>
                     <% if (items.items.length> 0) { %>
                         <li class="table-row-total">
@@ -316,8 +318,8 @@
 
                     </script>
 
-                    
-                    
+
+
                     </body>
 
 </html>
