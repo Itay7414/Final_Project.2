@@ -6,7 +6,7 @@ async function addToOrder(itemName, price, quantity, itemId) {
       // Show pop-up message
       $('#match-message').text('Minimum quantity is 1 :)');
       $('#match-message').addClass('show-message');
-      setTimeout(function() {
+      setTimeout(function () {
         $('#match-message').removeClass('show-message');
       }, 3000);
       return;
@@ -31,7 +31,7 @@ async function addToOrder(itemName, price, quantity, itemId) {
       // Show pop-up message
       $('#match-message').text('Added to the cart!');
       $('#match-message').addClass('show-message');
-      setTimeout(function() {
+      setTimeout(function () {
         $('#match-message').removeClass('show-message');
       }, 3000);
 
@@ -43,7 +43,7 @@ async function addToOrder(itemName, price, quantity, itemId) {
         // Show pop-up message
         $('#match-message').text('You have to log in to your user before adding items to the cart!');
         $('#match-message').addClass('show-message');
-        setTimeout(function() {
+        setTimeout(function () {
           $('#match-message').removeClass('show-message');
         }, 5000);
       } else {
@@ -56,32 +56,25 @@ async function addToOrder(itemName, price, quantity, itemId) {
     console.error('Error adding item to order:', error);
   }
 }
-async function removeItem(itemId) {
+async function deleteItem(itemName) {
   try {
-    const deleteResponse = await fetch('/items/delete', {
+    const response = await fetch('/orders/deleteItem', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({
-        itemId,
-      }),
-      credentials: 'same-origin',
+      body: JSON.stringify({ itemName }),
+      credentials: 'same-origin', // Include cookies in the request
     });
 
-    if (deleteResponse.ok) {
-      location.reload();
+    if (response.ok) {
+      location.reload(); // Reload the page after successful deletion
     } else {
-      console.error('Failed to delete item from the database.');
+      console.error('Failed to delete item:', response.status);
+      // Handle the error response
     }
   } catch (error) {
     console.error('Error deleting item:', error);
+    // Handle any error that occurred during the request
   }
 }
-
-
-
-
-
-
-

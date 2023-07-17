@@ -88,4 +88,48 @@ exports.submitOrder = async (req, res) => {
   }
 };
 
+exports.deleteItem = (req, res) => {
+  try {
+    const itemName = req.body.itemName;
 
+    // Get the current order data from cookies
+    let order = req.cookies.order;
+
+    // Check if the order exists
+    if (!order) {
+      return res.status(400).json({ message: 'Order not found' });
+    }
+
+    // Find the index of the item in the order
+    const itemIndex = order.items.findIndex((item) => item.name === itemName);
+
+    // Check if the item exists in the order
+    if (itemIndex === -1) {
+      return res.status(400).json({ message: 'Item not found in order' });
+    }
+
+    console.log('Item index:', itemIndex);
+    console.log('Item name:', itemName);
+
+    const deletedItemName = order.items[itemIndex].name;
+
+    // Remove the item from the order
+    order.items.splice(itemIndex, 1);
+
+    // Check if the order is empty
+    if (order.items.length === 0) {
+      // Clear the order from cookies
+      res.clearCookie('order');
+    } else {
+      // Update the order in cookies
+      res.cookie('order', order);
+    }
+
+    console.log(`Deleted item: ${deletedItemName}`);
+
+    res.status(200).json(order);
+  } catch (error) {
+    console.error('Failed to delete item from order:', error);
+    res.status(500).json({ message: 'Failed to delete item from order' });
+  }
+};
