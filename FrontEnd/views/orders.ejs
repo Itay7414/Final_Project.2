@@ -51,10 +51,10 @@
             </li>
             <% if (Array.isArray(items.items)) { %>
                 <li class="table-header">
-                    <div class="col col-2">Product Name</div>
-                    <div class="col col-3">Price</div>
-                    <div class="col col-4">Amount</div>
-                    <div class="col col-5" data-label="Total Price">Total</div>
+                    <div class="col col-2" style="margin-left: -10px;">Product Name</div>
+                    <div class="col col-3" style="margin-left: -120px;">Price</div>
+                    <div class="col col-4" style="margin-left: -120px;">Amount</div>
+                    <div class="col col-5" data-label="Total Price"></div>
                     <% let total=0; %>
                         <% items.items.forEach(item=> { %>
                             <% total +=item.price * item.quantity; %>
@@ -68,14 +68,20 @@
                     <div class="col col-4" data-label="Amount">
                         <%= item.quantity %>
                     </div>
-                    <div class="col col-5" data-label="Total Price">
+                    <div class="col col-5" style="text-decoration: underline;" data-label="Total Price">
                         <%= (item.price * item.quantity).toFixed(2) %> $
                     </div>
                     <div class="col col-6" data-label="Delete">
-                        <button class="delete" onclick="deleteItem('<%= item.name %>')"
-                            data-item-name="<%= item.name %>">Delete</button>
-
-                    </div>
+                        <button class="delete noselect" onclick="deleteItem('<%= item.name %>')" data-item-name="<%= item.name %>">
+                          <span class="text">Delete</span>
+                          <span class="icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                              <path d="M24 20.188l-8.315-8.209 8.2-8.282-3.697-3.697-8.212 8.318-8.31-8.203-3.666 3.666 8.321 8.24-8.206 8.313 3.666 3.666 8.237-8.318 8.285 8.203z"></path>
+                            </svg>
+                          </span>
+                        </button>
+                      </div>
+                      
                 </li>
                 <% }) %>
                     <% if (items.items.length> 0) { %>
