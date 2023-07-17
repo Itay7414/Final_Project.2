@@ -87,12 +87,12 @@ const createApp = async function () {
     }
   });
   app.get('/', function (req, res) {
-    // Check if the user is logged in and retrieve the username from the session or wherever you store it
-    var loggedIn = req.session.loggedIn;
-    var username = req.session.username;
-
+    // Check if the user is logged in and retrieve the username from the cookies or wherever you store it
+    const loggedIn = req.session.user || req.cookies.user;
+    const username = loggedIn ? loggedIn.username : null;
+  
     // Render the index.ejs template and pass the loggedIn and username variables as data
-    res.render('index', { loggedIn: loggedIn, username: username });
+    res.render('index', { loggedIn: !!loggedIn, username: username });
   });
 
   app.post('/items/delete', async (req, res) => {
